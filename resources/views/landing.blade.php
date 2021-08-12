@@ -9,6 +9,11 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <link href="{{ URL::asset('landing/assets/img/logo unsoed.png') }}" rel="shortcut icon" />
 
@@ -60,24 +65,23 @@
             }
         </style>
 
-        <title>Inkubator Bisnis UNSOED</title>
+        <title>Pusat Inkubator Bisnis UNSOED</title>
     </head>
     <body>
-        <h1>Hello, world!</h1>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container">
                 <div class="col-md-1">
                     <img src="{{URL::asset('landing/assets/img/logo unsoed.png')}}" alt="" width="40px" height="40px">
                 </div>
-                <a class="navbar-brand" href="#">Inkubator Bisnis UNSOED</a>
+                <a class="navbar-brand" href="#">Pusat Inkubator Bisnis UNSOED</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Home
+                            <a class="nav-link" href="/">Home
                                 <span class="sr-only">(current)</span>
                             </a>
                         </li>
@@ -91,10 +95,10 @@
                             <a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Registrasi</a>
+                            <a class="nav-link" href="/registration">Registrasi</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Login</a>
+                            <a class="nav-link" href="/login">Login</a>
                         </li>
                     </ul>
                 </div>
