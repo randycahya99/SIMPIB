@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Mentor;
+use App\Models\CategoryMentor;
+use App\Models\BidangKeahlian;
+
 class MentorController extends Controller
 {
     /**
@@ -13,7 +17,11 @@ class MentorController extends Controller
      */
     public function index()
     {
-        return view('mentor');
+        $mentor = Mentor::all();
+        $category = CategoryMentor::all();
+        $ahli = BidangKeahlian::all();
+        
+        return view('mentor', compact('mentor', 'category', 'ahli'));
     }
 
     /**

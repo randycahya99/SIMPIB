@@ -10,4 +10,9 @@ class CategoryMentor extends Model
     protected $fillable = [
         'kode_mentor', 'kategori_mentor'
     ];
+
+    public function mentors()
+    {
+        return $this->hasMany(Mentor::class);
+    }
 }
