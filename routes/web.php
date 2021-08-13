@@ -40,6 +40,13 @@ Route::post('{id}/updateCategoryCoach', 'KategoriController@updateCategoryCoach'
 Route::get('{id}/deleteCategoryCoach', 'KategoriController@deleteCategoryCoach');
 
 
+//Kategori Mentor
+Route::get('/kategoriMentor', 'KategoriController@KategoriMentor');
+Route::post('/addCategoryMentor', 'KategoriController@addCategoryMentor');
+Route::post('{id}/updateCategoryMentor', 'KategoriController@updateCategoryMentor');
+Route::get('{id}/deleteCategoryMentor', 'KategoriController@deleteCategoryMentor');
+
+
 //Kategori Pendamping
 Route::get('/kategoriPendamping', 'KategoriController@KategoriPendamping');
 Route::post('/addCategoryPendamping', 'KategoriController@addCategoryPendamping');

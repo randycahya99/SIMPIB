@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\CategoryCoach;
+use App\Models\CategoryMentor;
 use App\Models\CategoryPendamping;
 use App\Models\CategoryTenant;
 use App\Models\TahapInkubasi;
@@ -18,6 +19,14 @@ class KategoriController extends Controller
         $category = CategoryCoach::all();
 
         return view('kategori/coach', compact('category'));
+    }
+
+    //Menampilkan Halaman Kategori Mentor
+    public function KategoriMentor()
+    {
+        $category = CategoryMentor::all();
+
+        return view('kategori/mentor', compact('category'));
     }
 
     //Menampilkan Halaman Kategori Pendamping
@@ -71,6 +80,27 @@ class KategoriController extends Controller
         CategoryCoach::create($request->all());
 
         return redirect('/kategoriCoach')->with('sukses', 'Kategori coach berhasil ditambahkan.');
+    }
+
+    //Menambahkan Data Kategori Mentor
+    public function addCategoryMentor(Request $request)
+    {
+        //Validasi Inputan Form
+        $request->validate([
+            'kode_mentor' => 'required|unique:category_mentor|alpha_num',
+            'kategori_mentor' => 'required|string',
+        ], [
+            'kode_mentor.required' => 'Kode mentor tidak boleh kosong',
+            'kode_mentor.unique' => 'Kode mentor sudah ada',
+            'kode_mentor.alpha_num' => 'Kode mentor harus berupa huruf dan angka',
+            'kategori_mentor.required' => 'Kategori mentor tidak boleh kosong',
+            'kategori_mentor.string' => 'Kategori mentor harus berupa string',
+        ]);
+
+        //Masuk ke Database
+        CategoryMentor::create($request->all());
+
+        return redirect('/kategoriMentor')->with('sukses', 'Kategori mentor berhasil ditambahkan.');
     }
 
     //Menambahkan Data Kategori Pendamping
@@ -179,6 +209,28 @@ class KategoriController extends Controller
         return redirect('/kategoriCoach')->with('sukses', 'Kategori coach berhasil diperbarui.');
     }
 
+    //Mengubah Data Kategori Mentor
+    public function updateCategoryMentor(Request $request, $id)
+    {
+        //Validasi Inputan Form
+        $request->validate([
+            'kode_mentor' => 'required|unique:category_mentor|alpha_num',
+            'kategori_mentor' => 'required|string',
+        ], [
+            'kode_mentor.required' => 'Kode mentor tidak boleh kosong',
+            'kode_mentor.unique' => 'Kode mentor sudah ada',
+            'kode_mentor.alpha_num' => 'Kode mentor harus berupa huruf dan angka',
+            'kategori_mentor.required' => 'Kategori mentor tidak boleh kosong',
+            'kategori_mentor.string' => 'Kategori mentor harus berupa string',
+        ]);
+
+        //Mengubah Data di Database
+        $category = CategoryMentor::find($id);
+        $category->update($request->all());
+
+        return redirect('/kategoriMentor')->with('sukses', 'Kategori mentor berhasil diperbarui.');
+    }
+
     //Mengubah Data Kategori Pendamping
     public function updateCategoryPendamping(Request $request, $id)
     {
@@ -275,6 +327,16 @@ class KategoriController extends Controller
         $category->delete();
 
         return redirect('/kategoriCoach');
+    }
+
+    //Menghapus Data Kategori Mentor
+    public function deleteCategoryMentor($id)
+    {
+        //Menghapus Data di Database
+        $category = CategoryMentor::find($id);
+        $category->delete();
+
+        return redirect('/kategoriMentor');
     }
 
     //Menghapus Data Kategori Pendamping

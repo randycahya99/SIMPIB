@@ -71,9 +71,10 @@
             <div class="bg-white py-2 collapse-inner rounded">
               <a class="collapse-item" href="{{url('/bidangKeahlian')}}">Bidang Keahlian</a>
               <a class="collapse-item" href="{{url('/kategoriCoach')}}">Kategori Coach</a>
+              <a class="collapse-item" href="{{url('/kategoriMentor')}}">Kategori Mentor</a>
               <a class="collapse-item" href="{{url('/kategoriPendamping')}}">Kategori Pendamping</a>
-              <a class="collapse-item" href="{{url('/tahapInkubasi')}}">Tahap Inkubasi</a>
               <a class="collapse-item" href="{{url('/kategoriTenant')}}">Kategori Tenant</a>
+              <a class="collapse-item" href="{{url('/tahapInkubasi')}}">Tahap Inkubasi</a>
             </div>
           </div>
         </li>
