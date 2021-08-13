@@ -103,7 +103,7 @@
 
 					<div class="form-group">
 						<label>Kategori Coach</label>
-						<select class="form-control" name="category_id" id="category_id" required="">
+						<select class="form-control" name="category_id" id="category_id" required>
 							<option value="" selected>Pilih Kategori Coach</option>
 
 							@foreach($category as $categories)
@@ -122,7 +122,7 @@
 					</div>
 					<div class="form-group">
 						<label>Bidang Keahlian</label>
-						<select class="form-control" name="bidang_id" id="bidang_id" required="">
+						<select class="form-control" name="bidang_id" id="bidang_id" required>
 							<option value="" selected>Pilih Bidang Keahlian</option>
 
 							@foreach($ahli as $ahlis)
@@ -180,7 +180,7 @@
 
 					<div class="form-group">
 						<label>Kategori Coach</label>
-						<select class="form-control" name="category_id" id="category_id" required="">
+						<select class="form-control" name="category_id" id="category_id" required>
 							<option value="{{$coachs['category_id']}}" selected>{{ !empty($coachs->categories) ? $coachs->categories['kategori_coach']:'' }}</option>
 
 							@foreach($category as $categories)
@@ -199,7 +199,7 @@
 					</div>
 					<div class="form-group">
 						<label>Bidang Keahlian</label>
-						<select class="form-control" name="bidang_id" id="bidang_id" required="">
+						<select class="form-control" name="bidang_id" id="bidang_id" required>
 							<option value="{{$coachs['bidang_id']}}" selected>{{ !empty($coachs->bidangs) ? $coachs->bidangs['bidang_keahlian']:'' }}</option>
 
 							@foreach($ahli as $ahlis)
@@ -229,7 +229,7 @@
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-						<button type="submit" class="btn btn-primary">Tambah</button>
+						<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
 					</div>
 				</form>
 			</div>

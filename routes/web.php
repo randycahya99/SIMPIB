@@ -87,7 +87,10 @@ Route::get('{id}/deleteCoach', 'CoachController@deleteCoach');
 
 
 //Manajemen Data Mentor
-Route::get('/mentor', 'MentorController@index');
+Route::get('/mentor', 'MentorController@Mentor');
+Route::post('/addMentor', 'MentorController@addMentor');
+Route::post('{id}/updateMentor', 'MentorController@updateMentor');
+Route::get('{id}/deleteMentor', 'MentorController@deleteMentor');
 
 
 //Manajemen Data Pendamping

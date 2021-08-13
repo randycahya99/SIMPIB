@@ -10,12 +10,8 @@ use App\Models\BidangKeahlian;
 
 class MentorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    //Menampilkan Halaman Manajemen Data Mentor
+    public function Mentor()
     {
         $mentor = Mentor::all();
         $category = CategoryMentor::all();
@@ -34,15 +30,36 @@ class MentorController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    //Menambahkan Data Mentor
+    public function addMentor(Request $request)
     {
-        //
+        //Validasi Inputan Form
+        $request->validate([
+            'nama_mentor' => 'required|string|max:100',
+            'alamat' => 'required|string|max:500',
+            'no_hp' => 'required|max:13',
+            'email' => 'required|unique:mentor',
+            'category_id' => 'required',
+            'bidang_id' => 'required'
+        ], [
+            'nama_mentor.required' => 'Nama mentor tidak boleh kosong',
+            'nama_mentor.string' => 'Nama mentor harus berupa string',
+            'nama_mentor.max' => 'Nama mentor tidak boleh lebih dari 100 karakter',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'alamat.string' => 'Alamat harus berupa string',
+            'alamat.max' => 'Alamat tidak boleh lebih dari 500 karakter',
+            'no_hp.required' => 'No. HP tidak boleh kosong',
+            'no_hp.max' => 'No. HP maksimal hanya 13 angka',
+            'email.required' => 'E-mail tidak boleh kosong',
+            'email.unique' => 'E-mail sudah ada',
+            'category_id.required' => 'Kategori coach tidak boleh kosong',
+            'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
+        ]);
+
+        //Masuk ke Database
+        Mentor::create($request->all());
+
+        return redirect('/mentor')->with('sukses', 'Data mentor berhasil ditambahkan.');
     }
 
     /**
@@ -67,26 +84,46 @@ class MentorController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    //Mengubah Data Mentor
+    public function updateMentor(Request $request, $id)
     {
-        //
+        //Validasi Inputan Form
+        $request->validate([
+            'nama_mentor' => 'required|string|max:100',
+            'alamat' => 'required|string|max:500',
+            'no_hp' => 'required|max:13',
+            'email' => 'required|unique:mentor',
+            'category_id' => 'required',
+            'bidang_id' => 'required'
+        ], [
+            'nama_mentor.required' => 'Nama mentor tidak boleh kosong',
+            'nama_mentor.string' => 'Nama mentor harus berupa string',
+            'nama_mentor.max' => 'Nama mentor tidak boleh lebih dari 100 karakter',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'alamat.string' => 'Alamat harus berupa string',
+            'alamat.max' => 'Alamat tidak boleh lebih dari 500 karakter',
+            'no_hp.required' => 'No. HP tidak boleh kosong',
+            'no_hp.max' => 'No. HP maksimal hanya 13 angka',
+            'email.required' => 'E-mail tidak boleh kosong',
+            'email.unique' => 'E-mail sudah ada',
+            'category_id.required' => 'Kategori coach tidak boleh kosong',
+            'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
+        ]);
+
+        //Mengubah Data di Database
+        $mentor = Mentor::find($id);
+        $mentor->update($request->all());
+
+        return redirect('/mentor')->with('sukses', 'Data mentor berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    //Menghapus Data Mentor
+    public function deleteMentor($id)
     {
-        //
+        //Menghapus Data di Database
+        $mentor = Mentor::find($id);
+        $mentor->delete();
+
+        return redirect('/mentor');
     }
 }
