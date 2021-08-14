@@ -52,7 +52,7 @@ class MentorController extends Controller
             'no_hp.max' => 'No. HP maksimal hanya 13 angka',
             'email.required' => 'E-mail tidak boleh kosong',
             'email.unique' => 'E-mail sudah ada',
-            'category_id.required' => 'Kategori coach tidak boleh kosong',
+            'category_id.required' => 'Kategori mentor tidak boleh kosong',
             'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
         ]);
 

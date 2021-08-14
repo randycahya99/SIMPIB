@@ -11,7 +11,7 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h6 class="m-0 font-weight-bold text-primary float-left">Pendamping</h6>
-			<button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData">
+			<button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah">
 				Tambah Pendamping
 			</button>
 		</div>
@@ -50,42 +50,277 @@
 							<th>Kode Pendamping</th>
 							<th>Nama Pendamping</th>
 							<th>Bidang Keahlian</th>
-							<th>Alamat</th>
 							<th>No. HP</th>
 							<th width="80">Aksi</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						{{-- @foreach($product as $products) --}}
+						@foreach($pendamping as $pendampings)
 						<tr>
-							{{-- <td align="center">{{$loop->iteration}}</td> --}} <td align="center"></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td align="center">{{$loop->iteration}}</td>
+							<td>{{$pendampings->categories->kode_pendamping}}</td>
+							<td>{{$pendampings->nama_pendamping}}</td>
+							<td>{{$pendampings->bidangs->bidang_keahlian}}</td>
+							<td>{{$pendampings->no_hp}}</td>
 
 							<td>
-								<a href="" class="btn btn-danger btn-circle btn-sm hapusProduct">
+								<a href="{{$pendampings->id}}/deletePendamping" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
 									<i class="fas fa-trash"></i>
 								</a>
-								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$pendampings['id']}}">
 									<i class="fas fa-edit"></i>
 								</button>
-								<button class="btn btn-success btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="#detailData{{$pendampings['id']}}">
 									<i class="fas fa-eye"></i>
 								</button>
 							</td>
 						</tr>
-						{{-- @endforeach --}}
+						@endforeach
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<!-- Modal Tambah Data -->
+<div class="modal fade" id="tambahData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tambah Data Pendamping</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form action="addPendamping" method="POST" class="needs-validation" novalidate>
+
+					@csrf
+
+					<div class="form-group">
+						<label>Kategori Pendamping</label>
+						<select class="form-control" name="category_id" id="category_id" required>
+							<option value="" selected>Pilih Kategori Mentor</option>
+
+							@foreach($category as $categories)
+
+							<option value="{{ $categories->id }}">{{ $categories->kategori_pendamping }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Kategori pendamping tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Nama Pendamping</label>
+						<input type="text" name="nama_pendamping" id="nama_pendamping" class="form-control" placeholder="Masukan nama mentor" required>
+						<div class="invalid-feedback">Nama pendamping tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Bidang Keahlian</label>
+						<select class="form-control" name="bidang_id" id="bidang_id" required>
+							<option value="" selected>Pilih Bidang Keahlian</option>
+
+							@foreach($ahli as $ahlis)
+
+							<option value="{{ $ahlis->id }}">{{ $ahlis->bidang_keahlian }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Bidang keahlian tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Alamat</label>
+						<input type="text" name="alamat" id="alamat" class="form-control" placeholder="Masukan alamat" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Alamat tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>No. HP</label>
+						<input type="text" name="no_hp" id="no_hp" class="form-control" placeholder="Masukan no. hp" pattern="[0-9]+" required>
+						<div class="invalid-feedback">No. HP tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>E-mail</label>
+						<input type="email" name="email" id="email" class="form-control" placeholder="Masukan e-mail" required>
+						<div class="invalid-feedback">E-mail tidak valid</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-primary">Tambah</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal Edit Data -->
+@foreach ($pendamping as $pendampings)
+<div class="modal fade" id="editData{{$pendampings['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit Data Pendamping</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form action="{{$pendampings->id}}/updatePendamping" method="POST" class="needs-validation" novalidate>
+
+					@csrf
+
+					<div class="form-group">
+						<label>Kategori Pendamping</label>
+						<select class="form-control" name="category_id" id="category_id" required>
+							<option value="{{$pendampings['category_id']}}" selected>{{ !empty($pendampings->categories) ? $pendampings->categories['kategori_pendamping']:'' }}</option>
+
+							@foreach($category as $categories)
+
+							<option value="{{ $categories->id }}">{{ $categories->kategori_pendamping }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Kategori pendamping tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Nama Pendamping</label>
+						<input type="text" name="nama_pendamping" id="nama_pendamping" class="form-control" value="{{$pendampings['nama_pendamping']}}" required>
+						<div class="invalid-feedback">Nama pendamping tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Bidang Keahlian</label>
+						<select class="form-control" name="bidang_id" id="bidang_id" required>
+							<option value="{{$pendampings['bidang_id']}}" selected>{{ !empty($pendampings->bidangs) ? $pendampings->bidangs['bidang_keahlian']:'' }}</option>
+
+							@foreach($ahli as $ahlis)
+
+							<option value="{{ $ahlis->id }}">{{ $ahlis->bidang_keahlian }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Bidang keahlian tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Alamat</label>
+						<input type="text" name="alamat" id="alamat" class="form-control" value="{{$pendampings['alamat']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Alamat tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>No. HP</label>
+						<input type="text" name="no_hp" id="no_hp" class="form-control" value="{{$pendampings['no_hp']}}" pattern="[0-9]+" required>
+						<div class="invalid-feedback">No. HP tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>E-mail</label>
+						<input type="email" name="email" id="email" class="form-control" value="{{$pendampings['email']}}" required>
+						<div class="invalid-feedback">E-mail tidak valid</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+
+
+<!-- Modal Detail Data -->
+@foreach($pendamping as $pendampings)
+<div class="modal fade" id="detailData{{$pendampings['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Detail Data Pendamping</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Kategori Pendamping</p>
+					<div class="col-sm-8">
+						<p>: {{$pendampings->categories->kategori_pendamping}} ({{$pendampings->categories->kode_pendamping}})</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Nama Pendamping</p>
+					<div class="col-sm-8">
+						<p>: {{$pendampings->nama_pendamping}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Bidang Keahlian</p>
+					<div class="col-sm-8">
+						<p>: {{$pendampings->bidangs->bidang_keahlian}} ({{$pendampings->bidangs->kode_bidang}})</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Alamat</p>
+					<div class="col-sm-8">
+						<p>: {{$pendampings->alamat}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">No. HP</p>
+					<div class="col-sm-8">
+						<p>: {{$pendampings->no_hp}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">E-mail</p>
+					<div class="col-sm-8">
+						<p>: {{$pendampings->email}}</p>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+
+
+{{-- <!-- Modal Hapus Data -->
+@foreach($pendamping as $pendampings)
+<div class="modal fade" id="hapusData{{$pendampings['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Apakah Anda yakin akan menghapus data ini?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+				<a href="{{$pendampings->id}}/deletePendamping" class="btn btn-danger">Hapus</a>
+			</div> 
+		</div>
+	</div>
+</div>
+@endforeach --}}
     
+
 @endsection
 
 <script src="{{asset('assets/adminpos/vendor/jquery/jquery.min.js')}}"></script>

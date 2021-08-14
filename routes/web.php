@@ -94,7 +94,10 @@ Route::get('{id}/deleteMentor', 'MentorController@deleteMentor');
 
 
 //Manajemen Data Pendamping
-Route::get('/pendamping', 'PendampingController@index');
+Route::get('/pendamping', 'PendampingController@Pendamping');
+Route::post('/addPendamping', 'PendampingController@addPendamping');
+Route::post('{id}/updatePendamping', 'PendampingController@updatePendamping');
+Route::get('{id}/deletePendamping', 'PendampingController@deletePendamping');
 
 
 //Manajemen Data Tenant
