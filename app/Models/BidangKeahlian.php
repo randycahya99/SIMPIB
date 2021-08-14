@@ -15,4 +15,14 @@ class BidangKeahlian extends Model
     {
         return $this->hasMany(Coach::class);
     }
+
+    public function mentors()
+    {
+        return $this->hasMany(Mentor::class);
+    }
+
+    public function pendampings()
+    {
+        return $this->hasMany(Pendamping::class);
+    }
 }

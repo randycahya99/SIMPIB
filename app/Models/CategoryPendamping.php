@@ -10,4 +10,9 @@ class CategoryPendamping extends Model
     protected $fillable = [
         'kode_pendamping', 'kategori_pendamping'
     ];
+
+    public function pendampings()
+    {
+        return $this->hasMany(Pendamping::class);
+    }
 }
