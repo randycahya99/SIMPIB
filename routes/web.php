@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 //Landing Page
 Route::get('/', function () {
     return view('landing');
-})->middleware('guest')->name('login');
+})->middleware('guest')->name('/');
 
 
 //Dashboard
