@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use App\User;
 
 class UserSeeder extends Seeder
 {
@@ -12,13 +12,13 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // $pengelola = User::create([
-        //     'name' => 'Randy',
-        //     'email' => 'tes@gmail.com',
-        //     'password' => bcrypt('123123123'),
-        //     'remember_token' => Str::random(60)
-        // ]);
+        $pengelola = User::create([
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('123123123'),
+            'remember_token' => Str::random(60)
+        ]);
 
-        // $pengelola->assignRole('admin');
+        $pengelola->assignRole('admin');
     }
 }

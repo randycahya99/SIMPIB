@@ -159,6 +159,15 @@
                 </svg>
             </div>
             <form action="/postLogin" method="POST">
+                
+                @if (session('message'))
+                    <div style="color: red" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
+                
+                @csrf
+                
                 <div class="form-item">
                     <p class="formLabel">Email</p>
                     <input type="email" name="email" id="email" class="form-style" autocomplete="off"/>

@@ -16,89 +16,94 @@ use Illuminate\Support\Facades\Route;
 //Landing Page
 Route::get('/', function () {
     return view('landing');
-});
+})->middleware('guest')->name('login');
 
 
 //Dashboard
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->middleware('auth');
 
 
 //Login
-Route::get('/login', 'LoginController@LoginPage');
+Route::get('/login', 'LoginController@index')->middleware('guest')->name('login');
+Route::post('/postLogin', 'LoginController@login');
+
+
+//Logout
+Route::get('/logout', 'LoginController@logout')->middleware('auth');
 
 
 //Registrasi
-Route::get('/registration', 'RegistrationController@RegistrationPage');
+Route::get('/registration', 'RegistrationController@RegistrationPage')->middleware('guest')->name('registration');
 
 
 //Kategori Coach
-Route::get('/kategoriCoach', 'KategoriController@KategoriCoach');
-Route::post('/addCategoryCoach', 'KategoriController@addCategoryCoach');
-Route::post('{id}/updateCategoryCoach', 'KategoriController@updateCategoryCoach');
-Route::get('{id}/deleteCategoryCoach', 'KategoriController@deleteCategoryCoach');
+Route::get('/kategoriCoach', 'KategoriController@KategoriCoach')->middleware('auth','checkRole:admin');
+Route::post('/addCategoryCoach', 'KategoriController@addCategoryCoach')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateCategoryCoach', 'KategoriController@updateCategoryCoach')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteCategoryCoach', 'KategoriController@deleteCategoryCoach')->middleware('auth','checkRole:admin');
 
 
 //Kategori Mentor
-Route::get('/kategoriMentor', 'KategoriController@KategoriMentor');
-Route::post('/addCategoryMentor', 'KategoriController@addCategoryMentor');
-Route::post('{id}/updateCategoryMentor', 'KategoriController@updateCategoryMentor');
-Route::get('{id}/deleteCategoryMentor', 'KategoriController@deleteCategoryMentor');
+Route::get('/kategoriMentor', 'KategoriController@KategoriMentor')->middleware('auth','checkRole:admin');
+Route::post('/addCategoryMentor', 'KategoriController@addCategoryMentor')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateCategoryMentor', 'KategoriController@updateCategoryMentor')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteCategoryMentor', 'KategoriController@deleteCategoryMentor')->middleware('auth','checkRole:admin');
 
 
 //Kategori Pendamping
-Route::get('/kategoriPendamping', 'KategoriController@KategoriPendamping');
-Route::post('/addCategoryPendamping', 'KategoriController@addCategoryPendamping');
-ROute::post('{id}/updateCategoryPendamping', 'KategoriController@updateCategoryPendamping');
-Route::get('{id}/deleteCategoryPendamping', 'KategoriController@deleteCategoryPendamping');
+Route::get('/kategoriPendamping', 'KategoriController@KategoriPendamping')->middleware('auth','checkRole:admin');
+Route::post('/addCategoryPendamping', 'KategoriController@addCategoryPendamping')->middleware('auth','checkRole:admin');
+ROute::post('{id}/updateCategoryPendamping', 'KategoriController@updateCategoryPendamping')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteCategoryPendamping', 'KategoriController@deleteCategoryPendamping')->middleware('auth','checkRole:admin');
 
 
 //Tahap Inkubasi
-Route::get('/tahapInkubasi', 'KategoriController@TahapInkubasi');
-Route::post('/addTahapInkubasi', 'KategoriController@addTahapInkubasi');
-Route::post('{id}/updateTahapInkubasi', 'KategoriController@updateTahapInkubasi');
-Route::get('{id}/deleteTahapInkubasi', 'KategoriController@deleteTahapInkubasi');
+Route::get('/tahapInkubasi', 'KategoriController@TahapInkubasi')->middleware('auth','checkRole:admin');
+Route::post('/addTahapInkubasi', 'KategoriController@addTahapInkubasi')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateTahapInkubasi', 'KategoriController@updateTahapInkubasi')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteTahapInkubasi', 'KategoriController@deleteTahapInkubasi')->middleware('auth','checkRole:admin');
 
 
 //Kategori Tenant
-Route::get('/kategoriTenant', 'KategoriController@KategoriTenant');
-Route::post('/addCategoryTenant', 'KategoriController@addCategoryTenant');
-Route::post('{id}/updateCategoryTenant', 'KategoriController@updateCategoryTenant');
-Route::get('{id}/deleteCategoryTenant', 'KategoriController@deleteCategoryTenant');
+Route::get('/kategoriTenant', 'KategoriController@KategoriTenant')->middleware('auth','checkRole:admin');
+Route::post('/addCategoryTenant', 'KategoriController@addCategoryTenant')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateCategoryTenant', 'KategoriController@updateCategoryTenant')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteCategoryTenant', 'KategoriController@deleteCategoryTenant')->middleware('auth','checkRole:admin');
 
 
 //Bidang Keahlian
-Route::get('/bidangKeahlian', 'KategoriController@BidangKeahlian');
-Route::post('/addBidangKeahlian', 'KategoriController@addBidangKeahlian');
-Route::post('{id}/updateBidangKeahlian', 'KategoriController@updateBidangKeahlian');
-Route::get('{id}/deleteBidangKeahlian', 'KategoriController@deleteBidangKeahlian');
+Route::get('/bidangKeahlian', 'KategoriController@BidangKeahlian')->middleware('auth','checkRole:admin');
+Route::post('/addBidangKeahlian', 'KategoriController@addBidangKeahlian')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateBidangKeahlian', 'KategoriController@updateBidangKeahlian')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteBidangKeahlian', 'KategoriController@deleteBidangKeahlian')->middleware('auth','checkRole:admin');
 
 
 //Data Admin atau Pengelola Inkubator
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Coach
-Route::get('/coach', 'CoachController@Coach');
-Route::post('/addCoach', 'CoachController@addCoach');
-Route::post('{id}/updateCoach', 'CoachController@updateCoach');
-Route::get('{id}/deleteCoach', 'CoachController@deleteCoach');
+Route::get('/coach', 'CoachController@Coach')->middleware('auth','checkRole:admin');
+Route::post('/addCoach', 'CoachController@addCoach')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateCoach', 'CoachController@updateCoach')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteCoach', 'CoachController@deleteCoach')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Mentor
-Route::get('/mentor', 'MentorController@Mentor');
-Route::post('/addMentor', 'MentorController@addMentor');
-Route::post('{id}/updateMentor', 'MentorController@updateMentor');
-Route::get('{id}/deleteMentor', 'MentorController@deleteMentor');
+Route::get('/mentor', 'MentorController@Mentor')->middleware('auth','checkRole:admin');
+Route::post('/addMentor', 'MentorController@addMentor')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateMentor', 'MentorController@updateMentor')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteMentor', 'MentorController@deleteMentor')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Pendamping
-Route::get('/pendamping', 'PendampingController@Pendamping');
-Route::post('/addPendamping', 'PendampingController@addPendamping');
-Route::post('{id}/updatePendamping', 'PendampingController@updatePendamping');
-Route::get('{id}/deletePendamping', 'PendampingController@deletePendamping');
+Route::get('/pendamping', 'PendampingController@Pendamping')->middleware('auth','checkRole:admin');
+Route::post('/addPendamping', 'PendampingController@addPendamping')->middleware('auth','checkRole:admin');
+Route::post('{id}/updatePendamping', 'PendampingController@updatePendamping')->middleware('auth','checkRole:admin');
+Route::get('{id}/deletePendamping', 'PendampingController@deletePendamping')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Tenant
-Route::get('/tenant', 'TenantController@index');
+Route::get('/tenant', 'TenantController@index')->middleware('auth','checkRole:admin');
