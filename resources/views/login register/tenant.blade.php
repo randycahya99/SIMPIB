@@ -268,7 +268,7 @@
             <form action="/registerTenant" method="POST">
 
                 @csrf
-                
+
                 <h1>Create Account</h1>
                 <input type="text" name="username" id="username" placeholder="Username" />
                 <input type="email" name="email" id="email" placeholder="Email" />
@@ -298,13 +298,13 @@
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
+                    <h1>Selamat Datang!</h1>
+                    <p>Silahkan masuk menggunakan akun Anda, dan bangunlah bisnis impian Anda.</p>
                     <button class="ghost" id="signIn">Sign In</button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
+                    <h1>Ayo, Gabung!</h1>
+                    <p>Bergabunglah dengan kami dan mulailah untuk membangun bisnis impian Anda.</p>
                     <button class="ghost" id="signUp">Sign Up</button>
                 </div>
             </div>

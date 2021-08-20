@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Hash;
 use App\User;
 use Auth;
 
-class RegistrationController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function RegistrationPage()
+    public function RegisterPage()
     {
         return view('login register/registration');
     }

@@ -53,11 +53,11 @@
           <span>Dashboard</span></a>
         </li>
 
-      <!-- Nav Item - Admin -->
+      <!-- Nav Item - Data Admin -->
       
       @if (auth()->user()->hasRole('admin'))
 
-      <li class="nav-item{{ request()->is('/') ? ' active' : '' }}">
+      <li class="nav-item{{ request()->is('admin') ? ' active' : '' }}">
         <a class="nav-link" href="{{url('/admin')}}">
           <i class="fas fa-user-tie"></i>
           <span>Admin</span>
@@ -67,7 +67,7 @@
       @endif
 
 
-      <!-- Nav Kategori - Pages Collapse Menu -->
+      <!-- Nav Master Data - Pages Collapse Menu -->
 
       @if (auth()->user()->hasRole('admin'))
 
@@ -91,7 +91,7 @@
       @endif
 
 
-      <!-- Nav Master Data - Pages Collapse Menu -->
+      <!-- Nav Manajemen Data - Pages Collapse Menu -->
 
       @if (auth()->user()->hasRole('admin'))
 
@@ -112,9 +112,22 @@
 
       @endif
 
+      <!-- Nav Item - Lengkapi Profil Calon Tenant dan Profil Usahanya -->
+      
+      @if (auth()->user()->hasRole('calon tenant'))
+
+      <li class="nav-item{{ request()->is('profilTenant') ? ' active' : '' }}">
+        <a class="nav-link" href="{{url('/profilTenant')}}">
+          <i class="fas fa-user-tie"></i>
+          <span>Profil Diri dan Usaha</span>
+        </a>
+      </li>
+
+      @endif
+
       <!-- Nav Coaching -->
 
-      @if (auth()->user()->hasAnyRole('coach', 'calon tenant', 'tenant'))
+      @if (auth()->user()->hasAnyRole('coach', 'tenant'))
 
       <li class="nav-item{{ request()->is('order') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Coaching" aria-expanded="true" aria-controls="collapseFive">
@@ -128,7 +141,7 @@
             <a class="collapse-item" href="#">Form Coaching</a>
             @endif
             
-            @if (auth()->user()->hasAnyRole('coach', 'calon tenant'))
+            @if (auth()->user()->hasAnyRole('coach', 'tenant'))
             <a class="collapse-item" href="#">Coaching</a>
             <a class="collapse-item" href="#">Hasil Coaching</a>
             @endif
@@ -145,7 +158,7 @@
 
       <!-- Nav Mentoring -->
 
-      @if (auth()->user()->hasAnyRole('mentor', 'calon tenant', 'tenant'))
+      @if (auth()->user()->hasAnyRole('mentor', 'tenant'))
 
       <li class="nav-item{{ request()->is('order') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Mentoring" aria-expanded="true" aria-controls="collapseFive">
@@ -159,7 +172,7 @@
             <a class="collapse-item" href="#">Form Mentoring</a>
             @endif
             
-            @if (auth()->user()->hasAnyRole('mentor', 'calon tenant'))
+            @if (auth()->user()->hasAnyRole('mentor', 'tenant'))
             <a class="collapse-item" href="#">Mentoring</a>
             <a class="collapse-item" href="#">Hasil Mentoring</a>
             @endif
@@ -176,7 +189,7 @@
 
       <!-- Nav Pendampingan -->
 
-      @if (auth()->user()->hasAnyRole('pendamping', 'calon tenant', 'tenant'))
+      @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
 
       <li class="nav-item{{ request()->is('order') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pendampingan" aria-expanded="true" aria-controls="collapseFive">
@@ -190,7 +203,7 @@
             <a class="collapse-item" href="#">Form Pendampingan</a>
             @endif
             
-            @if (auth()->user()->hasAnyRole('pendamping', 'calon tenant', 'tenant'))
+            @if (auth()->user()->hasAnyRole('pendamping', 'tenant', 'tenant'))
             <a class="collapse-item" href="#">Pendampingan</a>
             <a class="collapse-item" href="#">Hasil Pendampingan</a>
             @endif
@@ -308,7 +321,7 @@
               <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">Randy</span>
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ auth()->user()->username }}</span>
                   <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                 </a>
                 <!-- Dropdown - User Information -->
