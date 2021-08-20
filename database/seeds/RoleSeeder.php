@@ -46,5 +46,10 @@ class RoleSeeder extends Seeder
             'name' => 'tenant',
             'guard_name' => 'web'
         ]);
+
+        Role::create([
+            'name' => 'calon tenant',
+            'guard_name' => 'web'
+        ]);
     }
 }

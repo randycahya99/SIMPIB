@@ -36,7 +36,7 @@
     <ul class="navbar-nav bg-gradient-warning sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
 <!--         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div> -->
@@ -47,93 +47,194 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item{{ request()->is('/') ? ' active' : '' }}">
+      <li class="nav-item{{ request()->is('dashboard') ? ' active' : '' }}">
         <a class="nav-link" href="{{url('/dashboard')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
         </li>
 
       <!-- Nav Item - Admin -->
+      
+      @if (auth()->user()->hasRole('admin'))
+
       <li class="nav-item{{ request()->is('/') ? ' active' : '' }}">
         <a class="nav-link" href="{{url('/admin')}}">
           <i class="fas fa-user-tie"></i>
-          <span>Admin</span></a>
-        </li>
+          <span>Admin</span>
+        </a>
+      </li>
+
+      @endif
 
 
-        <!-- Nav Kategori - Pages Collapse Menu -->
-        <li class="nav-item{{ request()->is('unit','category','product') ? ' active' : '' }}">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKategori" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-box-open"></i>
-            <span>Master Data</span>
-          </a>
-          <div id="collapseKategori" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="{{url('/bidangKeahlian')}}">Bidang Keahlian</a>
-              <a class="collapse-item" href="{{url('/kategoriCoach')}}">Kategori Coach</a>
-              <a class="collapse-item" href="{{url('/kategoriMentor')}}">Kategori Mentor</a>
-              <a class="collapse-item" href="{{url('/kategoriPendamping')}}">Kategori Pendamping</a>
-              <a class="collapse-item" href="{{url('/kategoriTenant')}}">Kategori Tenant</a>
-              <a class="collapse-item" href="{{url('/tahapInkubasi')}}">Tahap Inkubasi</a>
-            </div>
+      <!-- Nav Kategori - Pages Collapse Menu -->
+
+      @if (auth()->user()->hasRole('admin'))
+
+      <li class="nav-item{{ request()->is('bidangKeahlian','kategoriCoach','kategoriMentor','kategoriPendamping','kategoriTenant','tahapInkubasi') ? ' active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MasterData" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-box-open"></i>
+          <span>Master Data</span>
+        </a>
+        <div id="MasterData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('/bidangKeahlian')}}">Bidang Keahlian</a>
+            <a class="collapse-item" href="{{url('/kategoriCoach')}}">Kategori Coach</a>
+            <a class="collapse-item" href="{{url('/kategoriMentor')}}">Kategori Mentor</a>
+            <a class="collapse-item" href="{{url('/kategoriPendamping')}}">Kategori Pendamping</a>
+            <a class="collapse-item" href="{{url('/kategoriTenant')}}">Kategori Tenant</a>
+            <a class="collapse-item" href="{{url('/tahapInkubasi')}}">Tahap Inkubasi</a>
           </div>
-        </li>
-
-
-        <!-- Nav Master Data - Pages Collapse Menu -->
-        <li class="nav-item{{ request()->is('unit','category','product') ? ' active' : '' }}">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMasterData" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-box-open"></i>
-            <span>Manajemen Data</span>
-          </a>
-          <div id="collapseMasterData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="{{url('/coach')}}">Coach</a>
-              <a class="collapse-item" href="{{url('/mentor')}}">Mentor</a>
-              <a class="collapse-item" href="{{url('/pendamping')}}">Pendamping</a>
-              <a class="collapse-item" href="{{url('/tenant')}}">Tenant</a>
-            </div>
-          </div>
-        </li>
-
-        <!-- Nav Order -->
-        <li class="nav-item{{ request()->is('order') ? ' active' : '' }}">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
-            <i class="fas fa-fw fa-money-bill-alt"></i>
-            <span>Orders</span>
-          </a>
-          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="/order">Order</a>
-              <a class="collapse-item" href="cards.html">Histori Order</a>
-            </div>
-          </div>
-        </li>
-
-        <!-- Nav Laporan -->
-        <li class="nav-item">
-          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-            <i class="fas fa-fw fa-book"></i>
-            <span>Laporan</span>
-          </a>
-          <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="buttons.html">Produk</a>
-              <a class="collapse-item" href="cards.html">Order</a>
-            </div>
-          </div>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-          <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
+      </li>
 
-      </ul>
-      <!-- End of Sidebar -->
+      @endif
+
+
+      <!-- Nav Master Data - Pages Collapse Menu -->
+
+      @if (auth()->user()->hasRole('admin'))
+
+      <li class="nav-item{{ request()->is('coach','mentor','pendamping','tenant') ? ' active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#ManajemenData" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-box-open"></i>
+          <span>Manajemen Data</span>
+        </a>
+        <div id="ManajemenData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{url('/coach')}}">Coach</a>
+            <a class="collapse-item" href="{{url('/mentor')}}">Mentor</a>
+            <a class="collapse-item" href="{{url('/pendamping')}}">Pendamping</a>
+            <a class="collapse-item" href="{{url('/tenant')}}">Tenant</a>
+          </div>
+        </div>
+      </li>
+
+      @endif
+
+      <!-- Nav Coaching -->
+
+      @if (auth()->user()->hasAnyRole('coach', 'calon tenant', 'tenant'))
+
+      <li class="nav-item{{ request()->is('order') ? ' active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Coaching" aria-expanded="true" aria-controls="collapseFive">
+          <i class="fas fa-tasks"></i>
+          <span>Coaching</span>
+        </a>
+        <div id="Coaching" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            
+            @if (auth()->user()->hasRole('coach'))
+            <a class="collapse-item" href="#">Form Coaching</a>
+            @endif
+            
+            @if (auth()->user()->hasAnyRole('coach', 'calon tenant'))
+            <a class="collapse-item" href="#">Coaching</a>
+            <a class="collapse-item" href="#">Hasil Coaching</a>
+            @endif
+
+            @if (auth()->user()->hasRole('coach'))
+            <a class="collapse-item" href="#">Penjadwalan</a>
+            @endif
+
+          </div>
+        </div>
+      </li>
+
+      @endif
+
+      <!-- Nav Mentoring -->
+
+      @if (auth()->user()->hasAnyRole('mentor', 'calon tenant', 'tenant'))
+
+      <li class="nav-item{{ request()->is('order') ? ' active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Mentoring" aria-expanded="true" aria-controls="collapseFive">
+          <i class="fas fa-tasks"></i>
+          <span>Mentoring</span>
+        </a>
+        <div id="Mentoring" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            
+            @if (auth()->user()->hasRole('mentor'))
+            <a class="collapse-item" href="#">Form Mentoring</a>
+            @endif
+            
+            @if (auth()->user()->hasAnyRole('mentor', 'calon tenant'))
+            <a class="collapse-item" href="#">Mentoring</a>
+            <a class="collapse-item" href="#">Hasil Mentoring</a>
+            @endif
+
+            @if (auth()->user()->hasRole('mentor'))
+            <a class="collapse-item" href="#">Penjadwalan</a>
+            @endif
+
+          </div>
+        </div>
+      </li>
+
+      @endif
+
+      <!-- Nav Pendampingan -->
+
+      @if (auth()->user()->hasAnyRole('pendamping', 'calon tenant', 'tenant'))
+
+      <li class="nav-item{{ request()->is('order') ? ' active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pendampingan" aria-expanded="true" aria-controls="collapseFive">
+          <i class="fas fa-tasks"></i>
+          <span>Pendampingan</span>
+        </a>
+        <div id="Pendampingan" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            
+            @if (auth()->user()->hasRole('pendamping'))
+            <a class="collapse-item" href="#">Form Pendampingan</a>
+            @endif
+            
+            @if (auth()->user()->hasAnyRole('pendamping', 'calon tenant', 'tenant'))
+            <a class="collapse-item" href="#">Pendampingan</a>
+            <a class="collapse-item" href="#">Hasil Pendampingan</a>
+            @endif
+
+            @if (auth()->user()->hasRole('pendamping'))
+            <a class="collapse-item" href="#">Penjadwalan</a>
+            @endif
+
+          </div>
+        </div>
+      </li>
+
+      @endif
+
+      <!-- Nav Laporan -->
+
+      @if (auth()->user()->hasAnyRole('admin', 'perusahaan', 'pemonev'))
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+          <i class="fas fa-fw fa-book"></i>
+          <span>Laporan</span>
+        </a>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="#">Coaching</a>
+            <a class="collapse-item" href="#">Mentoring</a>
+            <a class="collapse-item" href="#">Pendampingan</a>
+          </div>
+        </div>
+      </li>
+
+      @endif
+
+      <!-- Divider -->
+      <hr class="sidebar-divider d-none d-md-block">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
 
       <!-- Content Wrapper -->
       <div id="content-wrapper" class="d-flex flex-column">

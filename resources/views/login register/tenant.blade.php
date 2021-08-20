@@ -265,11 +265,14 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="/registerTenant" method="POST">
+
+                @csrf
+                
                 <h1>Create Account</h1>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
+                <input type="text" name="username" id="username" placeholder="Username" />
+                <input type="email" name="email" id="email" placeholder="Email" />
+                <input type="password" name="password" id="password" placeholder="Password" />
                 <button>Sign Up</button>
             </form>
         </div>

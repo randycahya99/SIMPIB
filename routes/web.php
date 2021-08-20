@@ -36,6 +36,7 @@ Route::get('/logout', 'LoginController@logout')->middleware('auth');
 
 //Registrasi
 Route::get('/registration', 'RegistrationController@RegistrationPage')->middleware('guest')->name('registration');
+Route::post('/registerTenant', 'RegistrationController@RegisterTenant');
 
 
 //Kategori Coach
