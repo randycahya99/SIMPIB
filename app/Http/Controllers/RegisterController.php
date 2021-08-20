@@ -13,16 +13,6 @@ use Auth;
 
 class RegisterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function RegisterPage()
-    {
-        return view('login register/registration');
-    }
-
     //Registrasi Tenant
     public function RegisterTenant(Request $request)
     {
@@ -55,6 +45,12 @@ class RegisterController extends Controller
         // event(new Registered($user));
 
         return redirect()->route('login')->with('status', 'Registrasi berhasil. Silahkan login dengan e-mail dan password Anda. Cek kotak masuk di e-mail Anda untuk melakukan verifikasi.');
+    }
+
+    //Menampilkan Halaman Profil DIri dan Usaha Calon Tenant
+    public function RegisterPage()
+    {
+        return view('login register/registration');
     }
 
     /**
