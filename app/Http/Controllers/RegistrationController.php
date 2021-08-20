@@ -13,7 +13,7 @@ class RegistrationController extends Controller
      */
     public function RegistrationPage()
     {
-        return view('registration');
+        return view('login register/registration');
     }
 
     /**

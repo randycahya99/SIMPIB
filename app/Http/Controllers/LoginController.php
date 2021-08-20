@@ -14,7 +14,7 @@ class LoginController extends Controller
     //Menampilkan Halaman Login
     public function index()
     {
-        return view('login');
+        return view('login register/tenant');
     }
 
     //Melakukan Login
