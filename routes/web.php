@@ -86,7 +86,8 @@ Route::get('{id}/deleteBidangKeahlian', 'KategoriController@deleteBidangKeahlian
 
 
 //Data Admin atau Pengelola Inkubator
-Route::get('/admin', 'AdminController@index')->middleware('auth','checkRole:admin');
+Route::get('/admin', 'AdminController@Admin')->middleware('auth','checkRole:admin');
+Route::post('/addAdmin', 'AdminController@addAdmin')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Coach

@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use Spatie\Permission\Traits\HasRoles;
+
 use Closure;
 
 class CheckRole
@@ -15,7 +17,7 @@ class CheckRole
      */
     public function handle($request, Closure $next, $role)
     {
-        if ($request->user()->username == $role) {
+        if ($request->user()->hasRole([$role])) {
             return $next($request);
         }
         

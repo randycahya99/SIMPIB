@@ -11,7 +11,7 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h6 class="m-0 font-weight-bold text-primary float-left">Admin</h6>
-			<button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData">
+			<button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah">
 				Tambah Admin
 			</button>
 		</div>
@@ -47,38 +47,94 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Kode Admin</th>
 							<th>Nama</th>
-							<th>E-mail</th>
+							<th>Jabatan</th>
 							<th>No. HP</th>
 							<th width="80">Aksi</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						{{-- @foreach($product as $products) --}}
+						@foreach($pengelola as $pengelolas)
 						<tr>
-							{{-- <td align="center">{{$loop->iteration}}</td> --}} <td align="center"></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td align="center">{{$loop->iteration}}</td>
+							<td>{{$pengelolas->nama_pengelola}}</td>
+							<td>{{$pengelolas->jabatan}}</td>
+							<td>{{$pengelolas->no_hp}}</td>
 
 							<td>
-								<a href="" class="btn btn-danger btn-circle btn-sm hapusProduct">
+								<a href="{{$pengelolas->id}}/deleteAdmin" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
 									<i class="fas fa-trash"></i>
 								</a>
 								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
 									<i class="fas fa-edit"></i>
 								</button>
-								<button class="btn btn-success btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="">
 									<i class="fas fa-eye"></i>
 								</button>
 							</td>
 						</tr>
-						{{-- @endforeach --}}
+						@endforeach
 					</tbody>
 				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal Tambah Data -->
+<div class="modal fade" id="tambahData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Tambah Tahap Inkubasi</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form action="addAdmin" method="POST" class="needs-validation" novalidate>
+
+					@csrf
+
+					{{-- <div class="form-group">
+						<label>Nama</label>
+						<input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control" placeholder="Masukkan nama pengelola" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Nama tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Jabatan</label>
+						<input type="text" name="jabatan" id="jabatan" class="form-control" placeholder="Masukan jabatan" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Jabatan tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>No. HP</label>
+						<input type="text" name="no_hp" id="no_hp" class="form-control" placeholder="Masukan no. hp" pattern="[0-9]+" required>
+						<div class="invalid-feedback">No. HP tidak valid</div>
+					</div> --}}
+					<div class="form-group">
+						<label>Username</label>
+						<input type="text" name="username" id="username" class="form-control" placeholder="Masukan username" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Username tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>E-mail</label>
+						<input type="email" name="email" id="email" class="form-control" placeholder="Masukan e-mail" required>
+						<div class="invalid-feedback">No. HP tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Password</label>
+						<input type="password" name="password" id="password" class="form-control" placeholder="Masukan password" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Password tidak valid</div>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-primary">Tambah</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
