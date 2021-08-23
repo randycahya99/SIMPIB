@@ -25,6 +25,12 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 
+//Profil User
+Route::get('/profile', 'UserController@Profile')->middleware('auth');
+Route::get('{id}/profile/edit', 'UserController@EditProfile')->middleware('auth');
+Route::post('/updateProfilePengelola', 'UserController@UpdateProfilePengelola')->middleware('auth');
+
+
 //Login
 Route::get('/login', 'LoginController@index')->middleware('guest')->name('login');
 Route::post('/postLogin', 'LoginController@login');

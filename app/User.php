@@ -41,7 +41,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function pengelolas()
     {
-        return $this->hasOne(Pengelola::class);
+        return $this->hasOne('App\Models\Pengelola');
     }
 
 }
