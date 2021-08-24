@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Models\Pengelola;
 
 class UserSeeder extends Seeder
 {
@@ -12,14 +13,21 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $pengelola = User::create([
+        $userPengelola = User::create([
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123123123'),
             'remember_token' => Str::random(60)
         ]);
 
-        $pengelola->assignRole('admin');
+        $pengelola = Pengelola::create([
+            'nama_pengelola' => 'Taufik Budhi Pramono, S.Pi., M.Si.',
+            'jabatan' => 'Kadiv Rekruitmen Tenant',
+            'no_hp' => '08156984570'
+        ]);
+
+        $userPengelola->pengelolas()->save($pengelola);
+        $userPengelola->assignRole('admin');
 
 
         $pendamping = User::create([
