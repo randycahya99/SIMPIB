@@ -34,8 +34,41 @@ class UserController extends Controller
         return view('editProfile', compact('user'));
     }
 
-    public function UpdateProfilePengelola(Request $request, $id)
+    public function UpdateProfilePengelola(Request $request)
     {
         //Validasi Inputan Form
+        $request->validate([
+            'nama_pengelola' => 'required|string|max:100',
+            'jabatan' => 'required|string',
+            'no_hp' => 'required|max:13',
+            'username' => 'required',
+            'email' => 'required'
+        ], [
+            'nama_pengelola.required' => 'Nama tidak boleh kosong',
+            'nama_pengelola.string' => 'Nama harus berupa string',
+            'nama_pengelola.max' => 'Nama tidak boleh lebih dari 100 karakter',
+            'jabatan.required' => 'Jabatan tidak boleh kosong',
+            'jabatan.string' => 'Jabatan harus berupa string',
+            'no_hp.required' => 'No. HP tidak boleh kosong',
+            'no_hp.max' => 'No. HP maksimal hanya 13 angka',
+            'username.required' => 'Username tidak boleh kosong',
+            'email' => 'E-mail tidak boleh kosong'
+        ]);
+
+        $user = Auth::user();
+        $pengelola = Auth::user()->pengelolas;
+
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email
+        ]);
+
+        $pengelola->update([
+            'nama_pengelola' => $request->nama_pengelola,
+            'jabatan' => $request->jabatan,
+            'no_hp' => $request->no_hp
+        ]);
+
+        return redirect('/profile')->with('sukses', 'Profile berhasil diperbarui.');
     }
 }

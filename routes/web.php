@@ -28,7 +28,7 @@ Route::get('/dashboard', function () {
 //Profil User
 Route::get('/profile', 'UserController@Profile')->middleware('auth');
 Route::get('{id}/profile/edit', 'UserController@EditProfile')->middleware('auth');
-Route::post('/updateProfilePengelola', 'UserController@UpdateProfilePengelola')->middleware('auth');
+Route::post('/updateProfilePengelola', 'UserController@UpdateProfilePengelola')->middleware('auth','checkRole:admin');
 
 
 //Login
