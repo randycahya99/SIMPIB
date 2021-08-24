@@ -34,7 +34,7 @@ class AdminController extends Controller
     {
         $token = Str::random();
         
-        //Validasi inputan form
+        //Validasi Inputan Form
         $request->validate([
             'nama_pengelola' => 'required|string|max:100',
             'jabatan' => 'required|string',
@@ -59,7 +59,7 @@ class AdminController extends Controller
             'password.min' => 'Password minimal 8 karakter'
         ]);
 
-        //Menambahkan akun user ke database
+        //Menambahkan Akun User ke Database
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
@@ -67,16 +67,17 @@ class AdminController extends Controller
             'remember_token' => $token
         ]);
 
-        //Menambahkan data pengelola ke database
+        //Menambahkan Data Pengelola ke Database
         $pengelola = Pengelola::create([
             'nama_pengelola' => $request->nama_pengelola,
             'jabatan' => $request->jabatan,
             'no_hp' => $request->no_hp
         ]);
 
+        //Menyimpan Data Relasi Tabel User Dengan Pengelola
         $user->pengelolas()->save($pengelola);
 
-        //Menambahkan role kepada akun user
+        //Menambahkan Role Kepada Akun User
         $user->assignRole('admin');
 
         return redirect('/admin')->with('sukses', 'Data Admin berhasil ditambahkan.');
@@ -105,9 +106,45 @@ class AdminController extends Controller
     }
 
     //Mengubah Data Admin/Pengelola
-    public function update(Request $request, $id)
+    public function updateAdmin(Request $request, $id)
     {
-        //
+        //Validasi Inputan Form
+        $request->validate([
+            'nama_pengelola' => 'required|string|max:100',
+            'jabatan' => 'required|string',
+            'no_hp' => 'required|max:13',
+            'username' => 'required',
+            'email' => 'required'
+        ], [
+            'nama_pengelola.required' => 'Nama pengelola tidak boleh kosong',
+            'nama_pengelola.string' => 'Nama pengelola harus berupa string',
+            'nama_pengelola.max' => 'Nama pengelola tidak boleh lebih dari 100 karakter',
+            'jabatan.required' => 'Jabatan tidak boleh kosong',
+            'jabatan.string' => 'Jabatan harus berupa string',
+            'no_hp.required' => 'No. HP tidak boleh kosong',
+            'no_hp.max' => 'No. HP maksimal hanya 13 angka',
+            'username.required' => 'Username tidak boleh kosong',
+            'email.required' => 'E-mail tidak boleh kosong'
+        ]);
+
+        //Mencari Data Sesuai Dengan id
+        $pengelola = Pengelola::find($id);
+        $user = $pengelola->users;
+        
+        //Mengubah Data Admin/Pengelola di Database
+        $pengelola->update([
+            'nama_pengelola' => $request->nama_pengelola,
+            'jabatan' => $request->jabatan,
+            'no_hp' => $request->no_hp
+        ]);
+
+        //Mengubah Data Akun Admin/Pengelola di Database
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email
+        ]);
+
+        return redirect('/admin')->with('sukses', 'Data Admin berhasil diperbarui.');
     }
 
     /**
@@ -116,8 +153,20 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function deleteAdmin($id)
     {
-        //
+        //Mencari Data Admin/Pengelola di Database
+        $pengelola = Pengelola::find($id);
+
+        //Mencari Data Akun Admin di Database
+        $user = $pengelola->users;
+
+        //Menghapus Data Admin/Pengelola di Database
+        $pengelola->delete();
+
+        //Menghapus Data Akun Admin di Database
+        $user->delete();
+
+        return redirect('/admin');
     }
 }

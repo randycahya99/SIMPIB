@@ -66,10 +66,10 @@
 								<a href="{{$pengelolas->id}}/deleteAdmin" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
 									<i class="fas fa-trash"></i>
 								</a>
-								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$pengelolas['id']}}">
 									<i class="fas fa-edit"></i>
 								</button>
-								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="">
+								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="#detailData{{$pengelolas['id']}}">
 									<i class="fas fa-eye"></i>
 								</button>
 							</td>
@@ -88,7 +88,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Tambah Tahap Inkubasi</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Tambah Data Admin</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -139,6 +139,137 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- Modal Edit Data -->
+@foreach($pengelola as $pengelolas)
+<div class="modal fade" id="editData{{$pengelolas['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit Data Admin</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form action="{{$pengelolas->id}}/updateAdmin" method="POST" class="needs-validation" novalidate>
+					@csrf
+					
+					<div class="form-group">
+						<label>Nama</label>
+						<input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control" value="{{$pengelolas['nama_pengelola']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Nama tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Jabatan</label>
+						<input type="text" name="jabatan" id="jabatan" class="form-control" value="{{$pengelolas['jabatan']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Jabatan tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>No. HP</label>
+						<input type="text" name="no_hp" id="no_hp" class="form-control" value="{{$pengelolas['no_hp']}}" pattern="[0-9]+" required>
+						<div class="invalid-feedback">No. HP tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Username</label>
+						<input type="text" name="username" id="username" class="form-control" value="{{$pengelolas->users['username']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Username tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>E-mail</label>
+						<input type="email" name="email" id="email" class="form-control" value="{{$pengelolas->users['email']}}" required>
+						<div class="invalid-feedback">No. HP tidak valid</div>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+
+
+<!-- Modal Detail Data -->
+@foreach($pengelola as $pengelolas)
+<div class="modal fade" id="detailData{{$pengelolas['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Detail Data Admin</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Nama</p>
+					<div class="col-sm-8">
+						<p>: {{$pengelolas->nama_pengelola}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Jabatan</p>
+					<div class="col-sm-8">
+						<p>: {{$pengelolas->jabatan}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">No. HP</p>
+					<div class="col-sm-8">
+						<p>: {{$pengelolas->no_hp}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Username</p>
+					<div class="col-sm-8">
+						<p>: {{$pengelolas->users->username}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">E-mail</p>
+					<div class="col-sm-8">
+						<p>: {{$pengelolas->users->email}}</p>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+
+
+{{-- <!-- Modal Hapus Data -->
+@foreach($pengelola as $pengelolas)
+<div class="modal fade" id="hapusData{{$pengelolas['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Apakah Anda yakin akan menghapus data ini?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+				<a href="{{$pengelolas->id}}/deleteAdmin" class="btn btn-danger">Hapus</a>
+			</div> 
+		</div>
+	</div>
+</div>
+@endforeach --}}
+
     
 @endsection
 
