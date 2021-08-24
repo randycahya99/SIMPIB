@@ -101,7 +101,7 @@
 
 					<div class="form-group">
 						<label>Nama</label>
-						<input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control" placeholder="Masukkan nama pengelola" pattern="[a-zA-Z\s0-9]+" required>
+						<input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control" placeholder="Masukkan nama pengelola" required>
 						<div class="invalid-feedback">Nama tidak valid</div>
 					</div>
 					<div class="form-group">
@@ -159,7 +159,7 @@
 					
 					<div class="form-group">
 						<label>Nama</label>
-						<input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control" value="{{$pengelolas['nama_pengelola']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control" value="{{$pengelolas['nama_pengelola']}}" required>
 						<div class="invalid-feedback">Nama tidak valid</div>
 					</div>
 					<div class="form-group">

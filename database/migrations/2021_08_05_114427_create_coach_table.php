@@ -18,12 +18,13 @@ class CreateCoachTable extends Migration
             $table->string('nama_coach', 100);
             $table->string('alamat', 500);
             $table->string('no_hp');
-            $table->string('email')->unique();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('bidang_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('category_coach')->onUpdate('cascade')->onDelete('set null');
             $table->foreign('bidang_id')->references('id')->on('bidang_keahlian')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

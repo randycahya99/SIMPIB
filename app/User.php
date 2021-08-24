@@ -44,4 +44,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne('App\Models\Pengelola');
     }
 
+    public function coachs()
+    {
+        return $this->hasOne('App\Models\Coach');
+    }
+
 }

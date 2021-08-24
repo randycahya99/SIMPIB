@@ -104,6 +104,7 @@ Route::post('/addCoach', 'CoachController@addCoach')->middleware('auth','checkRo
 Route::post('{id}/updateCoach', 'CoachController@updateCoach')->middleware('auth','checkRole:admin');
 Route::get('{id}/deleteCoach', 'CoachController@deleteCoach')->middleware('auth','checkRole:admin');
 Route::get('/tambahCoach', 'CoachController@Coach');
+Route::get('{id}/editCoach', 'CoachController@Coach');
 
 
 //Manajemen Data Mentor
