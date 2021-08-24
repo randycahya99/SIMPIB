@@ -36,10 +36,20 @@ class AdminController extends Controller
         
         //Validasi inputan form
         $request->validate([
+            'nama_pengelola' => 'required|string|max:100',
+            'jabatan' => 'required|string',
+            'no_hp' => 'required|max:13',
             'username' => 'required|unique:users',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8'
         ], [
+            'nama_pengelola.required' => 'Nama pengelola tidak boleh kosong',
+            'nama_pengelola.string' => 'Nama pengelola harus berupa string',
+            'nama_pengelola.max' => 'Nama pengelola tidak boleh lebih dari 100 karakter',
+            'jabatan.required' => 'Jabatan tidak boleh kosong',
+            'jabatan.string' => 'Jabatan harus berupa string',
+            'no_hp.required' => 'No. HP tidak boleh kosong',
+            'no_hp.max' => 'No. HP maksimal hanya 13 angka',
             'username.required' => 'Username tidak boleh kosong',
             'username.unique' => 'Username sudah digunakan',
             'email.required' => 'E-mail tidak boleh kosong',
@@ -56,6 +66,15 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
             'remember_token' => $token
         ]);
+
+        //Menambahkan data pengelola ke database
+        $pengelola = Pengelola::create([
+            'nama_pengelola' => $request->nama_pengelola,
+            'jabatan' => $request->jabatan,
+            'no_hp' => $request->no_hp
+        ]);
+
+        $user->pengelolas()->save($pengelola);
 
         //Menambahkan role kepada akun user
         $user->assignRole('admin');

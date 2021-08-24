@@ -99,7 +99,7 @@
 
 					@csrf
 
-					{{-- <div class="form-group">
+					<div class="form-group">
 						<label>Nama</label>
 						<input type="text" name="nama_pengelola" id="nama_pengelola" class="form-control" placeholder="Masukkan nama pengelola" pattern="[a-zA-Z\s0-9]+" required>
 						<div class="invalid-feedback">Nama tidak valid</div>
@@ -113,7 +113,7 @@
 						<label>No. HP</label>
 						<input type="text" name="no_hp" id="no_hp" class="form-control" placeholder="Masukan no. hp" pattern="[0-9]+" required>
 						<div class="invalid-feedback">No. HP tidak valid</div>
-					</div> --}}
+					</div>
 					<div class="form-group">
 						<label>Username</label>
 						<input type="text" name="username" id="username" class="form-control" placeholder="Masukan username" pattern="[a-zA-Z\s0-9]+" required>
