@@ -90,7 +90,8 @@
                                         <div class="row mt-3">
                                             <div class="col-lg-4"></div>
                                             <div class="col-lg-7">
-                                                <button class="btn btn-primary" type="submit" style="display: inline-block;font-weight: 400;text-align: center;border: 1px solid transparent;line-height: 1.5;border-radius: 0.25rem;padding: 0.375rem 0.75rem;">Update Profil</button>
+                                                <a href="/profile" class="btn btn-secondary">Batal</a>
+                                                <button class="btn btn-primary" type="submit" style="display: inline-block;font-weight: 400;text-align: center;border: 1px solid transparent;line-height: 1.5;border-radius: 0.25rem;padding: 0.375rem 0.75rem;">Simpan</button>
                                             </div>
                                         </div>
                                     </div>
