@@ -111,9 +111,15 @@ class CoachController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editCoach($id)
     {
-        //
+        $coach = Coach::find($id);
+        $category = CategoryCoach::all();
+        $ahli = BidangKeahlian::all();
+
+        // dd($coach);
+
+        return view('editCoach', compact('coach', 'category', 'ahli'));
     }
 
     //Mengubah Data Coach
@@ -124,7 +130,9 @@ class CoachController extends Controller
             'nama_coach' => 'required|string|max:100',
             'alamat' => 'required|string|max:500',
             'no_hp' => 'required|max:13',
-            'email' => 'required|unique:coach',
+            'email' => 'required|email',
+            'username' => 'required',
+            // 'password' => 'required|min:8',
             'category_id' => 'required',
             'bidang_id' => 'required'
         ], [
@@ -137,14 +145,34 @@ class CoachController extends Controller
             'no_hp.required' => 'No. HP tidak boleh kosong',
             'no_hp.max' => 'No. HP maksimal hanya 13 angka',
             'email.required' => 'E-mail tidak boleh kosong',
-            'email.unique' => 'E-mail sudah ada',
+            'email.email' => 'Inputan harus berupa email (Contoh: tes@gmail.com)',
+            'username.required' => 'Username tidak boleh kosong',
+            // 'password.required' => 'Password tidak boleh kosong',
+            // 'password.min' => 'Password minimal 8 karakter',
             'category_id.required' => 'Kategori coach tidak boleh kosong',
             'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
         ]);
 
-        //Mengubah Data di Database
+        //Mencari Data Sesuai Dengan id
         $coach = Coach::find($id);
-        $coach->update($request->all());
+        $user = $coach->users;
+
+        //Mengubah Data Coach di Database
+        $coach->update([
+            'nama_coach' => $request->nama_coach,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'category_id' => $request->category_id,
+            'bidang_id' => $request->bidang_id
+        ]);
+
+        //Mengubah Data Akun Coach di Database
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email
+        ]);
+
+        // dd($coach);
 
         return redirect('/coach')->with('sukses', 'Data coach berhasil diperbarui.');
     }

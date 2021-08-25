@@ -1,10 +1,10 @@
 @extends('layout.main')
 
+@if (Request::is('coach'))
+
 @section('title','SIMPIB - Data Coach')
 
 @section('container')
-
-@if (Request::is('coach'))
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -14,7 +14,7 @@
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h6 class="m-0 font-weight-bold text-primary float-left">Coach</h6>
 			{{-- <button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah"> --}}
-				<a href="/tambahCoach" class="btn  btn-sm btn-primary">
+				<a href="/coach/tambah" class="btn  btn-sm btn-primary">
 					Tambah Coach
 				</a>
 			{{-- </button> --}}
@@ -92,7 +92,11 @@
 
 
 <!-- Tambah Data Coach -->
-@elseif (Request::is('tambahCoach'))
+@elseif (Request::is('coach/tambah'))
+
+@section('title','SIMPIB - Tambah Data Coach')
+
+@section('container')
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -201,11 +205,11 @@
 
 
 <!-- Edit Data Coach -->
-@elseif (Request::url('{id}/editCoach'))
+{{-- @elseif (Request::url('{id}/editCoach')) --}}
 
-@foreach ($coach as $coachs)
+{{-- @foreach ($coach as $coachs) --}}
 <!-- Begin Page Content -->
-<div class="container-fluid">
+{{-- <div class="container-fluid">
 
 	<!-- Card Content - Form -->
 	<div class="card shadow mb-4">
@@ -267,7 +271,7 @@
 					<div class="form-group col-md-1"></div>
 					<div class="form-group col-md-3">
 						<label for="no_hp">No. HP</label>
-						<input type="text" name="no_hp" id="no_hp" class="form-control" value="{{$coachs['nama_coach']}}" pattern="[0-9]+" required>
+						<input type="text" name="no_hp" id="no_hp" class="form-control" value="{{$coachs['no_hp']}}" pattern="[0-9]+" required>
 						<div class="invalid-feedback">No. HP tidak valid</div>
 					</div>
 				</div>
@@ -307,9 +311,9 @@
 			</form>
 		</div>
 	</div>
-</div>
+</div> --}}
 
-@endforeach
+{{-- @endforeach --}}
 
 
 @endif

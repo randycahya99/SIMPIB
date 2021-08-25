@@ -100,11 +100,11 @@ Route::get('{id}/deleteAdmin', 'AdminController@deleteAdmin')->middleware('auth'
 
 //Manajemen Data Coach
 Route::get('/coach', 'CoachController@Coach')->middleware('auth','checkRole:admin');
-Route::post('/addCoach', 'CoachController@addCoach')->middleware('auth','checkRole:admin');
-Route::post('{id}/updateCoach', 'CoachController@updateCoach')->middleware('auth','checkRole:admin');
+Route::post('/coach/addCoach', 'CoachController@addCoach')->middleware('auth','checkRole:admin');
+Route::post('/updateCoach/{id}', 'CoachController@updateCoach')->middleware('auth','checkRole:admin');
 Route::get('{id}/deleteCoach', 'CoachController@deleteCoach')->middleware('auth','checkRole:admin');
-Route::get('/tambahCoach', 'CoachController@Coach');
-Route::get('{id}/editCoach', 'CoachController@Coach');
+Route::get('/coach/tambah', 'CoachController@Coach')->middleware('auth','checkRole:admin');
+Route::get('{id}/editCoach', 'CoachController@editCoach')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Mentor
