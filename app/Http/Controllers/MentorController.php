@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
+use App\User;
 use App\Models\Mentor;
 use App\Models\CategoryMentor;
 use App\Models\BidangKeahlian;
@@ -33,12 +36,16 @@ class MentorController extends Controller
     //Menambahkan Data Mentor
     public function addMentor(Request $request)
     {
+        $token = Str::random();
+
         //Validasi Inputan Form
         $request->validate([
             'nama_mentor' => 'required|string|max:100',
             'alamat' => 'required|string|max:500',
             'no_hp' => 'required|max:13',
-            'email' => 'required|unique:mentor',
+            'email' => 'required|email|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required|min:8',
             'category_id' => 'required',
             'bidang_id' => 'required'
         ], [
@@ -51,13 +58,38 @@ class MentorController extends Controller
             'no_hp.required' => 'No. HP tidak boleh kosong',
             'no_hp.max' => 'No. HP maksimal hanya 13 angka',
             'email.required' => 'E-mail tidak boleh kosong',
-            'email.unique' => 'E-mail sudah ada',
+            'email.email' => 'Inputan harus berupa email (Contoh: tes@gmail.com)',
+            'email.unique' => 'E-mail sudah digunakan',
+            'username.required' => 'Username tidak boleh kosong',
+            'username.unique' => 'Username sudah digunakan',
+            'password.required' => 'Password tidak boleh kosong',
+            'password.min' => 'Password minimal 8 karakter',
             'category_id.required' => 'Kategori mentor tidak boleh kosong',
             'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
         ]);
 
-        //Masuk ke Database
-        Mentor::create($request->all());
+        //Menambahkan Akun User ke Database
+        $user = User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'remember_token' => $token
+        ]);
+
+        //Menambahkan Data Mentor ke Database
+        $mentor = Mentor::create([
+            'nama_mentor' => $request->nama_mentor,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'category_id' => $request->category_id,
+            'bidang_id' => $request->bidang_id
+        ]);
+
+        //Menyimpan Data Relasi Tabel User Dengan Mentor
+        $user->mentors()->save($mentor);
+
+        //Menambahkan Role Kepada Akun User
+        $user->assignRole('mentor');
 
         return redirect('/mentor')->with('sukses', 'Data mentor berhasil ditambahkan.');
     }
@@ -106,7 +138,7 @@ class MentorController extends Controller
             'no_hp.max' => 'No. HP maksimal hanya 13 angka',
             'email.required' => 'E-mail tidak boleh kosong',
             'email.unique' => 'E-mail sudah ada',
-            'category_id.required' => 'Kategori coach tidak boleh kosong',
+            'category_id.required' => 'Kategori mentor tidak boleh kosong',
             'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
         ]);
 
@@ -120,9 +152,17 @@ class MentorController extends Controller
     //Menghapus Data Mentor
     public function deleteMentor($id)
     {
-        //Menghapus Data di Database
+        //Mencari Data Mentor di Database
         $mentor = Mentor::find($id);
+
+        //Mencari Data Akun Mentor di Database
+        $user = $mentor->users;
+
+        //Menghapus Data Mentor di Database
         $mentor->delete();
+
+        //Menghapus Data Akun Mentor di Database
+        $user->delete();
 
         return redirect('/mentor');
     }

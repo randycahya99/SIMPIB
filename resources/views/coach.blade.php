@@ -14,7 +14,7 @@
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h6 class="m-0 font-weight-bold text-primary float-left">Coach</h6>
 			{{-- <button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah"> --}}
-				<a href="/coach/tambah" class="btn  btn-sm btn-primary">
+				<a href="/coach/tambah" class="btn  btn-sm btn-primary" title="Tambah">
 					Tambah Coach
 				</a>
 			{{-- </button> --}}
@@ -457,7 +457,7 @@
 					</div>
 					<div class="form-group">
 						<label>E-mail</label>
-						<input type="email" name="email" id="email" class="form-control" value="{{$coachs['email']}}" required>
+						<input type="email" name="email" id="email" class="form-control" value="{{$coachs->users['email']}}" required>
 						<div class="invalid-feedback">E-mail tidak valid</div>
 					</div>
 
@@ -521,6 +521,12 @@
 					<p class=" col-sm-4 font-weight-bold">E-mail</p>
 					<div class="col-sm-8">
 						<p>: {{$coachs->users->email}}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<p class=" col-sm-4 font-weight-bold">Username</p>
+					<div class="col-sm-8">
+						<p>: {{$coachs->users->username}}</p>
 					</div>
 				</div>
 			

@@ -109,9 +109,10 @@ Route::get('{id}/editCoach', 'CoachController@editCoach')->middleware('auth','ch
 
 //Manajemen Data Mentor
 Route::get('/mentor', 'MentorController@Mentor')->middleware('auth','checkRole:admin');
-Route::post('/addMentor', 'MentorController@addMentor')->middleware('auth','checkRole:admin');
+Route::post('/mentor/addMentor', 'MentorController@addMentor')->middleware('auth','checkRole:admin');
 Route::post('{id}/updateMentor', 'MentorController@updateMentor')->middleware('auth','checkRole:admin');
 Route::get('{id}/deleteMentor', 'MentorController@deleteMentor')->middleware('auth','checkRole:admin');
+Route::get('/mentor/tambah', 'MentorController@Mentor')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Pendamping
