@@ -72,9 +72,11 @@
 								<a href="{{$mentors->id}}/deleteMentor" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
 									<i class="fas fa-trash"></i>
 								</a>
-								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$mentors['id']}}">
+								<a href="{{$mentors->id}}/editMentor" class="btn btn-primary btn-circle btn-sm" title="Edit">
+								{{-- <button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$mentors['id']}}"> --}}
 									<i class="fas fa-edit"></i>
-								</button>
+								{{-- </button> --}}
+								</a>
 								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="#detailData{{$mentors['id']}}">
 									<i class="fas fa-eye"></i>
 								</button>

@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Models\Pengelola;
 use App\Models\Coach;
+use App\Models\Mentor;
 
 class UserSeeder extends Seeder
 {
@@ -44,14 +45,21 @@ class UserSeeder extends Seeder
 
 
         //Mentor
-        $mentor = User::create([
+        $userMentor = User::create([
             'username' => 'mentor',
             'email' => 'mentor@gmail.com',
             'password' => bcrypt('123123123'),
             'remember_token' => Str::random(60)
         ]);
 
-        $mentor->assignRole('mentor');
+        $mentor = Mentor::create([
+            'nama_mentor' => 'Arief Kelik Nugroho, S.Kom., M.Cs.',
+            'alamat' => 'Purbalingga',
+            'no_hp' => '081931779152',
+        ]);
+
+        $userMentor->mentors()->save($mentor);
+        $userMentor->assignRole('mentor');
 
 
         //Coach

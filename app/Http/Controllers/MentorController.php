@@ -105,15 +105,16 @@ class MentorController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    //Menampilkan Halaman Edit Data Mentor
+    public function editMentor($id)
     {
-        //
+        $mentor = Mentor::find($id);
+        $category = CategoryMentor::all();
+        $ahli = BidangKeahlian::all();
+
+        // dd($mentor);
+
+        return view('editMentor', compact('mentor', 'category', 'ahli'));
     }
 
     //Mengubah Data Mentor
@@ -124,7 +125,9 @@ class MentorController extends Controller
             'nama_mentor' => 'required|string|max:100',
             'alamat' => 'required|string|max:500',
             'no_hp' => 'required|max:13',
-            'email' => 'required|unique:mentor',
+            'email' => 'required|email',
+            'username' => 'required',
+            // 'password' => 'required|min:8',
             'category_id' => 'required',
             'bidang_id' => 'required'
         ], [
@@ -137,14 +140,34 @@ class MentorController extends Controller
             'no_hp.required' => 'No. HP tidak boleh kosong',
             'no_hp.max' => 'No. HP maksimal hanya 13 angka',
             'email.required' => 'E-mail tidak boleh kosong',
-            'email.unique' => 'E-mail sudah ada',
+            'email.email' => 'Inputan harus berupa email (Contoh: tes@gmail.com)',
+            'username.required' => 'Username tidak boleh kosong',
+            // 'password.required' => 'Password tidak boleh kosong',
+            // 'password.min' => 'Password minimal 8 karakter',
             'category_id.required' => 'Kategori mentor tidak boleh kosong',
             'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
         ]);
 
-        //Mengubah Data di Database
+        //Mencari Data Sesuai Dengan id
         $mentor = Mentor::find($id);
-        $mentor->update($request->all());
+        $user = $mentor->users;
+
+        //Mengubah Data Mentor di Database
+        $mentor->update([
+            'nama_mentor' => $request->nama_mentor,
+            'alamat' => $request->alamat,
+            'no_hp' => $request->no_hp,
+            'category_id' => $request->category_id,
+            'bidang_id' => $request->bidang_id
+        ]);
+
+        //Mengubah Data Akun Mentor di Database
+        $user->update([
+            'username' => $request->username,
+            'email' => $request->email
+        ]);
+
+        // dd($mentor);
 
         return redirect('/mentor')->with('sukses', 'Data mentor berhasil diperbarui.');
     }
