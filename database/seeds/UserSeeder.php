@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Models\Pengelola;
+use App\Models\Coach;
 
 class UserSeeder extends Seeder
 {
@@ -13,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        //Admin atau Pengelola
         $userPengelola = User::create([
             'username' => 'admin',
             'email' => 'admin@gmail.com',
@@ -30,6 +32,7 @@ class UserSeeder extends Seeder
         $userPengelola->assignRole('admin');
 
 
+        //Pendamping
         $pendamping = User::create([
             'username' => 'pendamping',
             'email' => 'pendamping@gmail.com',
@@ -40,6 +43,7 @@ class UserSeeder extends Seeder
         $pendamping->assignRole('pendamping');
 
 
+        //Mentor
         $mentor = User::create([
             'username' => 'mentor',
             'email' => 'mentor@gmail.com',
@@ -50,16 +54,25 @@ class UserSeeder extends Seeder
         $mentor->assignRole('mentor');
 
 
-        $coach = User::create([
+        //Coach
+        $userCoach = User::create([
             'username' => 'coach',
             'email' => 'coach@gmail.com',
             'password' => bcrypt('123123123'),
             'remember_token' => Str::random(60)
         ]);
 
-        $coach->assignRole('coach');
+        $coach = Coach::create([
+            'nama_coach' => 'Dr. Lasmedi Afuan, S.T., M.Cs.',
+            'alamat' => 'Purwokerto',
+            'no_hp' => '082137371349',
+        ]);
+
+        $userCoach->coachs()->save($coach);
+        $userCoach->assignRole('coach');
 
 
+        //Pemonev
         $pemonev = User::create([
             'username' => 'pemonev',
             'email' => 'pemonev@gmail.com',
@@ -70,6 +83,7 @@ class UserSeeder extends Seeder
         $pemonev->assignRole('pemonev');
 
 
+        //Perusahaan
         $perusahaan = User::create([
             'username' => 'perusahaan',
             'email' => 'perusahaan@gmail.com',
@@ -80,6 +94,7 @@ class UserSeeder extends Seeder
         $perusahaan->assignRole('perusahaan');
 
 
+        //Tenant
         $tenant = User::create([
             'username' => 'tenant',
             'email' => 'tenant@gmail.com',
