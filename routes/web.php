@@ -45,11 +45,11 @@ Route::get('/logout', 'LoginController@logout')->middleware('auth');
 
 //Registrasi
 Route::get('/registration', 'RegisterController@RegisterPage')->middleware('guest')->name('registration');
-Route::post('/registerTenant', 'RegisterController@RegisterTenant');
+Route::post('/registerTenant', 'RegisterController@RegisterTenant')->middleware('guest');
 
 
 //Melengkapi Profil
-Route::get('/profilTenant', 'RegisterController@profilTenant');
+Route::get('/profilTenant', 'RegisterController@profilTenant')->middleware('auth','checkRole:calon tenant');
 
 
 //Kategori Coach

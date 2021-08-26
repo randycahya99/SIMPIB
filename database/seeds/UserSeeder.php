@@ -119,5 +119,16 @@ class UserSeeder extends Seeder
         ]);
 
         $tenant->assignRole('tenant');
+
+
+        //Calon Tenant
+        $calonTenant = User::create([
+            'username' => 'calon tenant',
+            'email' => 'calontenant@gmail.com',
+            'password' => bcrypt('123123123'),
+            'remember_token' => Str::random(60)
+        ]);
+
+        $calonTenant->assignRole('calon tenant');
     }
 }
