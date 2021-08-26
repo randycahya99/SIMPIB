@@ -5,6 +5,7 @@ use App\User;
 use App\Models\Pengelola;
 use App\Models\Coach;
 use App\Models\Mentor;
+use App\Models\Pendamping;
 
 class UserSeeder extends Seeder
 {
@@ -34,14 +35,21 @@ class UserSeeder extends Seeder
 
 
         //Pendamping
-        $pendamping = User::create([
+        $userPendamping = User::create([
             'username' => 'pendamping',
             'email' => 'pendamping@gmail.com',
             'password' => bcrypt('123123123'),
             'remember_token' => Str::random(60)
         ]);
 
-        $pendamping->assignRole('pendamping');
+        $pendamping = Pendamping::create([
+            'nama_pendamping' => 'Nur Chasanah, S.Kom,. M.Kom.',
+            'alamat' => 'Purbalingga',
+            'no_hp' => '081322685699',
+        ]);
+
+        $userPendamping->pendampings()->save($pendamping);
+        $userPendamping->assignRole('pendamping');
 
 
         //Mentor

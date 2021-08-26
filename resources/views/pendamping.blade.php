@@ -1,5 +1,7 @@
 @extends('layout.main')
 
+@if (Request::is('pendamping'))
+
 @section('title','SIMPIB - Data Pendamping')
 
 @section('container')
@@ -11,9 +13,11 @@
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 			<h6 class="m-0 font-weight-bold text-primary float-left">Pendamping</h6>
-			<button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah">
-				Tambah Pendamping
-			</button>
+			{{-- <button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah"> --}}
+				<a href="/pendamping/tambah" class="btn  btn-sm btn-primary" title="Tambah">
+					Tambah Pendamping
+				</a>
+			{{-- </button> --}}
 		</div>
 		<div class="card-body">
 <!-- 			@if ($errors->any())
@@ -68,9 +72,11 @@
 								<a href="{{$pendampings->id}}/deletePendamping" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
 									<i class="fas fa-trash"></i>
 								</a>
-								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$pendampings['id']}}">
+								<a href="{{$pendampings->id}}/editPendamping" class="btn btn-primary btn-circle btn-sm" title="Edit">
+								{{-- <button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$pendampings['id']}}"> --}}
 									<i class="fas fa-edit"></i>
-								</button>
+								{{-- </button> --}}
+								</a>
 								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="#detailData{{$pendampings['id']}}">
 									<i class="fas fa-eye"></i>
 								</button>
@@ -83,6 +89,121 @@
 		</div>
 	</div>
 </div>
+
+
+@elseif (Request::is('pendamping/tambah'))
+
+@section('title','SIMPIB - Tambah Data Pendamping')
+
+@section('container')
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+	<!-- Card Content - Form -->
+	<div class="card shadow mb-4">
+		<ol class="breadcrumb" style="background-color: #F8F8FF">
+			<li class="breadcrumb-item">
+				<a href="/pendamping" class="m-0 font-weight-bold text-primary float-left">Pendamping</a>
+			</li>
+			<li class="breadcrumb-item active" aria-current="page">Tambah Data Pendamping</li>
+		</ol>
+		<div class="card-body">
+			<form action="addPendamping" method="POST" class="needs-validation" novalidate>
+
+				@csrf
+
+				<h4 class="card-text font-weight-bold">Identitas</h4>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="nama_pendamping">Nama Pendamping</label>
+						<input type="text" name="nama_pendamping" id="nama_pendamping" class="form-control" placeholder="Masukan nama pendamping" required>
+						<div class="invalid-feedback">Nama pendamping tidak valid</div>
+					</div>
+					<div class="form-group col-md-1"></div>
+					<div class="form-group col-md-3">
+						<label for="category_id">Kategori Pendamping</label>
+						<select class="form-control" name="category_id" id="category_id" required>
+							<option value="" selected>Pilih Kategori Pendamping</option>
+
+							@foreach($category as $categories)
+
+							<option value="{{ $categories->id }}">{{ $categories->kategori_pendamping }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Kategori pendamping tidak valid</div>
+					</div>
+					<div class="form-group col-md-1"></div>
+					<div class="form-group col-md-3">
+						<label for="bidang_id">Bidang Keahlian</label>
+						<select class="form-control" name="bidang_id" id="bidang_id" required>
+							<option value="" selected>Pilih Bidang Keahlian</option>
+
+							@foreach($ahli as $ahlis)
+
+							<option value="{{ $ahlis->id }}">{{ $ahlis->bidang_keahlian }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Bidang keahlian tidak valid</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-4">
+						<label for="alamat">Alamat</label>
+						<input type="text" name="alamat" id="alamat" class="form-control" placeholder="Masukan alamat" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Alamat tidak valid</div>
+					</div>
+					<div class="form-group col-md-1"></div>
+					<div class="form-group col-md-3">
+						<label for="no_hp">No. HP</label>
+						<input type="text" name="no_hp" id="no_hp" class="form-control" placeholder="Masukan no. hp" pattern="[0-9]+" required>
+						<div class="invalid-feedback">No. HP tidak valid</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-12"><hr></div>
+				</div>
+				<h4 class="card-text font-weight-bold">Akun</h4>
+				<div class="form-group row">
+					<label for="username" class="col-sm-2 col-form-label">Username</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="username" id="username" placeholder="Masukkan username" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Username tidak valid</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="email" class="col-sm-2 col-form-label">E-mail</label>
+					<div class="col-sm-4">
+						<input type="email" class="form-control" name="email" id="email" placeholder="Masukkan e-mail" required>
+						<div class="invalid-feedback">E-mail tidak valid</div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="password" class="col-sm-2 col-form-label">Password</label>
+					<div class="col-sm-4">
+						<input type="password" class="form-control" name="password" id="password" placeholder="Masukkan password" pattern="[a-zA-Z\s0-9]+" required>
+						<div class="invalid-feedback">Password tidak valid</div>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label"></label>
+					<div class="col-sm-4">
+						<button type="submit" class="btn btn-primary">Tambah</button>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+
+
+@endif
 
 
 <!-- Modal Tambah Data -->
@@ -286,7 +407,7 @@
 				<div class="form-group row">
 					<p class=" col-sm-4 font-weight-bold">E-mail</p>
 					<div class="col-sm-8">
-						<p>: {{$pendampings->email}}</p>
+						<p>: {{$pendampings->users->email}}</p>
 					</div>
 				</div>
 			

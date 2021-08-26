@@ -54,4 +54,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne('App\Models\Mentor');
     }
 
+    public function pendampings()
+    {
+        return $this->hasOne('App\Models\Pendamping');
+    }
+
 }

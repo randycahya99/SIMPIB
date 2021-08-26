@@ -118,9 +118,11 @@ Route::get('{id}/editMentor', 'MentorController@editMentor')->middleware('auth',
 
 //Manajemen Data Pendamping
 Route::get('/pendamping', 'PendampingController@Pendamping')->middleware('auth','checkRole:admin');
-Route::post('/addPendamping', 'PendampingController@addPendamping')->middleware('auth','checkRole:admin');
-Route::post('{id}/updatePendamping', 'PendampingController@updatePendamping')->middleware('auth','checkRole:admin');
+Route::post('pendamping/addPendamping', 'PendampingController@addPendamping')->middleware('auth','checkRole:admin');
+Route::post('/updatePendamping/{id}', 'PendampingController@updatePendamping')->middleware('auth','checkRole:admin');
 Route::get('{id}/deletePendamping', 'PendampingController@deletePendamping')->middleware('auth','checkRole:admin');
+Route::get('/pendamping/tambah', 'PendampingController@Pendamping')->middleware('auth','checkRole:admin');
+Route::get('{id}/editPendamping', 'PendampingController@editPendamping')->middleware('auth','checkRole:admin');
 
 
 //Manajemen Data Tenant

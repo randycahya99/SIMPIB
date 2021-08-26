@@ -20,4 +20,9 @@ class Pendamping extends Model
     {
         return $this->belongsTo(BidangKeahlian::class, 'bidang_id');
     }
+
+    public function users()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
 }
