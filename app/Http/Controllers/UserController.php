@@ -18,11 +18,14 @@ class UserController extends Controller
     //Menampilkan Halaman Profile User
     public function Profile()
     {
-        $user = Auth::user()->pengelolas;
+        $pengelola = Auth::user()->pengelolas;
+        $pendamping = Auth::user()->pendampings;
+        $mentor = Auth::user()->mentors;
+        $coach = Auth::user()->coachs;
 
         // dd($user);
         
-        return view('profile', compact('user'));
+        return view('profile', compact('pengelola','pendamping','mentor','coach'));
     }
 
     public function EditProfile($id)

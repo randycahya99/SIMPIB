@@ -31,15 +31,16 @@
                         <div class="col-lg-8" style="background-color: ">
                             <div class="m-5" style="text-align:left">
                                 
+
                                 @if (auth()->user()->hasRole('admin'))
-                                
+
                                 <b>Informasi Saya</b>
                                 <div class="row mt-3">
                                     <div class="col-lg-4">
                                         Nama
                                     </div>
                                     <div class="col">
-                                        {{$user->nama_pengelola}}
+                                        {{$pengelola->nama_pengelola}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -47,7 +48,7 @@
                                         Jabatan
                                     </div>
                                     <div class="col">
-                                        {{$user->jabatan}}
+                                        {{$pengelola->jabatan}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -55,7 +56,7 @@
                                         No. HP
                                     </div>
                                     <div class="col">
-                                        {{$user->no_hp}}
+                                        {{$pengelola->no_hp}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -75,8 +76,169 @@
                                     </div>
                                 </div>
 
+
+                                @elseif(auth()->user()->hasRole('pendamping'))
+
+                                <b>Informasi Saya</b>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        Nama
+                                    </div>
+                                    <div class="col">
+                                        {{$pendamping->nama_pendamping}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Alamat
+                                    </div>
+                                    <div class="col">
+                                        {{$pendamping->alamat}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        No. HP
+                                    </div>
+                                    <div class="col">
+                                        {{$pendamping->no_hp}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Bidang Keahlian
+                                    </div>
+                                    <div class="col">
+                                        {{$pendamping->bidangs->bidang_keahlian}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        E-mail
+                                    </div>
+                                    <div class="col">
+                                        {{ auth()->user()->email }}
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-5">
+                                    <div class="col-lg-4">
+                                        Username
+                                    </div>
+                                    <div class="col">
+                                        {{ auth()->user()->username }}
+                                    </div>
+                                </div>
+
+
+                                @elseif(auth()->user()->hasRole('mentor'))
+
+                                <b>Informasi Saya</b>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        Nama
+                                    </div>
+                                    <div class="col">
+                                        {{$mentor->nama_mentor}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Alamat
+                                    </div>
+                                    <div class="col">
+                                        {{$mentor->alamat}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        No. HP
+                                    </div>
+                                    <div class="col">
+                                        {{$mentor->no_hp}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Bidang Keahlian
+                                    </div>
+                                    <div class="col">
+                                        {{$mentor->bidangs->bidang_keahlian}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        E-mail
+                                    </div>
+                                    <div class="col">
+                                        {{ auth()->user()->email }}
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-5">
+                                    <div class="col-lg-4">
+                                        Username
+                                    </div>
+                                    <div class="col">
+                                        {{ auth()->user()->username }}
+                                    </div>
+                                </div>
+
+
+                                @elseif(auth()->user()->hasRole('coach'))
+
+                                <b>Informasi Saya</b>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        Nama
+                                    </div>
+                                    <div class="col">
+                                        {{$coach->nama_coach}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Alamat
+                                    </div>
+                                    <div class="col">
+                                        {{$coach->alamat}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        No. HP
+                                    </div>
+                                    <div class="col">
+                                        {{$coach->no_hp}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Bidang Keahlian
+                                    </div>
+                                    <div class="col">
+                                        {{$coach->bidangs->bidang_keahlian}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        E-mail
+                                    </div>
+                                    <div class="col">
+                                        {{ auth()->user()->email }}
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-5">
+                                    <div class="col-lg-4">
+                                        Username
+                                    </div>
+                                    <div class="col">
+                                        {{ auth()->user()->username }}
+                                    </div>
+                                </div>
+
+
                                 @endif
                                 
+
                             </div>
                         </div>
                     </div>
