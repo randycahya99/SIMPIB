@@ -29,6 +29,9 @@ Route::get('/dashboard', function () {
 Route::get('/profile', 'UserController@Profile')->middleware('auth');
 Route::get('{id}/profile/edit', 'UserController@EditProfile')->middleware('auth');
 Route::post('/updateProfilePengelola', 'UserController@UpdateProfilePengelola')->middleware('auth','checkRole:admin');
+Route::post('/updateProfilePendamping', 'UserController@updateProfilePendamping')->middleware('auth','checkRole:pendamping');
+Route::post('/updateProfileMentor', 'UserController@updateProfileMentor')->middleware('auth','checkRole:mentor');
+Route::post('/updateProfileCoach', 'UserController@updateProfileCoach')->middleware('auth','checkRole:coach');
 
 
 //Login
