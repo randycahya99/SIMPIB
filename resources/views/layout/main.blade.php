@@ -25,6 +25,13 @@
 
   <link href="{{ asset('assets/adminpos/css/sweetalert2.min.css') }}" rel="stylesheet">
 
+  <style>
+    .asterisk:after {
+      content: "*";
+      color: red;
+    }
+  </style>
+
 </head>
 
 <body id="page-top">
@@ -116,8 +123,8 @@
       
       @if (auth()->user()->hasRole('calon tenant'))
 
-      <li class="nav-item{{ request()->is('profilTenant') ? ' active' : '' }}">
-        <a class="nav-link" href="{{url('/profilTenant')}}">
+      <li class="nav-item{{ request()->is('lengkapiProfile') ? ' active' : '' }}">
+        <a class="nav-link" href="{{url('/lengkapiProfile')}}">
           <i class="fas fa-user-tie"></i>
           <span>Profil Diri dan Usaha</span>
         </a>

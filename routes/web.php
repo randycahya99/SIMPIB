@@ -49,7 +49,7 @@ Route::post('/registerTenant', 'RegisterController@RegisterTenant')->middleware(
 
 
 //Melengkapi Profil
-Route::get('/profilTenant', 'RegisterController@profilTenant')->middleware('auth','checkRole:calon tenant');
+Route::get('/lengkapiProfile', 'RegisterController@LengkapiProfile')->middleware('auth','checkRole:calon tenant');
 
 
 //Kategori Coach
