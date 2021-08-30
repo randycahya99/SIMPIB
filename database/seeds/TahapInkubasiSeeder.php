@@ -13,18 +13,18 @@ class TahapInkubasiSeeder extends Seeder
     public function run()
     {
         $tahap = TahapInkubasi::create([
-            'kode' => 'TNT1',
-            'tahap_inkubasi' => 'Calon Tenant'
+            'kode' => 'TH1',
+            'tahap_inkubasi' => 'Pra Inkubasi'
         ]);
 
         $tahap = TahapInkubasi::create([
-            'kode' => 'TNT2',
-            'tahap_inkubasi' => 'Startup'
+            'kode' => 'TH2',
+            'tahap_inkubasi' => 'Inkubasi'
         ]);
 
         $tahap = TahapInkubasi::create([
-            'kode' => 'TNT3',
-            'tahap_inkubasi' => 'UMKM'
+            'kode' => 'TH3',
+            'tahap_inkubasi' => 'Pasca Inkubasi'
         ]);
     }
 }

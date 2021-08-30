@@ -137,7 +137,7 @@
 					
 					<div class="form-group">
 						<label>Kode</label>
-						<input type="text" name="kode_bidang" id="kode_bidang" class="form-control" value="{{$ahlis['kode_bidang']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<input type="text" name="kode_bidang" id="kode_bidang" class="form-control" value="{{$ahlis['kode_bidang']}}" pattern="[a-zA-Z\s0-9]+" readonly>
 						<div class="invalid-feedback">Kode bidang keahlian tidak valid</div>
 					</div>
 					<div class="form-group">

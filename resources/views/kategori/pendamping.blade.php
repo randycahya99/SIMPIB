@@ -137,7 +137,7 @@
 					
 					<div class="form-group">
 						<label>Kode Pendamping</label>
-						<input type="text" name="kode_pendamping" id="kode_pendamping" class="form-control" value="{{$categories['kode_pendamping']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<input type="text" name="kode_pendamping" id="kode_pendamping" class="form-control" value="{{$categories['kode_pendamping']}}" pattern="[a-zA-Z\s0-9]+" readonly>
 						<div class="invalid-feedback">Kode pendamping tidak valid</div>
 					</div>
 					<div class="form-group">

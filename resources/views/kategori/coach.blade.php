@@ -137,7 +137,7 @@
 					
 					<div class="form-group">
 						<label>Kode Coach</label>
-						<input type="text" name="kode_coach" id="kode_coach" class="form-control" value="{{$categories['kode_coach']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<input type="text" name="kode_coach" id="kode_coach" class="form-control" value="{{$categories['kode_coach']}}" pattern="[a-zA-Z\s0-9]+" readonly>
 						<div class="invalid-feedback">Kode coach tidak valid</div>
 					</div>
 					<div class="form-group">

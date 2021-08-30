@@ -7,6 +7,8 @@
 
     <link href="{{ URL::asset('landing/assets/img/logo unsoed.png') }}" rel="shortcut icon" />
 
+    <link href="{{ asset('assets/adminpos/css/sweetalert2.min.css') }}" rel="stylesheet">
+
     <style>
         @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
@@ -313,6 +315,9 @@
         </div>
     </div>
 
+
+    <script src="{{asset('assets/adminpos/js/sweetalert2.all.min.js')}}"></script>
+
     <script>
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
@@ -326,6 +331,16 @@
             container.classList.remove("right-panel-active");
         });
     </script>
+
+    @if(session('sukses'))    
+        <script type="text/javascript">
+            Swal.fire(
+                'Berhasil',
+                '{{session('sukses')}}',
+                'success'
+            )
+        </script>
+    @endif
 
 </body>
 </html>

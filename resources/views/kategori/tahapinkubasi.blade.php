@@ -137,7 +137,7 @@
 					
 					<div class="form-group">
 						<label>Kode</label>
-						<input type="text" name="kode" id="kode" class="form-control" value="{{$tahaps['kode']}}" pattern="[a-zA-Z\s0-9]+" required>
+						<input type="text" name="kode" id="kode" class="form-control" value="{{$tahaps['kode']}}" pattern="[a-zA-Z\s0-9]+" readonly>
 						<div class="invalid-feedback">Kode tahap inkubasi tidak valid</div>
 					</div>
 					<div class="form-group">

@@ -16,6 +16,11 @@
             <h4 class="card-text font-weight-bold">Profil Diri</h4>
 			<p class="card-text" style="color: red">* Wajib</p>
             <form action="isiProfileUsaha" method="POST" class="needs-validation" novalidate>
+
+                @csrf
+
+                <input type="hidden" class="form-control" id="user_id" name="user_id" value="{{auth()->user()->id}}">
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="asterisk" for="nama">Nama Lengkap</label>
@@ -110,7 +115,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="asterisk" for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" value="{{ auth()->user()->email }}" readonly>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="asterisk" for="website">Website</label>

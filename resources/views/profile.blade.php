@@ -24,7 +24,7 @@
                             </div>
                             <div class="">
                                 <form action="{{auth()->user()->id}}/profile/edit">
-                                    <button class='btn-purple' style="display: inline-block;font-weight: 400;text-align: center;border: 1px solid transparent;line-height: 1.5;border-radius: 0.25rem;padding: 0.375rem 0.75rem;">Edit Profil</button>
+                                    <button class='btn btn-warning' style="display: inline-block;font-weight: 400;text-align: center;border: 1px solid transparent;line-height: 1.5;border-radius: 0.25rem;padding: 0.375rem 0.75rem;">Edit Profil</button>
                                 </form>
                             </div>
                         </div>
