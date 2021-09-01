@@ -138,6 +138,7 @@ Route::get('{id}/editPendamping', 'PendampingController@editPendamping')->middle
 Route::get('/calonTenant', 'TenantController@Registrasi')->middleware('auth','checkRole:admin');
 Route::get('{id}/reviewRegister', 'TenantController@ReviewRegister')->middleware('auth','checkRole:admin');
 Route::post('/terimaRegister/{id}', 'TenantController@TerimaRegister')->middleware('auth','checkRole:admin');
+Route::get('/tolakRegister/{id}', 'TenantController@TolakRegister')->middleware('auth','checkRole:admin');
 
 
 // Manajemen Data Tenant

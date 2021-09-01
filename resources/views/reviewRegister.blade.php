@@ -269,7 +269,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label"></label>
                         <div class="col-sm-1">
-                            <a href="#" class="btn btn-danger">
+                            <a href="/tolakRegister/{{$tenant->id}}" class="btn btn-danger">
                             {{-- <button type="submit" class="btn btn-danger"> --}}
                                 Tolak
                             {{-- </button> --}}

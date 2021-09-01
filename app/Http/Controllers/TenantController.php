@@ -104,6 +104,19 @@ class TenantController extends Controller
         return redirect('/tenant')->with('sukses', 'Berhasil menerima calon tenant baru.');
     }
 
+    // Menolak Data Registrasi Calon Tenant
+    public function TolakRegister($id)
+    {
+        // Mengubah Status Aktivasi Tenant
+        $tenant = Tenant::find($id);
+        $tenant->status = 'ditolak';
+        $tenant->save();
+
+        // dd($tenant);
+
+        return redirect('/tenant')->with('sukses', 'Berhasil menolak calon tenant baru.');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
