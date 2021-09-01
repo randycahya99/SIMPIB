@@ -22,7 +22,11 @@ class Tenant extends Model
         'kode_pos',
         'no_hp',
         'email',
-        'website'
+        'website',
+        'aktivasi',
+        'coach_id',
+        'mentor_id',
+        'pendamping_id'
     ];
 
     public function users()
@@ -33,5 +37,20 @@ class Tenant extends Model
     public function usahas()
     {
         return $this->hasOne(Usaha::class);
+    }
+
+    public function coachs()
+    {
+        return $this->belongsTo(Coach::class, 'coach_id');
+    }
+
+    public function mentors()
+    {
+        return $this->belongsTo(Mentor::class, 'mentor_id');
+    }
+
+    public function pendampings()
+    {
+        return $this->belongsTo(Pendamping::class, 'pendamping_id');
     }
 }

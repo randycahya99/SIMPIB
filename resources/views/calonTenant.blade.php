@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title','SIMPIB - Data Tenant')
+@section('title','SIMPIB - Data Registrasi Calon Tenant')
 
 @section('container')
     
@@ -10,7 +10,7 @@
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary float-left">Tenant</h6>
+			<h6 class="m-0 font-weight-bold text-primary float-left">Data Registrasi Calon Tenant</h6>
 			{{-- <button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData">
 				Tambah Tenant
 			</button> --}}
@@ -47,7 +47,7 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Namat</th>
+							<th>Nama</th>
 							<th>No. Identitas</th>
 							<th>Alamat</th>
 							<th>No. HP</th>
@@ -66,16 +66,18 @@
 							<td>{{$tenants->no_hp}}</td>
 							<td>{{$tenants->email}}</td>
 
-							<td>
-								<a href="" class="btn btn-danger btn-circle btn-sm hapusProduct">
+							<td align="center">
+								{{-- <a href="" class="btn btn-danger btn-circle btn-sm hapusProduct">
 									<i class="fas fa-trash"></i>
-								</a>
-								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								</a> --}}
+								{{-- <button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
 									<i class="fas fa-edit"></i>
-								</button>
-								<button class="btn btn-success btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
-									<i class="fas fa-eye"></i>
-								</button>
+								</button> --}}
+								{{-- <button class="btn btn-success btn-circle btn-sm" title="Review" data-toggle="modal" data-target=""> --}}
+								<a href="{{$tenants->id}}/reviewRegister" class="btn btn-success btn-sm" title="Review">
+									{{-- <i class="fas fa-eye"></i> --}}Review
+								</a>
+								{{-- </button> --}}
 							</td>
 						</tr>
 						@endforeach

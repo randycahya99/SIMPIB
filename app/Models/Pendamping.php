@@ -25,4 +25,9 @@ class Pendamping extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+
+    public function tenants()
+    {
+        return $this->hasMany(Tenant::class);
+    }
 }

@@ -112,6 +112,7 @@
             <a class="collapse-item" href="{{url('/coach')}}">Coach</a>
             <a class="collapse-item" href="{{url('/mentor')}}">Mentor</a>
             <a class="collapse-item" href="{{url('/pendamping')}}">Pendamping</a>
+            <a class="collapse-item" href="{{url('/calonTenant')}}">Registrasi</a>
             <a class="collapse-item" href="{{url('/tenant')}}">Tenant</a>
           </div>
         </div>
@@ -126,7 +127,20 @@
       <li class="nav-item{{ request()->is('lengkapiProfile') ? ' active' : '' }}">
         <a class="nav-link" href="{{url('/lengkapiProfile')}}">
           <i class="fas fa-user-tie"></i>
-          <span>Profil Diri dan Usaha</span>
+          <span>Ajukan Pendaftaran</span>
+        </a>
+      </li>
+
+      @endif
+
+      <!-- Nav Item - Histori Registrasi -->
+      
+      @if (auth()->user()->hasAnyRole('calon tenant', 'tenant'))
+
+      <li class="nav-item{{ request()->is('historiPendaftaran') ? ' active' : '' }}">
+        <a class="nav-link" href="{{url('/historiPendaftaran')}}">
+          <i class="fas fa-user-tie"></i>
+          <span>Histori Pendaftaran</span>
         </a>
       </li>
 

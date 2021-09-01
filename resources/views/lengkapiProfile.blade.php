@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title','SIMPIB - Lengkapi Data Diri dan Usaha')
+@section('title','SIMPIB - Ajukan Pendaftaran')
 
 @section('container')
 
@@ -115,7 +115,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="asterisk" for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" required>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ auth()->user()->email }}" readonly>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="asterisk" for="website">Website</label>

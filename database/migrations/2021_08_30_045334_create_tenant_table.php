@@ -29,9 +29,16 @@ class CreateTenantTable extends Migration
             $table->string('no_hp');
             $table->string('email', 100);
             $table->string('website', 100);
+            $table->enum('status', ['pengajuan','diterima','ditolak'])->default('pengajuan');
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('coach_id')->nullable();
+            $table->unsignedBigInteger('mentor_id')->nullable();
+            $table->unsignedBigInteger('pendamping_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('coach_id')->references('id')->on('coach')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('mentor_id')->references('id')->on('mentor')->onUpdate('cascade')->onDelete('set null');
+            $table->foreign('pendamping_id')->references('id')->on('pendamping')->onUpdate('cascade')->onDelete('set null');
         });
     }
 

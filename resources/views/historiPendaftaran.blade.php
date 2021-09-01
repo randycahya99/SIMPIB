@@ -1,57 +1,27 @@
 @extends('layout.main')
 
-@section('title','SIMPIB - Data Tenant')
+@section('title','SIMPIB - Histori Pendaftaran')
 
 @section('container')
-    
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary float-left">Tenant</h6>
-			{{-- <button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData">
-				Tambah Tenant
-			</button> --}}
+			<h6 class="m-0 font-weight-bold text-primary float-left">Histori Pendaftaran</h6>
 		</div>
 		<div class="card-body">
-<!-- 			@if ($errors->any())
-			<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				<strong>Gagal menambahkan data Produk dikarenakan :</strong>
-				<ul>
-					@foreach ($errors->all() as $error)
-
-					<li>{{ $error }}</li>
-
-					@endforeach
-				</ul>
-				<strong>Silahkan perbaiki kembali data dalam form!</strong>
-
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			@endif -->
-
-<!-- 			@if(session('success'))
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
-				<strong>{{ session('success') }}</strong> 
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			@endif -->
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Namat</th>
+							<th>Nama</th>
 							<th>No. Identitas</th>
-							<th>Alamat</th>
-							<th>No. HP</th>
-							<th>E-mail</th>
+							<th>Nama Usaha</th>
+							<th>Status</th>
 							<th width="80">Aksi</th>
 						</tr>
 					</thead>
@@ -62,20 +32,30 @@
 							<td align="center">{{$loop->iteration}}</td>
 							<td>{{$tenants->nama}}</td>
 							<td>{{$tenants->no_identitas}}</td>
-							<td>{{$tenants->alamat}}</td>
-							<td>{{$tenants->no_hp}}</td>
-							<td>{{$tenants->email}}</td>
-
+							<td>{{$tenants->usahas->nama_usaha}}</td>
 							<td>
-								<a href="" class="btn btn-danger btn-circle btn-sm hapusProduct">
+                                {{-- {{$tenants->status}} --}}
+                                @if ($tenants->status == "pengajuan")
+                                    Dalam Proses
+                                @elseif($tenants->status == "diterima")
+                                    Diterima
+                                @else
+                                    Ditolak
+                                @endif
+                            </td>
+
+							<td align="center">
+								{{-- <a href="" class="btn btn-danger btn-circle btn-sm hapusProduct">
 									<i class="fas fa-trash"></i>
-								</a>
-								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								</a> --}}
+								{{-- <button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
 									<i class="fas fa-edit"></i>
-								</button>
-								<button class="btn btn-success btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
-									<i class="fas fa-eye"></i>
-								</button>
+								</button> --}}
+								{{-- <button class="btn btn-success btn-circle btn-sm" title="Review" data-toggle="modal" data-target=""> --}}
+								<a href="{{$tenants->id}}/detailHistori" class="btn btn-success btn-sm" title="Review">
+									{{-- <i class="fas fa-eye"></i> --}}Lihat
+								</a>
+								{{-- </button> --}}
 							</td>
 						</tr>
 						@endforeach
