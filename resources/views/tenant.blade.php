@@ -67,13 +67,13 @@
 							<td>{{$tenants->email}}</td>
 
 							<td>
-								<a href="" class="btn btn-danger btn-circle btn-sm hapusProduct">
+								<a href="{{$tenants->id}}/deactiveTenant" class="btn btn-danger btn-circle btn-sm nonAktivasi" title="Non-Aktivasi">
 									<i class="fas fa-trash"></i>
 								</a>
-								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$tenants['id']}}">
 									<i class="fas fa-edit"></i>
 								</button>
-								<button class="btn btn-success btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="">
+								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="">
 									<i class="fas fa-eye"></i>
 								</button>
 							</td>
@@ -85,6 +85,78 @@
 		</div>
 	</div>
 </div>
+
+
+<!-- Modal Edit Data -->
+@foreach($tenant as $tenants)
+<div class="modal fade" id="editData{{$tenants['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit Tenant</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form action="{{$tenants->id}}/updateTenant" method="POST" class="needs-validation" novalidate>
+					@csrf
+					
+					<div class="form-group">
+						<label>Coach</label>
+						<select class="form-control" name="coach_id" id="coach_id" required>
+							<option value="{{$tenants['coach_id']}}" selected>{{ !empty($tenants->coachs) ? $tenants->coachs['nama_coach']:'' }}</option>
+
+							@foreach($coach as $coachs)
+    
+							<option value="{{ $coachs->id }}">{{ $coachs->nama_coach }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Coach tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Mentor</label>
+						<select class="form-control" name="mentor_id" id="mentor_id" required>
+							<option value="{{$tenants['mentor_id']}}" selected>{{ !empty($tenants->mentors) ? $tenants->mentors['nama_mentor']:'' }}</option>
+
+							@foreach($mentor as $mentors)
+    
+							<option value="{{ $mentors->id }}">{{ $mentors->nama_mentor }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Mentor tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Pendamping</label>
+						<select class="form-control" name="pendamping_id" id="pendamping_id" required>
+							<option value="{{$tenants['pendamping_id']}}" selected>{{ !empty($tenants->pendampings) ? $tenants->pendampings['nama_pendamping']:'' }}</option>
+
+							@foreach($pendamping as $pendampings)
+    
+							<option value="{{ $pendampings->id }}">{{ $pendampings->nama_pendamping }}</option>
+
+							@endforeach
+
+						</select>
+						<div class="invalid-feedback">Pendamping tidak valid</div>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+
     
 @endsection
 

@@ -554,6 +554,39 @@
             })
           </script>
 
+          <!-- SweetAlert Non-Aktivasi -->
+          <script type="text/javascript">
+            $('.nonAktivasi').on('click', function(e){
+              e.preventDefault();
+
+              const href = $(this).attr('href')
+
+              Swal.fire({
+                title: 'Ingin Menon-aktifkan Tenant Ini?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.value) {
+                 setTimeout(function(){ 
+
+                   document.location.href = href;
+
+                 }, 900);
+                 Swal.fire(
+                  'Non-Aktif',
+                  'Tenant Berhasil di Non-Aktifkan',
+                  'success',
+                  'showConfirmButton: false',
+                  'timer: 2000'
+                  )
+               }
+             })
+            })
+          </script>
+
           <!-- Menambahkan fungsi Rupiah pada bagian produk-->
           <script type="text/javascript">
             var rupiah2 = document.getElementById('purchase_price');

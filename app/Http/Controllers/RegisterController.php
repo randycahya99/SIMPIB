@@ -159,7 +159,7 @@ class RegisterController extends Controller
         // Menyimpan Data Relasi Tabel Tenant Dengan Usaha
         $tenant->usahas()->save($usaha);
 
-        return redirect('/dashboard')->with('sukses', 'Data Anda berhasil dikirimkan. Silahkan tunggu proses seleksi dari pihak PIB Unsoed.');
+        return redirect('/historiPendaftaran')->with('sukses', 'Data Anda berhasil dikirimkan. Silahkan tunggu proses seleksi dari pihak PIB Unsoed.');
     }
 
     /**

@@ -29,10 +29,13 @@ class TenantController extends Controller
     {
         $tenant = Tenant::where('status','diterima')->get();
         $usaha = Usaha::all();
+        $coach = Coach::all();
+        $mentor = Mentor::all();
+        $pendamping = Pendamping::all();
 
         // dd($tenant);
 
-        return view('tenant', compact('tenant', 'usaha'));
+        return view('tenant', compact('tenant','usaha','coach','mentor','pendamping'));
     }
 
     // Menampilkan Halaman Histori Pendaftaran Calon Tenant & Tenant
@@ -117,59 +120,48 @@ class TenantController extends Controller
         return redirect('/tenant')->with('sukses', 'Berhasil menolak calon tenant baru.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function UpdateTenant(Request $request, $id)
     {
-        //
+        // Validasi Inputan Form
+        $request->validate([
+            'coach_id' => 'required',
+            'mentor_id' => 'required',
+            'pendamping_id' => 'required'
+        ], [
+            'coach_id.required' => 'Coach tidak boleh kosong',
+            'mentor_id.required' => 'Mentor tidak boleh kosong',
+            'pendamping_id.required' => 'Pendamping tidak boleh kosong'
+        ]);
+
+        // Mengubah Data di Database
+        $tenant = Tenant::find($id);
+        $tenant->update([
+            'coach_id' => $request->coach_id,
+            'mentor_id' => $request->mentor_id,
+            'pendamping_id' => $request->pendamping_id
+        ]);
+
+        // dd($tenant);
+
+        return redirect('/tenant')->with('sukses', 'Data tenant berhasil diperbarui.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function DeactiveTenant($id)
     {
-        //
-    }
+        // Mencari or Mengambil Data Tenant di Database
+        $tenant = Tenant::find($id);
+        
+        // Mengubah Status Aktivasi Tenant
+        $tenant->status = 'ditolak';
+        $tenant->save();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        // Mengubah Role Akun User Tenant Menjadi Role Calon Tenant
+        $user = $tenant->users;
+        $user->removeRole('tenant');
+        $user->assignRole('calon tenant');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        // dd($tenant);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect('/tenant');
     }
 }

@@ -143,3 +143,5 @@ Route::get('/tolakRegister/{id}', 'TenantController@TolakRegister')->middleware(
 
 // Manajemen Data Tenant
 Route::get('/tenant', 'TenantController@Tenant')->middleware('auth','checkRole:admin');
+Route::post('{id}/updateTenant', 'TenantController@UpdateTenant')->middleware('auth','checkRole:admin');
+Route::get('{id}/deactiveTenant', 'TenantController@DeactiveTenant')->middleware('auth','checkRole:admin');
