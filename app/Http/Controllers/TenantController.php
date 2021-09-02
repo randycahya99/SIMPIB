@@ -164,4 +164,20 @@ class TenantController extends Controller
 
         return redirect('/tenant');
     }
+
+    public function DaftarTenant()
+    {
+        if (Auth::user()->hasRole('coach')) {
+            $tenant = Auth::user()->coachs->tenants;
+        } elseif (Auth::user()->hasRole('mentor')) {
+            $tenant = Auth::user()->mentors->tenants;
+        } else {
+            $tenant = Auth::user()->pendampings->tenants;
+        }
+        
+
+        // dd($tenant);
+        
+        return view('daftarTenant', compact('tenant'));
+    }
 }

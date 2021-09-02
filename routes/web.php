@@ -145,3 +145,7 @@ Route::get('/tolakRegister/{id}', 'TenantController@TolakRegister')->middleware(
 Route::get('/tenant', 'TenantController@Tenant')->middleware('auth','checkRole:admin');
 Route::post('{id}/updateTenant', 'TenantController@UpdateTenant')->middleware('auth','checkRole:admin');
 Route::get('{id}/deactiveTenant', 'TenantController@DeactiveTenant')->middleware('auth','checkRole:admin');
+
+
+// Daftar Tenant
+Route::get('/daftarTenant', 'TenantController@DaftarTenant')->middleware('auth');

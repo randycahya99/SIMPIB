@@ -239,6 +239,19 @@
 
       @endif
 
+      <!-- Nav Item - Data Tenant Yang Diampu -->
+      
+      @if (auth()->user()->hasAnyRole('coach', 'mentor', 'pendamping'))
+
+      <li class="nav-item{{ request()->is('daftarTenant') ? ' active' : '' }}">
+        <a class="nav-link" href="{{url('/daftarTenant')}}">
+          <i class="fas fa-user-tie"></i>
+          <span>Tenant</span>
+        </a>
+      </li>
+
+      @endif
+
       <!-- Nav Laporan -->
 
       @if (auth()->user()->hasAnyRole('admin', 'perusahaan', 'pemonev'))
