@@ -121,6 +121,7 @@ class TenantController extends Controller
         return redirect('/tenant')->with('sukses', 'Berhasil menolak calon tenant baru.');
     }
 
+    // Mengubah Data Tenant (Menambahkan Coach, Mentor dan Pendamping u/ Tenant)
     public function UpdateTenant(Request $request, $id)
     {
         // Validasi Inputan Form
@@ -147,6 +148,7 @@ class TenantController extends Controller
         return redirect('/tenant')->with('sukses', 'Data tenant berhasil diperbarui.');
     }
 
+    // Menon-aktifkan Tenant
     public function DeactiveTenant($id)
     {
         // Mencari or Mengambil Data Tenant di Database
@@ -166,6 +168,7 @@ class TenantController extends Controller
         return redirect('/tenant');
     }
 
+    // Menampilkan Halaman Daftar Tenant u/ Coach, Mentor and Pendamping
     public function DaftarTenant()
     {
         if (Auth::user()->hasRole('coach')) {
