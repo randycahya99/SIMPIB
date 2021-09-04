@@ -41,7 +41,8 @@ class TenantController extends Controller
     // Menampilkan Halaman Histori Pendaftaran Calon Tenant & Tenant
     public function HistoriPendaftaran()
     {
-        $tenant = Auth::user()->tenants->get();
+        $user = Auth::user();
+        $tenant = Auth::user()->tenants->where('user_id', '=', $user->id)->get();
 
         // dd($tenant);
         
@@ -179,5 +180,15 @@ class TenantController extends Controller
         // dd($tenant);
         
         return view('daftarTenant', compact('tenant'));
+    }
+
+    // Menampilkan Halaman Detail Tenant (For Coach, Mentor and Pendamping)
+    public function DetailTenant($id)
+    {
+        $tenant = Tenant::find($id);
+
+        // dd($tenant);
+
+        return view('detailHistori', compact('tenant'));
     }
 }

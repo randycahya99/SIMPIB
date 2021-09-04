@@ -51,7 +51,7 @@
 									<i class="fas fa-edit"></i>
 								</button> --}}
 								{{-- <button class="btn btn-success btn-circle btn-sm" title="Review" data-toggle="modal" data-target=""> --}}
-								<a href="{{$tenants->id}}/reviewRegister" class="btn btn-success btn-sm" title="Review">
+								<a href="{{$tenants->id}}/detailTenant" class="btn btn-success btn-sm" title="Review">
 									{{-- <i class="fas fa-eye"></i> --}}Detail
 								</a>
 								{{-- </button> --}}
@@ -96,7 +96,7 @@
 									<i class="fas fa-edit"></i>
 								</button> --}}
 								{{-- <button class="btn btn-success btn-circle btn-sm" title="Review" data-toggle="modal" data-target=""> --}}
-								<a href="{{$tenants->id}}/reviewRegister" class="btn btn-success btn-sm" title="Review">
+								<a href="{{$tenants->id}}/detailTenant" class="btn btn-success btn-sm" title="Detail">
 									{{-- <i class="fas fa-eye"></i> --}}Detail
 								</a>
 								{{-- </button> --}}
@@ -141,7 +141,7 @@
 									<i class="fas fa-edit"></i>
 								</button> --}}
 								{{-- <button class="btn btn-success btn-circle btn-sm" title="Review" data-toggle="modal" data-target=""> --}}
-								<a href="{{$tenants->id}}/reviewRegister" class="btn btn-success btn-sm" title="Review">
+								<a href="{{$tenants->id}}/detailTenant" class="btn btn-success btn-sm" title="Detail">
 									{{-- <i class="fas fa-eye"></i> --}}Detail
 								</a>
 								{{-- </button> --}}
