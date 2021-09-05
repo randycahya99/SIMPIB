@@ -73,9 +73,11 @@
 								<button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$tenants['id']}}">
 									<i class="fas fa-edit"></i>
 								</button>
-								<button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target="">
-									<i class="fas fa-eye"></i>
-								</button>
+								{{-- <button class="btn btn-success btn-circle btn-sm" title="Detail" data-toggle="modal" data-target=""> --}}
+									<a href="{{$tenants->id}}/detailTenant" class="btn btn-success btn-circle btn-sm" title="Detail">
+										<i class="fas fa-eye"></i>
+									</a>
+								{{-- </button> --}}
 							</td>
 						</tr>
 						@endforeach
