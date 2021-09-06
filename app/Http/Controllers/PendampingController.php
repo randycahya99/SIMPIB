@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use Auth;
 use App\User;
 use App\Models\Pendamping;
 use App\Models\CategoryPendamping;
@@ -21,16 +22,6 @@ class PendampingController extends Controller
         $ahli = BidangKeahlian::all();
         
         return view('pendamping', compact('pendamping', 'category', 'ahli'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     //Menambahkan Data Pendamping
@@ -92,17 +83,6 @@ class PendampingController extends Controller
         $user->assignRole('pendamping');
 
         return redirect('/pendamping')->with('sukses', 'Data pendamping berhasil ditambahkan.');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     //Menampilkan Halaman Edit Data Pendamping
@@ -188,5 +168,14 @@ class PendampingController extends Controller
         $user->delete();
 
         return redirect('/pendamping');
+    }
+
+    public function FormPendampingan()
+    {
+        $tenant = Auth::user()->pendampings->tenants;
+
+        // dd($tenant);
+
+        return view('pendampingan/form', compact('tenant'));
     }
 }

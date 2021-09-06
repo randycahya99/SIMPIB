@@ -221,7 +221,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             
             @if (auth()->user()->hasRole('pendamping'))
-            <a class="collapse-item" href="#">Form Pendampingan</a>
+            <a class="collapse-item" href="/formPendampingan">Form Pendampingan</a>
             @endif
             
             @if (auth()->user()->hasAnyRole('pendamping', 'tenant', 'tenant'))

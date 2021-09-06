@@ -150,3 +150,7 @@ Route::get('{id}/deactiveTenant', 'TenantController@DeactiveTenant')->middleware
 // Daftar Tenant
 Route::get('/daftarTenant', 'TenantController@DaftarTenant')->middleware('auth');
 Route::get('{id}/detailTenant', 'TenantController@DetailTenant')->middleware('auth');
+
+
+// Pendampingan
+Route::get('/formPendampingan', 'PendampingController@FormPendampingan')->middleware('auth','checkRole:pendamping');
