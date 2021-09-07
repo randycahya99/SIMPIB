@@ -167,6 +167,7 @@
 						<a href="{{$jadwals->id}}/batalkanJadwalPendampingan" class="btn btn-danger">Batalkan Pendampingan</a>
 						<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
 					</div>
+
 				</form>
 			</div>
 		</div>
@@ -237,6 +238,12 @@
 						<p>: {{$jadwals['keterangan']}}</p>
 					</div>
 				</div>
+                
+                @if ($jadwals->status == "disetujui")
+                    <div class="modal-footer">
+                        <a href="{{$jadwals->id}}/selesaiJadwalPendampingan" class="btn btn-success">Selesai</a>
+                    </div>
+                @endif
 			
 			</div>
 		</div>

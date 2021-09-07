@@ -301,6 +301,21 @@ class PendampingController extends Controller
         return redirect('/jadwalPendampingan');
     }
 
+    // Mengubah Status Pendampingan Menjadi Selesai
+    public function SelesaiJadwalPendampingan($id)
+    {
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalPendampingan::find($id);
+
+        // Mengubah Status Menjadi Selesai
+        $jadwal->status = 'selesai';
+        $jadwal->save();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalPendampingan')->with('sukses', 'Pendampingan telah selesai dilakukan.');
+    }
+
     // Melakukan Konfirmasi Kehadiran Untuk Pendampingan (for tenant)
     public function KonfirmasiHadirPendampingan(Request $request, $id)
     {
@@ -330,6 +345,7 @@ class PendampingController extends Controller
         return redirect('/jadwalPendampingan')->with('sukses', 'Berhasil mengkonfirmasi kehadiran pendampingan.');
     }
 
+    // Melakukan Konfirmasi Kehadiran Untuk Pendampingan (for tenant)
     public function TolakHadirPendampingan(Request $request, $id)
     {
         // Validasi Inputan Form
