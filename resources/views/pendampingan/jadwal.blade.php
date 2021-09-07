@@ -302,8 +302,11 @@
 								</button> --}}
 								{{-- <button class="btn btn-success btn-circle btn-sm" title="Review" data-toggle="modal" data-target=""> --}}
 								@if ($jadwals->status == "pending")
-                                    <button class="btn btn-warning btn-sm" title="Konfirmasi Kehadiran" data-toggle="modal" data-target="#konfirmasi{{$jadwals['id']}}">
-                                        Konfirmasi
+                                    <button class="btn btn-success btn-circle btn-sm" title="Setujui" data-toggle="modal" data-target="#konfirmasiTerima{{$jadwals['id']}}">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle btn-sm" title="Tolak" data-toggle="modal" data-target="#konfirmasiTolak{{$jadwals['id']}}">
+                                        <i class="fas fa-times"></i>
                                     </button>
                                 @elseif ($jadwals->status == "disetujui" || $jadwals->status == "selesai")
                                     <button class="btn btn-success btn-sm" title="Lihat Detail" data-toggle="modal" data-target="#detail{{$jadwals['id']}}">
@@ -324,9 +327,9 @@
 </div>
 
 
-<!-- Modal Konfirmasi Kehadiran Pendampingan -->
+<!-- Modal Konfirmasi Setuju Kehadiran Pendampingan -->
 @foreach($jadwal as $jadwals)
-<div class="modal fade" id="konfirmasi{{$jadwals['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="konfirmasiTerima{{$jadwals['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -348,8 +351,43 @@
                     </div>
 					
 					<div class="modal-footer">
-						<a href="{{$jadwals->id}}/tolakHadirPendampingan" class="btn btn-danger" data-dismiss="modal">Tidak Bisa Hadir</a>
-						<button type="submit" class="btn btn-primary">Konfirmasi Kehadiran</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-primary">Hadir</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+@endforeach
+
+
+<!-- Modal Konfirmasi Tolak Kehadiran Pendampingan -->
+@foreach($jadwal as $jadwals)
+<div class="modal fade" id="konfirmasiTolak{{$jadwals['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Konfirmasi Kehadiran</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+
+			<div class="modal-body">
+				<form action="{{$jadwals->id}}/tolakHadirPendampingan" method="POST" class="needs-validation" novalidate>
+					
+                    @csrf
+					
+					<div class="form-group">
+                        <label>Keterangan</label>
+						<textarea rows="4" name="keterangan" id="keterangan" class="form-control" placeholder="Tambahkan keterangan (jika bisa hadir ataupun tidak dapat hadir)" required></textarea>
+						<div class="invalid-feedback">Keterangan tidak valid</div>
+                    </div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+						<button type="submit" class="btn btn-danger">Tidak Bisa</button>
 					</div>
 				</form>
 			</div>

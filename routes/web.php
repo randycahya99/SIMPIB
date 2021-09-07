@@ -159,3 +159,5 @@ Route::post('/addJadwalPendampingan', 'PendampingController@AddJadwalPendampinga
 Route::post('{id}/updateJadwalPendampingan', 'PendampingController@UpdateJadwalPendampingan')->middleware('auth','checkRole:pendamping');
 Route::get('{id}/batalkanJadwalPendampingan', 'PendampingController@BatalkanJadwalPendampingan')->middleware('auth','checkRole:pendamping');
 Route::get('{id}/deleteJadwalPendampingan', 'PendampingController@DeleteJadwalPendampingan')->middleware('auth','checkRole:pendamping');
+Route::post('{id}/konfirmasiHadirPendampingan', 'PendampingController@KonfirmasiHadirPendampingan')->middleware('auth','checkRole:tenant');
+Route::post('{id}/tolakHadirPendampingan', 'PendampingController@TolakHadirPendampingan')->middleware('auth','checkRole:tenant');

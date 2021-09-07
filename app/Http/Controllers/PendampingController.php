@@ -239,6 +239,7 @@ class PendampingController extends Controller
         return redirect('/jadwalPendampingan')->with('sukses', 'Jadwal pendampingan berhasil dibuat.');
     }
 
+    // Mengubah or Memperbarui Data Jadwal Pendampingan
     public function UpdateJadwalPendampingan(Request $request, $id)
     {
         // Validasi Inputan Form
@@ -271,6 +272,7 @@ class PendampingController extends Controller
         return redirect('/jadwalPendampingan')->with('sukses', 'Jadwal pendampingan berhasil diperbarui.');
     }
 
+    // Membatalkan Jadwal Pendampingan
     public function BatalkanJadwalPendampingan($id)
     {
         // Mencari Data Sesuai Dengan id
@@ -285,6 +287,7 @@ class PendampingController extends Controller
         return redirect('/jadwalPendampingan')->with('sukses', 'Jadwal pendampingan berhasil dibatalkan.');
     }
 
+    // Menghapus Data Jadwal Pendampingan
     public function DeleteJadwalPendampingan($id)
     {
         // Mencari Data Sesuai Dengan id
@@ -296,5 +299,62 @@ class PendampingController extends Controller
         // dd($jadwal);
 
         return redirect('/jadwalPendampingan');
+    }
+
+    // Melakukan Konfirmasi Kehadiran Untuk Pendampingan (for tenant)
+    public function KonfirmasiHadirPendampingan(Request $request, $id)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'keterangan' => 'required|string|max:100'
+        ], [
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'keterangan.max' => 'Keterangan tidak boleh lebih dari 100 karakter'
+        ]);
+
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalPendampingan::find($id);
+
+        // Mengubah or Menambahkan Keterangan Pada Jadwal Pendampingan
+        $jadwal->update([
+            'keterangan' => $request->keterangan
+        ]);
+
+        // Mengubah Status Jadwal Pendampingan Menjadi Disetujui oleh Tenant
+        $jadwal->status = 'disetujui';
+        $jadwal->save();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalPendampingan')->with('sukses', 'Berhasil mengkonfirmasi kehadiran pendampingan.');
+    }
+
+    public function TolakHadirPendampingan(Request $request, $id)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'keterangan' => 'required|string|max:100'
+        ], [
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'keterangan.max' => 'Keterangan tidak boleh lebih dari 100 karakter'
+        ]);
+
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalPendampingan::find($id);
+
+        // Mengubah or Menambahkan Keterangan Pada Jadwal Pendampingan
+        $jadwal->update([
+            'keterangan' => $request->keterangan
+        ]);
+
+        // Mengubah Status Jadwal Pendampingan Menjadi Disetujui oleh Tenant
+        $jadwal->status = 'ditolak';
+        $jadwal->save();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalPendampingan')->with('sukses', 'Berhasil mengkonfirmasi kehadiran pendampingan.');
     }
 }
