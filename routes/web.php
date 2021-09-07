@@ -154,6 +154,7 @@ Route::get('{id}/detailTenant', 'TenantController@DetailTenant')->middleware('au
 
 // Pendampingan
 Route::get('/formPendampingan', 'PendampingController@FormPendampingan')->middleware('auth','checkRole:pendamping');
+Route::post('/addFormPendampingan', 'PendampingController@AddFormPendampingan')->middleware('auth','checkRole:pendamping');
 Route::get('/jadwalPendampingan', 'PendampingController@JadwalPendampingan')->middleware('auth');
 Route::post('/addJadwalPendampingan', 'PendampingController@AddJadwalPendampingan')->middleware('auth','checkRole:pendamping');
 Route::post('{id}/updateJadwalPendampingan', 'PendampingController@UpdateJadwalPendampingan')->middleware('auth','checkRole:pendamping');
@@ -162,3 +163,4 @@ Route::get('{id}/deleteJadwalPendampingan', 'PendampingController@DeleteJadwalPe
 Route::get('{id}/selesaiJadwalPendampingan', 'PendampingController@SelesaiJadwalPendampingan')->middleware('auth','checkRole:pendamping');
 Route::post('{id}/konfirmasiHadirPendampingan', 'PendampingController@KonfirmasiHadirPendampingan')->middleware('auth','checkRole:tenant');
 Route::post('{id}/tolakHadirPendampingan', 'PendampingController@TolakHadirPendampingan')->middleware('auth','checkRole:tenant');
+Route::get('/hasilPendampingan', 'PendampingController@HasilPendampingan')->middleware('auth');

@@ -14,17 +14,19 @@
 		</div>
 		<div class="card-body">
             {{-- <h4 class="card-text font-weight-bold text-center">Form Pendampingan</h4> --}}
-            <form action="isiProfileUsaha" method="POST" class="needs-validation" novalidate>
+            <form action="addFormPendampingan" method="POST" class="needs-validation" novalidate>
                 
                 @csrf
 
                 <br>
 
+                <input type="hidden" class="form-control" id="pendamping_id" name="pendamping_id" value="{{auth()->user()->pendampings->id}}">
+
                 <div class="container-fluid">
                     <div class="form-group row">
-                        <label class="col-sm-2 font-weight-bold" for="tgl_pendampingan">Tanggal</label>
+                        <label class="col-sm-2 font-weight-bold" for="tanggal">Tanggal</label>
                         :<div class="col-sm-3">
-                            <input type="date" class="form-control" id="tgl_pendampingan" name="tgl_pendampingan" required>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -91,7 +93,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-4" for="luas_bangunan">Luas Bangunan (tempat usaha / inkubasi tenant ppbt)</label>
                                 :<div class="col-sm-7">
-                                    <input type="number" class="form-control" id="luas_bangunan" name="luas_bangunan" placeholder="Masukkan Jumlah Bangunan" required>
+                                    <input type="number" class="form-control" id="luas_bangunan" name="luas_bangunan" placeholder="Jumlah Bangunan (m2)" required>
                                     <div class="invalid-feedback">Luas bangunan tidak valid</div>
                                 </div>
                             </div>

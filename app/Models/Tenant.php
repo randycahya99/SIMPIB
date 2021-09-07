@@ -58,4 +58,9 @@ class Tenant extends Model
     {
         return $this->hasMany(JadwalPendampingan::class);
     }
+
+    public function formPendampingans()
+    {
+        return $this->hasMany(FormPendampingan::class);
+    }
 }
