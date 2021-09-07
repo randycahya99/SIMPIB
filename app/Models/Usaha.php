@@ -36,7 +36,7 @@ class Usaha extends Model
         'prestasi'
     ];
 
-    public function users()
+    public function tenants()
     {
         return $this->belongsTo(Tenant::class, 'tenant_id');
     }

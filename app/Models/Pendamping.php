@@ -30,4 +30,9 @@ class Pendamping extends Model
     {
         return $this->hasMany(Tenant::class);
     }
+
+    public function jadwalPendampingans()
+    {
+        return $this->hasMany(JadwalPendampingan::class);
+    }
 }

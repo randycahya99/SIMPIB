@@ -53,4 +53,9 @@ class Tenant extends Model
     {
         return $this->belongsTo(Pendamping::class, 'pendamping_id');
     }
+
+    public function jadwalPendampingans()
+    {
+        return $this->hasMany(JadwalPendampingan::class);
+    }
 }

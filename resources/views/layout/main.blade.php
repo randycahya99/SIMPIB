@@ -168,7 +168,7 @@
             @endif
 
             @if (auth()->user()->hasRole('coach'))
-            <a class="collapse-item" href="#">Penjadwalan</a>
+            <a class="collapse-item" href="#">Jadwal</a>
             @endif
 
           </div>
@@ -199,7 +199,7 @@
             @endif
 
             @if (auth()->user()->hasRole('mentor'))
-            <a class="collapse-item" href="#">Penjadwalan</a>
+            <a class="collapse-item" href="#">Jadwal</a>
             @endif
 
           </div>
@@ -229,8 +229,8 @@
             <a class="collapse-item" href="#">Hasil Pendampingan</a>
             @endif
 
-            @if (auth()->user()->hasRole('pendamping'))
-            <a class="collapse-item" href="#">Penjadwalan</a>
+            @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
+            <a class="collapse-item" href="/jadwalPendampingan">Jadwal</a>
             @endif
 
           </div>
