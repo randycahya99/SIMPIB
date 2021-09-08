@@ -164,3 +164,4 @@ Route::get('{id}/selesaiJadwalPendampingan', 'PendampingController@SelesaiJadwal
 Route::post('{id}/konfirmasiHadirPendampingan', 'PendampingController@KonfirmasiHadirPendampingan')->middleware('auth','checkRole:tenant');
 Route::post('{id}/tolakHadirPendampingan', 'PendampingController@TolakHadirPendampingan')->middleware('auth','checkRole:tenant');
 Route::get('/hasilPendampingan', 'PendampingController@HasilPendampingan')->middleware('auth');
+Route::get('{id}/detailHasilPendampingan', 'PendampingController@DetailHasilPendampingan')->middleware('auth');

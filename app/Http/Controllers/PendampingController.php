@@ -450,6 +450,29 @@ class PendampingController extends Controller
     // Menampilkan Halaman Hasil Pendampingan
     public function HasilPendampingan()
     {
-        return view('pendampingan/hasilPendampingan');
+        // Mengambil Data Form Pendampingan Sesuai Dengan User yang Sedang Login
+        if (Auth::user()->hasRole('pendamping')) {
+            $form = Auth::user()->pendampings->FormPendampingans;
+
+            // dd($form);
+
+            return view('pendampingan/hasilPendampingan', compact('form'));
+        } else {
+            $form = Auth::user()->tenants->FormPendampingans;
+
+            // dd($form);
+
+            return view('pendampingan/hasilPendampingan', compact('form'));
+        }
+    }
+
+    public function DetailHasilPendampingan($id)
+    {
+        // Mencari or Mengambil Data Sesuai Dengan id
+        $form = FormPendampingan::find($id);
+
+        // dd($form);
+
+        return view('pendampingan/detailHasilPendampingan', compact('form'));
     }
 }
