@@ -165,3 +165,6 @@ Route::post('{id}/konfirmasiHadirPendampingan', 'PendampingController@Konfirmasi
 Route::post('{id}/tolakHadirPendampingan', 'PendampingController@TolakHadirPendampingan')->middleware('auth','checkRole:tenant');
 Route::get('/hasilPendampingan', 'PendampingController@HasilPendampingan')->middleware('auth');
 Route::get('{id}/detailHasilPendampingan', 'PendampingController@DetailHasilPendampingan')->middleware('auth');
+Route::get('/materiPendampingan', 'PendampingController@MateriPendampingan')->middleware('auth');
+Route::post('/addMateriPendampingan', 'PendampingController@AddMateriPendampingan')->middleware('auth','checkRole:pendamping');
+Route::get('/getfile/{id}', 'PendampingController@GetFile')->middleware('auth');

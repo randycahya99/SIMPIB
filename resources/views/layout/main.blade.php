@@ -225,8 +225,8 @@
             @endif
             
             @if (auth()->user()->hasAnyRole('pendamping', 'tenant', 'tenant'))
-            <a class="collapse-item" href="#">Pendampingan</a>
             <a class="collapse-item" href="/hasilPendampingan">Hasil Pendampingan</a>
+            <a class="collapse-item" href="/materiPendampingan">Pendampingan</a>
             @endif
 
             @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))

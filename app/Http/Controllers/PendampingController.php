@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 use Auth;
+use File;
+use Response;
 use App\User;
 use App\Models\Pendamping;
 use App\Models\CategoryPendamping;
 use App\Models\BidangKeahlian;
 use App\Models\JadwalPendampingan;
 use App\Models\FormPendampingan;
+use App\Models\MateriPendampingan;
 
 class PendampingController extends Controller
 {
@@ -466,6 +470,7 @@ class PendampingController extends Controller
         }
     }
 
+    // Menampilkan Halaman Detail Hasil Pendampingan
     public function DetailHasilPendampingan($id)
     {
         // Mencari or Mengambil Data Sesuai Dengan id
@@ -474,5 +479,86 @@ class PendampingController extends Controller
         // dd($form);
 
         return view('pendampingan/detailHasilPendampingan', compact('form'));
+    }
+
+    // Menampilkan Halaman Materi Pendampingan
+    public function MateriPendampingan()
+    {
+        // Mengambil Data Materi dan Tenant Sesuai Dengan Pendamping yang Sedang Login
+        if (Auth::user()->hasRole('pendamping')) {
+            $materi = Auth::user()->pendampings->materiPendampingans;
+            $tenant = Auth::user()->pendampings->tenants;
+
+            // dd($jadwal);
+
+            return view('pendampingan/materi', compact('materi','tenant'));
+        } else {
+            $materi = Auth::user()->tenants->materiPendampingans;
+            $pendamping = Auth::user()->tenants->pendampings;
+
+            // dd($jadwal);
+
+            return view('pendampingan/materi', compact('materi','pendamping'));
+        }
+    }
+
+    // Menambahkan Data Materi Pendampingan
+    public function AddMateriPendampingan(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'materi' => 'required',
+            'keterangan' => 'required|string',
+            'tenant_id' => 'required',
+            'pendamping_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'materi.required' => 'Materi tidak boleh kosong',
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'pendamping_id.required' => 'Pendamping tidak boleh kosong',
+        ]);
+
+        // Status From Diisi dengan Value Pendamping
+        $from = "pendamping";
+
+        // Menyimpan Data File kedalam Variabel
+        $file = $request->file('materi');
+        $filename = time()."_".$file->getClientOriginalName();
+        $filext = $file->getClientOriginalExtension();
+        $filesize = $file->getSize();
+
+        // Menentukan Storage Materi Pendampingan
+        $path = 'storage';
+        $file->move($path, $filename);
+
+        // dd($filename);
+
+        // Menambahkan Materi ke Database
+        $materi = MateriPendampingan::create([
+            'tanggal' => $request->tanggal,
+            'materi' => $filename,
+            'keterangan' => $request->keterangan,
+            'from' => $from,
+            'tenant_id' => $request->tenant_id,
+            'pendamping_id' => $request->pendamping_id,
+        ]);
+
+        // dd($materi);
+
+        return redirect('/materiPendampingan')->with('sukses', 'Materi berhasil dikirimkan ke tenant.');
+    }
+
+    // Mendownload Materi Pendampingan
+    public function GetFile($id)
+    {
+        $file = MateriPendampingan::find($id);
+
+        $pathFile = storage_path('../public/storage/' . $file->materi);
+
+        return response()->download($pathFile);
     }
 }

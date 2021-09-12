@@ -40,4 +40,9 @@ class Pendamping extends Model
     {
         return $this->hasMany(FormPendampingan::class);
     }
+
+    public function materiPendampingans()
+    {
+        return $this->hasMany(MateriPendampingan::class);
+    }
 }
