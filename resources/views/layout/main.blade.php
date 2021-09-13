@@ -224,9 +224,17 @@
             <a class="collapse-item" href="/formPendampingan">Form Pendampingan</a>
             @endif
             
-            @if (auth()->user()->hasAnyRole('pendamping', 'tenant', 'tenant'))
+            @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
             <a class="collapse-item" href="/hasilPendampingan">Hasil Pendampingan</a>
             <a class="collapse-item" href="/materiPendampingan">Pendampingan</a>
+            @endif
+
+            @if (auth()->user()->hasRole('pendamping'))
+            <a class="collapse-item" href="/filePendampingan">Tenant Files</a>
+            @endif
+
+            @if (auth()->user()->hasRole('tenant'))
+            <a class="collapse-item" href="/filePendampingan">Upload File</a>
             @endif
 
             @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))

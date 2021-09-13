@@ -168,3 +168,5 @@ Route::get('{id}/detailHasilPendampingan', 'PendampingController@DetailHasilPend
 Route::get('/materiPendampingan', 'PendampingController@MateriPendampingan')->middleware('auth');
 Route::post('/addMateriPendampingan', 'PendampingController@AddMateriPendampingan')->middleware('auth','checkRole:pendamping');
 Route::get('/getfile/{id}', 'PendampingController@GetFile')->middleware('auth');
+Route::get('/filePendampingan', 'PendampingController@UploadFile')->middleware('auth');
+Route::post('/addKonsultasiFile', 'PendampingController@AddKonsultasiFile')->middleware('auth','checkRole:tenant');

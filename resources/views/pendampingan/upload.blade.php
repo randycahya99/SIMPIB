@@ -1,8 +1,8 @@
 @extends('layout.main')
 
-@section('title','SIMPIB - Pendampingan')
+@section('title','SIMPIB - File Tenant')
 
-@if (Auth::user()->hasRole('pendamping'))
+@if (Auth::user()->hasRole('tenant'))
 
 @section('container')
 
@@ -12,9 +12,9 @@
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary float-left">Pendampingan</h6>
+			<h6 class="m-0 font-weight-bold text-primary float-left">Upload File</h6>
 			<button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah">
-				Kirimkan Materi
+				Kirimkan File
 			</button>
 		</div>
 		<div class="card-body">
@@ -25,7 +25,7 @@
 						<tr>
 							<th width="20">No</th>
 							<th>Tanggal</th>
-							<th>Nama Tenant</th>
+							<th>Pendamping</th>
                             <th>Keterangan</th>
 							<th width="80">Aksi</th>
 						</tr>
@@ -36,7 +36,7 @@
 						<tr>
 							<td align="center">{{$loop->iteration}}</td>
 							<td>{{$materis->tanggal}}</td>
-							<td>{{$materis->tenants->nama}}</td>
+							<td>{{$materis->pendampings->nama_pendamping}}</td>
                             <td>{{$materis->keterangan}}</td>
 
 							<td align="center">
@@ -67,33 +67,20 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Tambah Materi Pendampingan</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 
 			<div class="modal-body">
-				<form action="addMateriPendampingan" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+				<form action="addKonsultasiFile" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
 
 					@csrf
 
-                    <input type="hidden" class="form-control" id="pendamping_id" name="pendamping_id" value="{{auth()->user()->pendampings->id}}">
+                    <input type="hidden" class="form-control" id="tenant_id" name="tenant_id" value="{{auth()->user()->tenants->id}}">
+                    <input type="hidden" class="form-control" id="pendamping_id" name="pendamping_id" value="{{auth()->user()->tenants->pendampings->id}}">
 
-                    <div class="form-group">
-                        <label>Tenant</label>
-						<select class="form-control" name="tenant_id" id="tenant_id" required>
-							<option value="" selected>Pilih Tenant</option>
-
-							@foreach($tenant as $tenants)
-
-							<option value="{{ $tenants->id }}">{{ $tenants->nama }}</option>
-
-							@endforeach
-
-						</select>
-						<div class="invalid-feedback">Tenant tidak valid</div>
-                    </div>
 					<div class="form-group">
 						<label>Tanggal</label>
 						<input type="date" name="tanggal" id="tanggal" class="form-control" required>
@@ -136,9 +123,9 @@
 			<div class="modal-body">
 
 				<div class="form-group row">
-					<p class=" col-sm-4 font-weight-bold">Nama Tenant</p>
+					<p class=" col-sm-4 font-weight-bold">Nama Pendamping</p>
 					<div class="col-sm-8">
-						<p>: {{$materis->tenants['nama']}}</p>
+						<p>: {{$materis->pendampings['nama_pendamping']}}</p>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -167,8 +154,7 @@
 @endforeach
 
 
-@elseif (Auth::user()->hasRole('tenant'))
-
+@elseif (Auth::user()->hasRole('pendamping'))
 
 @section('container')
 
@@ -178,7 +164,10 @@
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary float-left">Materi Pendampingan</h6>
+			<h6 class="m-0 font-weight-bold text-primary float-left">Tenant Files</h6>
+			{{-- <button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah">
+				Kirimkan File
+			</button> --}}
 		</div>
 		<div class="card-body">
 
@@ -188,7 +177,7 @@
 						<tr>
 							<th width="20">No</th>
 							<th>Tanggal</th>
-							<th>Pendamping</th>
+							<th>Nama Tenant</th>
                             <th>Keterangan</th>
 							<th width="80">Aksi</th>
 						</tr>
@@ -199,7 +188,7 @@
 						<tr>
 							<td align="center">{{$loop->iteration}}</td>
 							<td>{{$materis->tanggal}}</td>
-							<td>{{$materis->pendampings->nama_pendamping}}</td>
+							<td>{{$materis->tenants->nama}}</td>
                             <td>{{$materis->keterangan}}</td>
 
 							<td align="center">
@@ -210,8 +199,7 @@
                                     <i class="fas fa-edit"></i>
                                 </button> --}}
 								<button class="btn btn-success btn-sm" title="Detail" data-toggle="modal" data-target="#detailData{{$materis['id']}}">
-									{{-- <i class="fas fa-eye"></i> --}}
-                                    Lihat
+									{{-- <i class="fas fa-eye"></i> --}}Lihat
 								</button>
 							</td>
 						</tr>
@@ -241,9 +229,9 @@
 			<div class="modal-body">
 
 				<div class="form-group row">
-					<p class=" col-sm-4 font-weight-bold">Nama Pendamping</p>
+					<p class=" col-sm-4 font-weight-bold">Nama Tenant</p>
 					<div class="col-sm-8">
-						<p>: {{$materis->pendampings['nama_pendamping']}}</p>
+						<p>: {{$materis->tenants['nama']}}</p>
 					</div>
 				</div>
 				<div class="form-group row">
