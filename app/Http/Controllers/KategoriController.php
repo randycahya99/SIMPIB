@@ -192,11 +192,11 @@ class KategoriController extends Controller
     {
         //Validasi Inputan Form
         $request->validate([
-            'kode_coach' => 'required|unique:category_coach|alpha_num',
+            'kode_coach' => 'required|alpha_num',
             'kategori_coach' => 'required|string',
         ], [
             'kode_coach.required' => 'Kode coach tidak boleh kosong',
-            'kode_coach.unique' => 'Kode coach sudah ada',
+            // 'kode_coach.unique' => 'Kode coach sudah ada',
             'kode_coach.alpha_num' => 'Kode coach harus berupa huruf dan angka',
             'kategori_coach.required' => 'Kategori coach tidak boleh kosong',
             'kategori_coach.string' => 'Kategori coach harus berupa string',
@@ -214,11 +214,11 @@ class KategoriController extends Controller
     {
         //Validasi Inputan Form
         $request->validate([
-            'kode_mentor' => 'required|unique:category_mentor|alpha_num',
+            'kode_mentor' => 'required|alpha_num',
             'kategori_mentor' => 'required|string',
         ], [
             'kode_mentor.required' => 'Kode mentor tidak boleh kosong',
-            'kode_mentor.unique' => 'Kode mentor sudah ada',
+            // 'kode_mentor.unique' => 'Kode mentor sudah ada',
             'kode_mentor.alpha_num' => 'Kode mentor harus berupa huruf dan angka',
             'kategori_mentor.required' => 'Kategori mentor tidak boleh kosong',
             'kategori_mentor.string' => 'Kategori mentor harus berupa string',
@@ -236,11 +236,11 @@ class KategoriController extends Controller
     {
         //Validasi Inputan Form
         $request->validate([
-            'kode_pendamping' => 'required|unique:category_pendamping|alpha_num',
+            'kode_pendamping' => 'required||alpha_num',
             'kategori_pendamping' => 'required|string',
         ], [
             'kode_pendamping.required' => 'Kode pendamping tidak boleh kosong',
-            'kode_pendamping.unique' => 'Kode pendamping sudah ada',
+            // 'kode_pendamping.unique' => 'Kode pendamping sudah ada',
             'kode_pendamping.alpha_num' => 'Kode pendamping harus berupa huruf dan angka',
             'kategori_pendamping.required' => 'Kategori pendamping tidak boleh kosong',
             'kategori_pendamping.string' => 'Kategori pendamping harus berupa string',
@@ -258,11 +258,11 @@ class KategoriController extends Controller
     {
         //Validasi Inputan Form
         $request->validate([
-            'kode' => 'required|unique:tahap_inkubasi|alpha_num',
+            'kode' => 'required|alpha_num',
             'tahap_inkubasi' => 'required|string',
         ], [
             'kdoe.required' => 'Kode tidak boleh kosong',
-            'kode.unique' => 'Kode sudah ada',
+            // 'kode.unique' => 'Kode sudah ada',
             'kode.alpha_num' => 'Kode harus berupa huruf dan angka',
             'tahap_inkubasi.required' => 'Tahap inkubasi tidak boleh kosong',
             'tahap_inkubasi.string' => 'Tahap inkubasi harus berupa string',
@@ -280,11 +280,11 @@ class KategoriController extends Controller
     {
         //Validasi Inputan Form
         $request->validate([
-            'kode_tenant' => 'required|unique:category_tenant|alpha_num',
+            'kode_tenant' => 'required|alpha_num',
             'kategori_tenant' => 'required|string',
         ], [
             'kode_tenant.required' => 'Kode tenant tidak boleh kosong',
-            'kode_tenant.unique' => 'Kode tenant sudah ada',
+            // 'kode_tenant.unique' => 'Kode tenant sudah ada',
             'kode_tenant.alpha_num' => 'Kode tenant harus berupa huruf dan angka',
             'kategori_tenant.required' => 'Kategori tenant tidak boleh kosong',
             'kategori_tenant.string' => 'Kategori tenant harus berupa string',
@@ -302,11 +302,11 @@ class KategoriController extends Controller
     {
         //Validasi Inputan Form
         $request->validate([
-            'kode_bidang' => 'required|unique:bidang_keahlian|alpha_num',
+            'kode_bidang' => 'required|alpha_num',
             'bidang_keahlian' => 'required|string',
         ], [
             'kode_bidang.required' => 'Kode bidang keahlian tidak boleh kosong',
-            'kode_bidang.unique' => 'Kode bidang keahlian sudah ada',
+            // 'kode_bidang.unique' => 'Kode bidang keahlian sudah ada',
             'kode_bidang.alpha_num' => 'Kode bidang keahlian harus berupa huruf dan angka',
             'bidang_keahlian.required' => 'Bidang keahlian tidak boleh kosong',
             'bidang_keahlian.string' => 'Bidang keahlian harus berupa string',
