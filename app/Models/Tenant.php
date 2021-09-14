@@ -73,4 +73,9 @@ class Tenant extends Model
     {
         return $this->hasMany(JadwalCoaching::class);
     }
+
+    public function materiCoachings()
+    {
+        return $this->hasMany(MateriCoaching::class);
+    }
 }

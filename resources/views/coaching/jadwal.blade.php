@@ -12,7 +12,7 @@
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary float-left">Jadwal Pendampingan</h6>
+			<h6 class="m-0 font-weight-bold text-primary float-left">Jadwal Coaching</h6>
 			<button type="button" class="btn  btn-sm btn-primary" data-toggle="modal" data-target="#tambahData" title="Tambah">
 				Buat Jadwal
 			</button>
@@ -262,7 +262,7 @@
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary float-left">Jadwal Pendampingan</h6>
+			<h6 class="m-0 font-weight-bold text-primary float-left">Jadwal Coaching</h6>
 		</div>
 		<div class="card-body">
 
@@ -271,10 +271,10 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Tanggal</th>
-							<th>Nama Pendamping</th>
+							<th width="80">Tanggal</th>
+							<th width="200">Nama Coach</th>
                             <th>Topik</th>
-                            <th>Status</th>
+                            <th width="90">Status</th>
 							<th width="80">Aksi</th>
 						</tr>
 					</thead>

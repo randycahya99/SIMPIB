@@ -24,8 +24,8 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Tanggal</th>
-							<th>Nama Tenant</th>
+							<th width="80">Tanggal</th>
+							<th width="250">Nama Tenant</th>
                             <th>Keterangan</th>
 							<th width="80">Aksi</th>
 						</tr>
@@ -67,7 +67,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Tambah Materi Pendampingan</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Kirim Materi Pendampingan</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -187,8 +187,8 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Tanggal</th>
-							<th>Pendamping</th>
+							<th width="80">Tanggal</th>
+							<th width="250">Pendamping</th>
                             <th>Keterangan</th>
 							<th width="80">Aksi</th>
 						</tr>

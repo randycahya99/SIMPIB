@@ -163,7 +163,7 @@
             @endif
             
             @if (auth()->user()->hasAnyRole('coach', 'tenant'))
-            <a class="collapse-item" href="#">Coaching</a>
+            <a class="collapse-item" href="/materiCoaching">Coaching</a>
             <a class="collapse-item" href="#">Hasil Coaching</a>
             @endif
 

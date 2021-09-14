@@ -20,9 +20,9 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Tanggal</th>
-							<th>Tenant</th>
-							<th>Pendamping</th>
+							<th width="80">Tanggal</th>
+							<th width="120">Tenant</th>
+							<th width="200">Pendamping</th>
 							<th>Perihal</th>
 							<th width="80">Aksi</th>
 						</tr>
@@ -77,9 +77,9 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Tanggal</th>
-							<th>Tenant</th>
-							<th>Pendamping</th>
+							<th width="80">Tanggal</th>
+							<th width="120">Tenant</th>
+							<th width="200">Pendamping</th>
 							<th>Perihal</th>
 							<th width="80">Aksi</th>
 						</tr>

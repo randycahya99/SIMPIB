@@ -24,8 +24,8 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Tanggal</th>
-							<th>Nama Tenant</th>
+							<th width="80">Tanggal</th>
+							<th width="200">Nama Tenant</th>
                             <th>Topik</th>
 							<th width="80">Aksi</th>
 						</tr>
@@ -271,10 +271,10 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th>Tanggal</th>
-							<th>Nama Pendamping</th>
+							<th width="80">Tanggal</th>
+							<th width="200">Nama Pendamping</th>
                             <th>Topik</th>
-                            <th>Status</th>
+                            <th width="90">Status</th>
 							<th width="80">Aksi</th>
 						</tr>
 					</thead>

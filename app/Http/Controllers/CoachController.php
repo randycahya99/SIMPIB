@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 use Auth;
+use File;
+use Response;
 use App\User;
 use App\Models\Coach;
 use App\Models\CategoryCoach;
 use App\Models\BidangKeahlian;
 use App\Models\JadwalCoaching;
+use App\Models\MateriCoaching;
 
 class CoachController extends Controller
 {
@@ -361,5 +365,86 @@ class CoachController extends Controller
         // dd($jadwal);
 
         return redirect('/jadwalCoaching')->with('sukses', 'Berhasil mengkonfirmasi kehadiran coaching.');
+    }
+
+    // Menampilkan Halaman Materi Coaching
+    public function MateriCoaching()
+    {
+        // Mengambil Data Materi dan Tenant Sesuai Dengan Coach yang Sedang Login
+        if (Auth::user()->hasRole('coach')) {
+            $materi = Auth::user()->coachs->materiCoachings->where('from','coach');
+            $tenant = Auth::user()->coachs->tenants;
+
+            // dd($jadwal);
+
+            return view('coaching/materi', compact('materi','tenant'));
+        } else {
+            $materi = Auth::user()->tenants->materiCoachings->where('from','coach');
+            $coach = Auth::user()->tenants->coachs;
+
+            // dd($jadwal);
+
+            return view('coaching/materi', compact('materi','coach'));
+        }
+    }
+
+    // Menambahkan Data Materi Coaching
+    public function AddMateriCoaching(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'materi' => 'required',
+            'keterangan' => 'required|string',
+            'tenant_id' => 'required',
+            'coach_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'materi.required' => 'Materi tidak boleh kosong',
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'coach_id.required' => 'Coach tidak boleh kosong',
+        ]);
+
+        // Status From Diisi dengan Value Coach
+        $from = "coach";
+
+        // Menyimpan Data File kedalam Variabel
+        $file = $request->file('materi');
+        $filename = time()."_".$file->getClientOriginalName();
+        $filext = $file->getClientOriginalExtension();
+        $filesize = $file->getSize();
+
+        // Menentukan Storage Materi Coaching
+        $path = 'storage';
+        $file->move($path, $filename);
+
+        // dd($filename);
+
+        // Menambahkan Materi ke Database
+        $materi = MateriCoaching::create([
+            'tanggal' => $request->tanggal,
+            'materi' => $filename,
+            'keterangan' => $request->keterangan,
+            'from' => $from,
+            'tenant_id' => $request->tenant_id,
+            'coach_id' => $request->coach_id,
+        ]);
+
+        // dd($materi);
+
+        return redirect('/materiCoaching')->with('sukses', 'Materi berhasil dikirimkan ke tenant.');
+    }
+    
+    // Mendownload Materi Coaching
+    public function GetFile($id)
+    {
+        $file = MateriCoaching::find($id);
+
+        $pathFile = storage_path('../public/storage/' . $file->materi);
+
+        return response()->download($pathFile);
     }
 }

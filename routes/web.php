@@ -181,3 +181,6 @@ Route::get('{id}/deleteJadwalCoaching', 'CoachController@DeleteJadwalCoaching')-
 Route::get('{id}/selesaiJadwalCoaching', 'CoachController@SelesaiJadwalCoaching')->middleware('auth','checkRole:coach');
 Route::post('{id}/konfirmasiHadirCoaching', 'CoachController@KonfirmasiHadirCoaching')->middleware('auth','checkRole:tenant');
 Route::post('{id}/tolakHadirCoaching', 'CoachController@TolakHadirCoaching')->middleware('auth','checkRole:tenant');
+Route::get('/materiCoaching', 'CoachController@MateriCoaching')->middleware('auth');
+Route::post('/addMateriCoaching', 'CoachController@AddMateriCoaching')->middleware('auth','checkRole:coach');
+Route::get('/getfile1/{id}', 'CoachController@GetFile')->middleware('auth');
