@@ -30,4 +30,9 @@ class Coach extends Model
     {
         return $this->hasMany(Tenant::class);
     }
+
+    public function jadwalCoachings()
+    {
+        return $this->hasMany(JadwalCoaching::class);
+    }
 }

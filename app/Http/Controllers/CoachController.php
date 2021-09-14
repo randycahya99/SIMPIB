@@ -6,14 +6,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use Auth;
 use App\User;
 use App\Models\Coach;
 use App\Models\CategoryCoach;
 use App\Models\BidangKeahlian;
+use App\Models\JadwalCoaching;
 
 class CoachController extends Controller
 {
-    //Menampilkan Halaman Manajemen Data Coach
+    // Menampilkan Halaman Manajemen Data Coach
     public function Coach()
     {
         $coach = Coach::all();
@@ -23,22 +25,12 @@ class CoachController extends Controller
         return view('coach', compact('coach', 'category', 'ahli'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    //Menambahkan Data Coach
+    // Menambahkan Data Coach
     public function addCoach(Request $request)
     {
         $token = Str::random();
 
-        //Validasi Inputan Form
+        // Validasi Inputan Form
         $request->validate([
             'nama_coach' => 'required|string|max:100',
             'alamat' => 'required|string|max:500',
@@ -68,7 +60,7 @@ class CoachController extends Controller
             'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
         ]);
 
-        //Menambahkan Akun User ke Database
+        // Menambahkan Akun User ke Database
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
@@ -76,7 +68,7 @@ class CoachController extends Controller
             'remember_token' => $token
         ]);
 
-        //Menambahkan Data Coach ke Database
+        // Menambahkan Data Coach ke Database
         $coach = Coach::create([
             'nama_coach' => $request->nama_coach,
             'alamat' => $request->alamat,
@@ -85,27 +77,16 @@ class CoachController extends Controller
             'bidang_id' => $request->bidang_id
         ]);
 
-        //Menyimpan Data Relasi Tabel User Dengan Coach
+        // Menyimpan Data Relasi Tabel User Dengan Coach
         $user->coachs()->save($coach);
 
-        //Menambahkan Role Kepada Akun User
+        // Menambahkan Role Kepada Akun User
         $user->assignRole('coach');
 
         return redirect('/coach')->with('sukses', 'Data coach berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    //Menampilkan Halaman Edit Data Coach
+    // Menampilkan Halaman Edit Data Coach
     public function editCoach($id)
     {
         $coach = Coach::find($id);
@@ -117,10 +98,10 @@ class CoachController extends Controller
         return view('editCoach', compact('coach', 'category', 'ahli'));
     }
 
-    //Mengubah Data Coach
+    // Mengubah Data Coach
     public function updateCoach(Request $request, $id)
     {
-        //Validasi Inputan Form
+        // Validasi Inputan Form
         $request->validate([
             'nama_coach' => 'required|string|max:100',
             'alamat' => 'required|string|max:500',
@@ -148,11 +129,11 @@ class CoachController extends Controller
             'bidang_id.required' => 'Bidang keahlian tidak boleh kosong'
         ]);
 
-        //Mencari Data Sesuai Dengan id
+        // Mencari Data Sesuai Dengan id
         $coach = Coach::find($id);
         $user = $coach->users;
 
-        //Mengubah Data Coach di Database
+        // Mengubah Data Coach di Database
         $coach->update([
             'nama_coach' => $request->nama_coach,
             'alamat' => $request->alamat,
@@ -161,7 +142,7 @@ class CoachController extends Controller
             'bidang_id' => $request->bidang_id
         ]);
 
-        //Mengubah Data Akun Coach di Database
+        // Mengubah Data Akun Coach di Database
         $user->update([
             'username' => $request->username,
             'email' => $request->email
@@ -172,21 +153,213 @@ class CoachController extends Controller
         return redirect('/coach')->with('sukses', 'Data coach berhasil diperbarui.');
     }
 
-    //Menghapus Data Coach
+    // Menghapus Data Coach
     public function deleteCoach($id)
     {
-        //Mencari Data Coach di Database
+        // Mencari Data Coach di Database
         $coach = Coach::find($id);
 
-        //Mencari Data Akun Coach di Database
+        // Mencari Data Akun Coach di Database
         $user = $coach->users;
 
-        //Menghapus Data Coach di Database
+        // Menghapus Data Coach di Database
         $coach->delete();
 
-        //Menghapus Data Akun Coach di Database
+        // Menghapus Data Akun Coach di Database
         $user->delete();
 
         return redirect('/coach');
+    }
+
+    // Menampilkan Halaman Jadwal Coaching
+    public function JadwalCoaching()
+    {
+        // Mengambil Data Jadwal dan Tenant Sesuai Dengan Coach yang Sedang Login
+        if (Auth::user()->hasRole('coach')) {
+            $jadwal = Auth::user()->coachs->jadwalCoachings;
+            $tenant = Auth::user()->coachs->tenants;
+
+            // dd($jadwal);
+
+            return view('coaching/jadwal', compact('jadwal','tenant'));
+        } else {
+            $jadwal = Auth::user()->tenants->jadwalCoachings;
+            $coach = Auth::user()->tenants->coachs;
+
+            // dd($jadwal);
+
+            return view('coaching/jadwal', compact('jadwal','coach'));
+        }
+    }
+
+    // Menambahkan or Membuat Jadwal Coaching
+    public function AddJadwalCoaching(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'topik' => 'required|string|max:1000',
+            'link' => 'required|max:200',
+            'tenant_id' => 'required',
+            'coach_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'topik.required' => 'Topik tidak boleh kosong',
+            'topik.string' => 'Topik harus berupa string',
+            'topik.max' => 'Topik maksimal 1000 karakter',
+            'link.required' => 'Link tidak boleh kosong',
+            'link.max' => 'Link maksimal 200 karakter',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'coach_id.required' => 'Coach tidak boleh kosong',
+        ]);
+
+        // Menambahkan Jadwal ke Database
+        $jadwal = JadwalCoaching::create([
+            'tanggal' => $request->tanggal,
+            'topik' => $request->topik,
+            'link' => $request->link,
+            'tenant_id' => $request->tenant_id,
+            'coach_id' => $request->coach_id,
+        ]);
+
+        // dd($jadwal);
+
+        return redirect('/jadwalCoaching')->with('sukses', 'Jadwal coaching berhasil dibuat.');
+    }
+
+    // Mengubah or Memperbarui Data Jadwal Coaching
+    public function UpdateJadwalCoaching(Request $request, $id)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'topik' => 'required|string|max:1000',
+            'link' => 'required|max:200'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'topik.required' => 'Topik tidak boleh kosong',
+            'topik.string' => 'Topik harus berupa string',
+            'topik.max' => 'Topik maksimal 1000 karakter',
+            'link.required' => 'Link tidak boleh kosong',
+            'link.max' => 'Link maksimal 200 karakter'
+        ]);
+
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalCoaching::find($id);
+
+        // Mengubah Data Jadwal Coaching di Database
+        $jadwal->update([
+            'tanggal' => $request->tanggal,
+            'topik' => $request->topik,
+            'link' => $request->link
+        ]);
+
+        // dd($jadwal);
+
+        return redirect('/jadwalCoaching')->with('sukses', 'Jadwal coaching berhasil diperbarui.');
+    }
+
+    // Membatalkan Jadwal Coaching
+    public function BatalkanJadwalCoaching($id)
+    {
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalCoaching::find($id);
+
+        // Mengubah Status Jadwal Coaching Menjadi Dibatalkan
+        $jadwal->status = 'dibatalkan';
+        $jadwal->save();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalCoaching')->with('sukses', 'Jadwal coaching berhasil dibatalkan.');
+    }
+
+    // Menghapus Data Jadwal Coaching
+    public function DeleteJadwalCoaching($id)
+    {
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalCoaching::find($id);
+
+        // Menghapus Jadwal Coaching dari Database
+        $jadwal->delete();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalCoaching');
+    }
+
+    // Mengubah Status Coaching Menjadi Selesai
+    public function SelesaiJadwalCoaching($id)
+    {
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalCoaching::find($id);
+
+        // Mengubah Status Menjadi Selesai
+        $jadwal->status = 'selesai';
+        $jadwal->save();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalCoaching')->with('sukses', 'Coaching telah selesai dilakukan.');
+    }
+
+    // Melakukan Konfirmasi Kehadiran Untuk Coaching (for tenant)
+    public function KonfirmasiHadirCoaching(Request $request, $id)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'keterangan' => 'required|string|max:100'
+        ], [
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'keterangan.max' => 'Keterangan tidak boleh lebih dari 100 karakter'
+        ]);
+
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalCoaching::find($id);
+
+        // Mengubah or Menambahkan Keterangan Pada Jadwal Coaching
+        $jadwal->update([
+            'keterangan' => $request->keterangan
+        ]);
+
+        // Mengubah Status Jadwal Coaching Menjadi Disetujui oleh Tenant
+        $jadwal->status = 'disetujui';
+        $jadwal->save();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalCoaching')->with('sukses', 'Berhasil mengkonfirmasi kehadiran coaching.');
+    }
+
+    // Melakukan Konfirmasi Kehadiran Untuk Coaching (for tenant)
+    public function TolakHadirCoaching(Request $request, $id)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'keterangan' => 'required|string|max:100'
+        ], [
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'keterangan.max' => 'Keterangan tidak boleh lebih dari 100 karakter'
+        ]);
+
+        // Mencari Data Sesuai Dengan id
+        $jadwal = JadwalCoaching::find($id);
+
+        // Mengubah or Menambahkan Keterangan Pada Jadwal Coaching
+        $jadwal->update([
+            'keterangan' => $request->keterangan
+        ]);
+
+        // Mengubah Status Jadwal Coaching Menjadi Ditolak oleh Tenant
+        $jadwal->status = 'ditolak';
+        $jadwal->save();
+
+        // dd($jadwal);
+
+        return redirect('/jadwalCoaching')->with('sukses', 'Berhasil mengkonfirmasi kehadiran coaching.');
     }
 }

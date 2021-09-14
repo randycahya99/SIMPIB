@@ -170,3 +170,14 @@ Route::post('/addMateriPendampingan', 'PendampingController@AddMateriPendampinga
 Route::get('/getfile/{id}', 'PendampingController@GetFile')->middleware('auth');
 Route::get('/filePendampingan', 'PendampingController@UploadFile')->middleware('auth');
 Route::post('/addKonsultasiFile', 'PendampingController@AddKonsultasiFile')->middleware('auth','checkRole:tenant');
+
+
+// Coaching
+Route::get('/jadwalCoaching', 'CoachController@JadwalCoaching')->middleware('auth');
+Route::post('/addJadwalCoaching', 'CoachController@AddJadwalCoaching')->middleware('auth','checkRole:coach');
+Route::post('{id}/updateJadwalCoaching', 'CoachController@UpdateJadwalCoaching')->middleware('auth','checkRole:coach');
+Route::get('{id}/batalkanJadwalCoaching', 'CoachController@BatalkanJadwalCoaching')->middleware('auth','checkRole:coach');
+Route::get('{id}/deleteJadwalCoaching', 'CoachController@DeleteJadwalCoaching')->middleware('auth','checkRole:coach');
+Route::get('{id}/selesaiJadwalCoaching', 'CoachController@SelesaiJadwalCoaching')->middleware('auth','checkRole:coach');
+Route::post('{id}/konfirmasiHadirCoaching', 'CoachController@KonfirmasiHadirCoaching')->middleware('auth','checkRole:tenant');
+Route::post('{id}/tolakHadirCoaching', 'CoachController@TolakHadirCoaching')->middleware('auth','checkRole:tenant');

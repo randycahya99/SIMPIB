@@ -167,8 +167,16 @@
             <a class="collapse-item" href="#">Hasil Coaching</a>
             @endif
 
+            @if (auth()->user()->hasAnyRole('coach', 'tenant'))
+            <a class="collapse-item" href="/jadwalCoaching">Jadwal</a>
+            @endif
+
             @if (auth()->user()->hasRole('coach'))
-            <a class="collapse-item" href="#">Jadwal</a>
+            <a class="collapse-item" href="#">Tenant Files</a>
+            @endif
+
+            @if (auth()->user()->hasRole('tenant'))
+            <a class="collapse-item" href="#">Upload File</a>
             @endif
 
           </div>
@@ -225,8 +233,12 @@
             @endif
             
             @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
-            <a class="collapse-item" href="/hasilPendampingan">Hasil Pendampingan</a>
             <a class="collapse-item" href="/materiPendampingan">Pendampingan</a>
+            <a class="collapse-item" href="/hasilPendampingan">Hasil Pendampingan</a>
+            @endif
+
+            @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
+            <a class="collapse-item" href="/jadwalPendampingan">Jadwal</a>
             @endif
 
             @if (auth()->user()->hasRole('pendamping'))
@@ -235,10 +247,6 @@
 
             @if (auth()->user()->hasRole('tenant'))
             <a class="collapse-item" href="/filePendampingan">Upload File</a>
-            @endif
-
-            @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
-            <a class="collapse-item" href="/jadwalPendampingan">Jadwal</a>
             @endif
 
           </div>

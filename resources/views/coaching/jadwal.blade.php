@@ -1,8 +1,8 @@
 @extends('layout.main')
 
-@section('title','SIMPIB - Jadwal Pendampingan')
+@section('title','SIMPIB - Jadwal Coaching')
 
-@if (Auth::user()->hasRole('pendamping'))
+@if (Auth::user()->hasRole('coach'))
 
 @section('container')
 
@@ -40,7 +40,7 @@
                             <td>{{$jadwals->topik}}</td>
 
 							<td align="center">
-								<a href="{{$jadwals->id}}/deleteJadwalPendampingan" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
+								<a href="{{$jadwals->id}}/deleteJadwalCoaching" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
 									<i class="fas fa-trash"></i>
 								</a>
                                 
@@ -71,18 +71,18 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Buat Jadwal Pendampingan</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Buat Jadwal Coaching</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 
 			<div class="modal-body">
-				<form action="addJadwalPendampingan" method="POST" class="needs-validation" novalidate>
+				<form action="addJadwalCoaching" method="POST" class="needs-validation" novalidate>
 
 					@csrf
 
-                    <input type="hidden" class="form-control" id="pendamping_id" name="pendamping_id" value="{{auth()->user()->pendampings->id}}">
+                    <input type="hidden" class="form-control" id="coach_id" name="coach_id" value="{{auth()->user()->coachs->id}}">
 
                     <div class="form-group">
                         <label>Tenant</label>
@@ -138,7 +138,7 @@
 			</div>
 
 			<div class="modal-body">
-				<form action="{{$jadwals->id}}/updateJadwalPendampingan" method="POST" class="needs-validation" novalidate>
+				<form action="{{$jadwals->id}}/updateJadwalCoaching" method="POST" class="needs-validation" novalidate>
 					
                     @csrf
 					
@@ -164,7 +164,7 @@
 					</div>
 					
 					<div class="modal-footer">
-						<a href="{{$jadwals->id}}/batalkanJadwalPendampingan" class="btn btn-danger">Batalkan Pendampingan</a>
+						<a href="{{$jadwals->id}}/batalkanJadwalCoaching" class="btn btn-danger">Batalkan Coaching</a>
 						<button type="submit" class="btn btn-primary">Simpan Perubahan</button>
 					</div>
 
@@ -225,7 +225,7 @@
                         @elseif ($jadwals->status == "ditolak")
                             <p style="color: red">: Tenant berhalangan hadir</p>
                         @elseif ($jadwals->status == "dibatalkan")
-                            <p style="color: red">: Pendamping membatalkan jadwal pendampingan</p>
+                            <p style="color: red">: Coach membatalkan jadwal coaching</p>
                         @else
                             <p style="color: rgb(28, 180, 28)">: Selesai</p>
                         @endif
@@ -241,7 +241,7 @@
                 
                 @if ($jadwals->status == "disetujui")
                     <div class="modal-footer">
-                        <a href="{{$jadwals->id}}/selesaiJadwalPendampingan" class="btn btn-success">Selesai</a>
+                        <a href="{{$jadwals->id}}/selesaiJadwalCoaching" class="btn btn-success">Selesai</a>
                     </div>
                 @endif
 			
@@ -284,7 +284,7 @@
 						<tr>
 							<td align="center">{{$loop->iteration}}</td>
 							<td>{{$jadwals->tanggal}}</td>
-							<td>{{$jadwals->pendampings->nama_pendamping}}</td>
+							<td>{{$jadwals->coachs->nama_coach}}</td>
                             <td>{{$jadwals->topik}}</td>
                             <td>
                                 @if ($jadwals->status == "pending")
@@ -334,7 +334,7 @@
 </div>
 
 
-<!-- Modal Konfirmasi Setuju Kehadiran Pendampingan -->
+<!-- Modal Konfirmasi Setuju Kehadiran Coaching -->
 @foreach($jadwal as $jadwals)
 <div class="modal fade" id="konfirmasiTerima{{$jadwals['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -347,7 +347,7 @@
 			</div>
 
 			<div class="modal-body">
-				<form action="{{$jadwals->id}}/konfirmasiHadirPendampingan" method="POST" class="needs-validation" novalidate>
+				<form action="{{$jadwals->id}}/konfirmasiHadirCoaching" method="POST" class="needs-validation" novalidate>
 					
                     @csrf
 					
@@ -369,7 +369,7 @@
 @endforeach
 
 
-<!-- Modal Konfirmasi Tolak Kehadiran Pendampingan -->
+<!-- Modal Konfirmasi Tolak Kehadiran Coaching -->
 @foreach($jadwal as $jadwals)
 <div class="modal fade" id="konfirmasiTolak{{$jadwals['id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -382,7 +382,7 @@
 			</div>
 
 			<div class="modal-body">
-				<form action="{{$jadwals->id}}/tolakHadirPendampingan" method="POST" class="needs-validation" novalidate>
+				<form action="{{$jadwals->id}}/tolakHadirCoaching" method="POST" class="needs-validation" novalidate>
 					
                     @csrf
 					
@@ -419,9 +419,9 @@
 			<div class="modal-body">
 
 				<div class="form-group row">
-					<p class=" col-sm-4 font-weight-bold">Nama Pendamping</p>
+					<p class=" col-sm-4 font-weight-bold">Nama Coach</p>
 					<div class="col-sm-8">
-						<p>: {{$jadwals->pendampings['nama_pendamping']}}</p>
+						<p>: {{$jadwals->coachs['nama_coach']}}</p>
 					</div>
 				</div>
 				<div class="form-group row">

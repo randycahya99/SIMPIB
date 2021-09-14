@@ -442,7 +442,7 @@ class PendampingController extends Controller
             'keterangan' => $request->keterangan
         ]);
 
-        // Mengubah Status Jadwal Pendampingan Menjadi Disetujui oleh Tenant
+        // Mengubah Status Jadwal Pendampingan Menjadi Ditolak oleh Tenant
         $jadwal->status = 'ditolak';
         $jadwal->save();
 
