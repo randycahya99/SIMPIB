@@ -603,7 +603,7 @@ class PendampingController extends Controller
             'pendamping_id.required' => 'Pendamping tidak boleh kosong',
         ]);
 
-        // Status From Diisi dengan Value Pendamping
+        // Status From Diisi dengan Value Tenant
         $from = "tenant";
 
         // Menyimpan Data File kedalam Variabel

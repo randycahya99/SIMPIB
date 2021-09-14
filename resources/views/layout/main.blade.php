@@ -172,11 +172,11 @@
             @endif
 
             @if (auth()->user()->hasRole('coach'))
-            <a class="collapse-item" href="#">Tenant Files</a>
+            <a class="collapse-item" href="/fileCoaching">Tenant Files</a>
             @endif
 
             @if (auth()->user()->hasRole('tenant'))
-            <a class="collapse-item" href="#">Upload File</a>
+            <a class="collapse-item" href="/fileCoaching">Upload File</a>
             @endif
 
           </div>

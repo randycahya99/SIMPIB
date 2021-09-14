@@ -184,3 +184,5 @@ Route::post('{id}/tolakHadirCoaching', 'CoachController@TolakHadirCoaching')->mi
 Route::get('/materiCoaching', 'CoachController@MateriCoaching')->middleware('auth');
 Route::post('/addMateriCoaching', 'CoachController@AddMateriCoaching')->middleware('auth','checkRole:coach');
 Route::get('/getfile1/{id}', 'CoachController@GetFile')->middleware('auth');
+Route::get('/fileCoaching', 'CoachController@UploadFile')->middleware('auth');
+Route::post('/addKonsultasiFile1', 'CoachController@AddKonsultasiFile')->middleware('auth','checkRole:tenant');

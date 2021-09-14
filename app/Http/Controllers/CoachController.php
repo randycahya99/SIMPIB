@@ -447,4 +447,75 @@ class CoachController extends Controller
 
         return response()->download($pathFile);
     }
+
+    // Menampilkan Halaman Upload File (Konsultasi)
+    public function UploadFile()
+    {
+        // Mengambil Data Materi dan Tenant Sesuai Dengan Coach yang Sedang Login
+        if (Auth::user()->hasRole('coach')) {
+            $materi = Auth::user()->coachs->materiCoachings->where('from','tenant');
+            $tenant = Auth::user()->coachs->tenants;
+
+            // dd($jadwal);
+
+            return view('coaching/upload', compact('materi','tenant'));
+        } else {
+            $materi = Auth::user()->tenants->materiCoachings->where('from','tenant');
+            $coach = Auth::user()->tenants->coachs;
+
+            // dd($jadwal);
+
+            return view('coaching/upload', compact('materi','coach'));
+        }
+    }
+
+    // Mengirimkan File Untuk Konsultasi
+    public function AddKonsultasiFile(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'materi' => 'required',
+            'keterangan' => 'required|string',
+            'tenant_id' => 'required',
+            'coach_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'materi.required' => 'Materi tidak boleh kosong',
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'coach_id.required' => 'Coach tidak boleh kosong',
+        ]);
+
+        // Status From Diisi dengan Value Tenant
+        $from = "tenant";
+
+        // Menyimpan Data File kedalam Variabel
+        $file = $request->file('materi');
+        $filename = time()."_".$file->getClientOriginalName();
+        $filext = $file->getClientOriginalExtension();
+        $filesize = $file->getSize();
+
+        // Menentukan Storage Materi Coach
+        $path = 'storage';
+        $file->move($path, $filename);
+
+        // dd($filename);
+
+        // Menambahkan Materi ke Database
+        $materi = MateriCoaching::create([
+            'tanggal' => $request->tanggal,
+            'materi' => $filename,
+            'keterangan' => $request->keterangan,
+            'from' => $from,
+            'tenant_id' => $request->tenant_id,
+            'coach_id' => $request->coach_id,
+        ]);
+
+        // dd($materi);
+
+        return redirect('/fileCoaching')->with('sukses', 'File berhasil dikirimkan ke coach.');
+    }
 }
