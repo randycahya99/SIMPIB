@@ -78,4 +78,9 @@ class Tenant extends Model
     {
         return $this->hasMany(MateriCoaching::class);
     }
+
+    public function jadwalMentorings()
+    {
+        return $this->hasMany(JadwalMentoring::class);
+    }
 }

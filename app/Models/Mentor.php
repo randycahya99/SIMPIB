@@ -30,4 +30,9 @@ class Mentor extends Model
     {
         return $this->hasMany(Tenant::class);
     }
+
+    public function jadwalMentorings()
+    {
+        return $this->hasMany(JadwalMentoring::class);
+    }
 }

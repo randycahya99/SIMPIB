@@ -206,8 +206,16 @@
             <a class="collapse-item" href="#">Hasil Mentoring</a>
             @endif
 
+            @if (auth()->user()->hasAnyRole('mentor', 'tenant'))
+            <a class="collapse-item" href="/jadwalMentoring">Jadwal</a>
+            @endif
+
             @if (auth()->user()->hasRole('mentor'))
-            <a class="collapse-item" href="#">Jadwal</a>
+            <a class="collapse-item" href="#">Tenant Files</a>
+            @endif
+
+            @if (auth()->user()->hasRole('tenant'))
+            <a class="collapse-item" href="#">Upload File</a>
             @endif
 
           </div>
