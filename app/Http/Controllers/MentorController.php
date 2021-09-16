@@ -15,6 +15,7 @@ use App\Models\Mentor;
 use App\Models\CategoryMentor;
 use App\Models\BidangKeahlian;
 use App\Models\JadwalMentoring;
+use App\Models\MateriMentoring;
 
 class MentorController extends Controller
 {
@@ -364,5 +365,157 @@ class MentorController extends Controller
         // dd($jadwal);
 
         return redirect('/jadwalMentoring')->with('sukses', 'Berhasil mengkonfirmasi kehadiran mentoring.');
+    }
+
+    // Menampilkan Halaman Materi Mentoring
+    public function MateriMentoring()
+    {
+        // Mengambil Data Materi dan Tenant Sesuai Dengan Mentor yang Sedang Login
+        if (Auth::user()->hasRole('mentor')) {
+            $materi = Auth::user()->mentors->materiMentorings->where('from','mentor');
+            $tenant = Auth::user()->mentors->tenants;
+
+            // dd($jadwal);
+
+            return view('mentoring/materi', compact('materi','tenant'));
+        } else {
+            $materi = Auth::user()->tenants->materiMentorings->where('from','mentor');
+            $mentor = Auth::user()->tenants->mentors;
+
+            // dd($jadwal);
+
+            return view('mentoring/materi', compact('materi','mentor'));
+        }
+    }
+
+    // Menambahkan Data Materi Mentoring
+    public function AddMateriMentoring(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'materi' => 'required',
+            'keterangan' => 'required|string',
+            'tenant_id' => 'required',
+            'mentor_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'materi.required' => 'Materi tidak boleh kosong',
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'mentor_id.required' => 'Mentor tidak boleh kosong',
+        ]);
+
+        // Status From Diisi dengan Value Mentor
+        $from = "mentor";
+
+        // Menyimpan Data File kedalam Variabel
+        $file = $request->file('materi');
+        $filename = time()."_".$file->getClientOriginalName();
+        $filext = $file->getClientOriginalExtension();
+        $filesize = $file->getSize();
+
+        // Menentukan Storage Materi Mentoring
+        $path = 'storage';
+        $file->move($path, $filename);
+
+        // dd($filename);
+
+        // Menambahkan Materi ke Database
+        $materi = MateriMentoring::create([
+            'tanggal' => $request->tanggal,
+            'materi' => $filename,
+            'keterangan' => $request->keterangan,
+            'from' => $from,
+            'tenant_id' => $request->tenant_id,
+            'mentor_id' => $request->mentor_id,
+        ]);
+
+        // dd($materi);
+
+        return redirect('/materiMentoring')->with('sukses', 'Materi berhasil dikirimkan ke tenant.');
+    }
+
+    // Mendownload Materi Mentoring
+    public function GetFile($id)
+    {
+        $file = MateriMentoring::find($id);
+
+        $pathFile = storage_path('../public/storage/' . $file->materi);
+
+        return response()->download($pathFile);
+    }
+
+    // Menampilkan Halaman Upload File (Konsultasi)
+    public function UploadFile()
+    {
+        // Mengambil Data Materi dan Tenant Sesuai Dengan Mentor yang Sedang Login
+        if (Auth::user()->hasRole('mentor')) {
+            $materi = Auth::user()->mentors->materiMentorings->where('from','tenant');
+            $tenant = Auth::user()->mentors->tenants;
+
+            // dd($jadwal);
+
+            return view('mentoring/upload', compact('materi','tenant'));
+        } else {
+            $materi = Auth::user()->tenants->materiMentorings->where('from','tenant');
+            $mentor = Auth::user()->tenants->mentors;
+
+            // dd($jadwal);
+
+            return view('mentoring/upload', compact('materi','mentor'));
+        }
+    }
+
+    // Mengirimkan File Untuk Konsultasi
+    public function AddKonsultasiFile(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'materi' => 'required',
+            'keterangan' => 'required|string',
+            'tenant_id' => 'required',
+            'mentor_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'materi.required' => 'Materi tidak boleh kosong',
+            'keterangan.required' => 'Keterangan tidak boleh kosong',
+            'keterangan.string' => 'Keterangan harus berupa string',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'mentor_id.required' => 'Mentor tidak boleh kosong',
+        ]);
+
+        // Status From Diisi dengan Value Tenant
+        $from = "tenant";
+
+        // Menyimpan Data File kedalam Variabel
+        $file = $request->file('materi');
+        $filename = time()."_".$file->getClientOriginalName();
+        $filext = $file->getClientOriginalExtension();
+        $filesize = $file->getSize();
+
+        // Menentukan Storage Materi Mentor
+        $path = 'storage';
+        $file->move($path, $filename);
+
+        // dd($filename);
+
+        // Menambahkan Materi ke Database
+        $materi = MateriMentoring::create([
+            'tanggal' => $request->tanggal,
+            'materi' => $filename,
+            'keterangan' => $request->keterangan,
+            'from' => $from,
+            'tenant_id' => $request->tenant_id,
+            'mentor_id' => $request->mentor_id,
+        ]);
+
+        // dd($materi);
+
+        return redirect('/fileMentoring')->with('sukses', 'File berhasil dikirimkan ke mentor.');
     }
 }

@@ -202,7 +202,7 @@
             @endif
             
             @if (auth()->user()->hasAnyRole('mentor', 'tenant'))
-            <a class="collapse-item" href="#">Mentoring</a>
+            <a class="collapse-item" href="/materiMentoring">Mentoring</a>
             <a class="collapse-item" href="#">Hasil Mentoring</a>
             @endif
 
@@ -211,11 +211,11 @@
             @endif
 
             @if (auth()->user()->hasRole('mentor'))
-            <a class="collapse-item" href="#">Tenant Files</a>
+            <a class="collapse-item" href="/fileMentoring">Tenant Files</a>
             @endif
 
             @if (auth()->user()->hasRole('tenant'))
-            <a class="collapse-item" href="#">Upload File</a>
+            <a class="collapse-item" href="/fileMentoring">Upload File</a>
             @endif
 
           </div>

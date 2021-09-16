@@ -35,4 +35,9 @@ class Mentor extends Model
     {
         return $this->hasMany(JadwalMentoring::class);
     }
+
+    public function materiMentorings()
+    {
+        return $this->hasMany(MateriMentoring::class);
+    }
 }

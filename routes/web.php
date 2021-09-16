@@ -197,3 +197,8 @@ Route::get('{id}/deleteJadwalMentoring', 'MentorController@DeleteJadwalMentoring
 Route::get('{id}/selesaiJadwalMentoring', 'MentorController@SelesaiJadwalMentoring')->middleware('auth','checkRole:mentor');
 Route::post('{id}/konfirmasiHadirMentoring', 'MentorController@KonfirmasiHadirMentoring')->middleware('auth','checkRole:tenant');
 Route::post('{id}/tolakHadirMentoring', 'MentorController@TolakHadirMentoring')->middleware('auth','checkRole:tenant');
+Route::get('/materiMentoring', 'MentorController@MateriMentoring')->middleware('auth');
+Route::post('/addMateriMentoring', 'MentorController@AddMateriMentoring')->middleware('auth','checkRole:mentor');
+Route::get('/getfile2/{id}', 'MentorController@GetFile')->middleware('auth');
+Route::get('/fileMentoring', 'MentorController@UploadFile')->middleware('auth');
+Route::post('/addKonsultasiFile2', 'MentorController@AddKonsultasiFile')->middleware('auth','checkRole:tenant');

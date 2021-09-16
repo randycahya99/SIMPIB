@@ -25,7 +25,7 @@
 						<tr>
 							<th width="20">No</th>
 							<th width="80">Tanggal</th>
-							<th width="250">Coach</th>
+							<th width="250">Mentor</th>
                             <th>Keterangan</th>
 							<th width="80">Aksi</th>
 						</tr>
@@ -36,11 +36,11 @@
 						<tr>
 							<td align="center">{{$loop->iteration}}</td>
 							<td>{{$materis->tanggal}}</td>
-							<td>{{$materis->coachs->nama_coach}}</td>
+							<td>{{$materis->mentors->nama_mentor}}</td>
                             <td>{{$materis->keterangan}}</td>
 
 							<td align="center">
-								<a href="{{$materis->id}}/deleteMateriPendampingan" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
+								<a href="{{$materis->id}}/deleteMateriMentoring" class="btn btn-danger btn-circle btn-sm hapusProduct" title="Hapus">
 									<i class="fas fa-trash"></i>
 								</a>
                                 <button class="btn btn-primary btn-circle btn-sm" title="Edit" data-toggle="modal" data-target="#editData{{$materis['id']}}">
@@ -74,12 +74,12 @@
 			</div>
 
 			<div class="modal-body">
-				<form action="addKonsultasiFile1" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+				<form action="addKonsultasiFile2" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
 
 					@csrf
 
                     <input type="hidden" class="form-control" id="tenant_id" name="tenant_id" value="{{auth()->user()->tenants->id}}">
-                    <input type="hidden" class="form-control" id="coach_id" name="coach_id" value="{{auth()->user()->tenants->coachs->id}}">
+                    <input type="hidden" class="form-control" id="mentor_id" name="mentor_id" value="{{auth()->user()->tenants->mentors->id}}">
 
 					<div class="form-group">
 						<label>Tanggal</label>
@@ -123,9 +123,9 @@
 			<div class="modal-body">
 
 				<div class="form-group row">
-					<p class=" col-sm-4 font-weight-bold">Nama Coach</p>
+					<p class=" col-sm-4 font-weight-bold">Nama Mentor</p>
 					<div class="col-sm-8">
-						<p>: {{$materis->coachs['nama_coach']}}</p>
+						<p>: {{$materis->mentors['nama_mentor']}}</p>
 					</div>
 				</div>
 				<div class="form-group row">
@@ -137,7 +137,7 @@
                 <div class="form-group row">
 					<p class=" col-sm-4 font-weight-bold">Materi</p>
 					<div class="col-sm-8">
-						<a href="/getfile1/{{$materis->id}}">: {{$materis['materi']}}</a>
+						<a href="/getfile2/{{$materis->id}}">: {{$materis['materi']}}</a>
 					</div>
 				</div>
                 <div class="form-group row">
@@ -154,7 +154,7 @@
 @endforeach
 
 
-@elseif (Auth::user()->hasRole('coach'))
+@elseif (Auth::user()->hasRole('mentor'))
 
 @section('container')
 
@@ -243,7 +243,7 @@
                 <div class="form-group row">
 					<p class=" col-sm-4 font-weight-bold">Materi</p>
 					<div class="col-sm-8">
-						<a href="/getfile1/{{$materis->id}}">: {{$materis['materi']}}</a>
+						<a href="/getfile2/{{$materis->id}}">: {{$materis['materi']}}</a>
 					</div>
 				</div>
                 <div class="form-group row">
@@ -261,7 +261,6 @@
 
 
 @endif
-
 
 @endsection
 
