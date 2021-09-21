@@ -74,13 +74,33 @@
       @endif
 
 
+      <!-- Nav Landing Page - Pages Collapse Menu -->
+
+      @if (auth()->user()->hasRole('admin'))
+
+      <li class="nav-item{{ request()->is('bidangKeahlian','kategoriCoach','kategoriMentor','kategoriPendamping','kategoriTenant','tahapInkubasi') ? ' active' : '' }}">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#LandingPage" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-pager"></i>
+          <span>Landing Page</span>
+        </a>
+        <div id="LandingPage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="/fotoSlider">Foto Slider</a>
+            <a class="collapse-item" href="#">Produk Tenant</a>
+          </div>
+        </div>
+      </li>
+
+      @endif
+
+
       <!-- Nav Master Data - Pages Collapse Menu -->
 
       @if (auth()->user()->hasRole('admin'))
 
       <li class="nav-item{{ request()->is('bidangKeahlian','kategoriCoach','kategoriMentor','kategoriPendamping','kategoriTenant','tahapInkubasi') ? ' active' : '' }}">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#MasterData" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-box-open"></i>
+          <i class="fas fa-fw fa-database"></i>
           <span>Master Data</span>
         </a>
         <div id="MasterData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -615,6 +635,39 @@
                  Swal.fire(
                   'Non-Aktif',
                   'Tenant Berhasil di Non-Aktifkan',
+                  'success',
+                  'showConfirmButton: false',
+                  'timer: 2000'
+                  )
+               }
+             })
+            })
+          </script>
+
+          <!-- SweetAlert HapusFoto -->
+          <script type="text/javascript">
+            $('.hapusFoto').on('click', function(e){
+              e.preventDefault();
+
+              const href = $(this).attr('href')
+
+              Swal.fire({
+                title: 'Ingin Menghapus Data?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.value) {
+                 setTimeout(function(){ 
+
+                   document.location.href = href;
+
+                 }, 900);
+                 Swal.fire(
+                  'Terhapus',
+                  'Foto Berhasil dihapus',
                   'success',
                   'showConfirmButton: false',
                   'timer: 2000'

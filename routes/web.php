@@ -14,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Landing Page
-Route::get('/', function () {
-    return view('landing');
-})->middleware('guest')->name('/');
+Route::get('/', 'LandingPageController@LandingPage')->middleware('guest')->name('/');
+// Route::get('/', function () {
+//     return view('landing');
+// })->middleware('guest')->name('/');
 
 
 // Dashboard
@@ -56,6 +57,12 @@ Route::post('/isiProfileUsaha', 'RegisterController@IsiProfileUsaha')->middlewar
 // Histori Pendaftaran (Untuk Calon Tenant & Tenant)
 Route::get('/historiPendaftaran', 'TenantController@HistoriPendaftaran')->middleware('auth');
 Route::get('{id}/detailHistori', 'TenantController@DetailHistori')->middleware('auth');
+
+
+// Manajemen Data Pada Landing Page
+Route::get('/fotoSlider', 'LandingPageController@FotoSlider')->middleware('auth','checkRole:admin');
+Route::post('/addFotoSlider', 'LandingPageController@AddFotoSlider')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteFotoSlider', 'LandingPageController@DeleteFotoSlider')->middleware('auth','checkRole:admin');
 
 
 // Kategori Coach
