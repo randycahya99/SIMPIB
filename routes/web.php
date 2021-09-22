@@ -196,6 +196,10 @@ Route::post('/addKonsultasiFile1', 'CoachController@AddKonsultasiFile')->middlew
 
 
 // Mentoring
+Route::get('/formMentoring', 'MentorController@FormMentoring')->middleware('auth','checkRole:mentor');
+Route::post('/addFormMentoring', 'MentorController@AddFormMentoring')->middleware('auth','checkRole:mentor');
+Route::get('/hasilMentoring', 'MentorController@HasilMentoring')->middleware('auth');
+Route::get('{id}/detailHasilMentoring', 'MentorController@DetailHasilMentoring')->middleware('auth');
 Route::get('/jadwalMentoring', 'MentorController@JadwalMentoring')->middleware('auth');
 Route::post('/addJadwalMentoring', 'MentorController@AddJadwalMentoring')->middleware('auth','checkRole:mentor');
 Route::post('{id}/updateJadwalMentoring', 'MentorController@UpdateJadwalMentoring')->middleware('auth','checkRole:mentor');

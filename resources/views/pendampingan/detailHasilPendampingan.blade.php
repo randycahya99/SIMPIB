@@ -1,7 +1,5 @@
 @extends('layout.main')
 
-@section('title','SIMPIB - Hasil Pendampingan')
-
 @section('title','SIMPIB - Detail Hasil Pendampingan')
 
 @section('container')
@@ -59,7 +57,7 @@
                         <div class="col-sm-9">
                             <p>: {{$form->tenants->nama}}</p>
                         </div>
-                        <p class=" col-sm-3 font-weight-bold">No. Identitas</p>
+                        <p class=" col-sm-3 font-weight-bold">Nama Perusahaan</p>
                         <div class="col-sm-9">
                             <p>: {{$form->tenants->usahas->nama_usaha}}</p>
                         </div>
@@ -99,7 +97,7 @@
 
             <div class="container-fluid">
                 
-                <br><h5 class="card-text font-weight-bold">Target</h4>
+                <br><h5 class="card-text font-weight-bold">Target</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="table-responsive">
@@ -121,7 +119,7 @@
                     </div>
                 </div>
 
-                <br><h5 class="card-text font-weight-bold">Anggaran</h4>
+                <br><h5 class="card-text font-weight-bold">Anggaran</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="table-responsive">
@@ -143,7 +141,7 @@
                     </div>
                 </div>
 
-                <br><h5 class="card-text font-weight-bold">Produksi Sampai Saat Ini</h4>
+                <br><h5 class="card-text font-weight-bold">Produksi Sampai Saat Ini</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="table-responsive">
@@ -185,7 +183,7 @@
                     </div>
                 </div>
 
-                <br><h5 class="card-text font-weight-bold">Perijinan</h4>
+                <br><h5 class="card-text font-weight-bold">Perijinan</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="table-responsive">
@@ -207,7 +205,7 @@
                     </div>
                 </div>
 
-                <br><h5 class="card-text font-weight-bold">Belanja Mesin</h4>
+                <br><h5 class="card-text font-weight-bold">Belanja Mesin</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="table-responsive">
@@ -231,7 +229,7 @@
                     </div>
                 </div>
 
-                <br><h5 class="card-text font-weight-bold">Inkubator</h4>
+                <br><h5 class="card-text font-weight-bold">Inkubator</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="table-responsive">
@@ -258,25 +256,25 @@
                     </div>
                 </div>
 
-                <br><h5 class="card-text font-weight-bold">Uraian Masalah Administrasi</h4>
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" style="text-align: center">
-                                    <thead>
-                                        <tr>
-                                            <th width="100%">Uraian Masalah Administrasi (Pelaporan, Keuangan, dsb)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{$form->masalah_administrasi}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <br><h5 class="card-text font-weight-bold">Uraian Masalah Administrasi</h5>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" style="text-align: center">
+                                <thead>
+                                    <tr>
+                                        <th width="100%">Uraian Masalah Administrasi (Pelaporan, Keuangan, dsb)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{$form->masalah_administrasi}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+                </div>
 
             </div>
             

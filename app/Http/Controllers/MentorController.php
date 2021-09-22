@@ -15,6 +15,7 @@ use App\Models\Mentor;
 use App\Models\CategoryMentor;
 use App\Models\BidangKeahlian;
 use App\Models\JadwalMentoring;
+use App\Models\FormMentoring;
 use App\Models\MateriMentoring;
 
 class MentorController extends Controller
@@ -517,5 +518,78 @@ class MentorController extends Controller
         // dd($materi);
 
         return redirect('/fileMentoring')->with('sukses', 'File berhasil dikirimkan ke mentor.');
+    }
+
+    // Menampilkan Halaman Form Mentoring
+    public function FormMentoring()
+    {
+        // Mengambil Data Tenant Sesuai Dengan Mentor yang Sedang Login
+        $tenant = Auth::user()->mentors->tenants;
+
+        // dd($tenant);
+
+        return view('mentoring/form', compact('tenant'));
+    }
+
+    // Menambahkan Data Form Mentoring
+    public function AddFormMentoring(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required',
+            'perihal' => 'required',
+            'strategi_marketing' => 'required',
+            'pengembangan_produk' => 'required',
+            'branding' => 'required',
+            'sistemasi_organisasi' => 'required',
+            'tenant_id' => 'required',
+            'mentor_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'perihal.required' => 'Perihal tidak boleh kosong',
+            'strategi_marketing.required' => 'Strategi marketing tidak boleh kosong',
+            'pengembangan_produk.required' => 'Pengembangan produk tidak boleh kosong',
+            'branding.required' => 'Branding tidak boleh kosong',
+            'sistemasi_organisasi.required' => 'Sistemasi organisasi tidak boleh kosong',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'mentor_id.required' => 'Mentor tidak boleh kosong'
+        ]);
+
+        // Menambahkan Data Form Mentoring ke Database
+        $form = FormMentoring::create($request->all());
+
+        // dd($form);
+
+        return redirect('/hasilMentoring')->with('sukses', 'Form mentoring tenant berhasil disimpan.');
+    }
+
+    // Menampilkan Halaman Hasil Mentoring
+    public function HasilMentoring()
+    {
+        // Mengambil Data Form Mentoring Sesuai Dengan User yang Sedang Login
+        if (Auth::user()->hasRole('mentor')) {
+            $form = Auth::user()->mentors->FormMentorings;
+
+            // dd($form);
+
+            return view('mentoring/hasilMentoring', compact('form'));
+        } else {
+            $form = Auth::user()->tenants->FormMentorings;
+
+            // dd($form);
+
+            return view('mentoring/hasilMentoring', compact('form'));
+        }
+    }
+
+    // Menampilkan Halaman Detail Hasil Mentoring
+    public function DetailHasilMentoring($id)
+    {
+        // Mencari or Mengambil Data Sesuai Dengan id
+        $form = FormMentoring::find($id);
+
+        // dd($form);
+
+        return view('mentoring/detailHasilMentoring', compact('form'));
     }
 }

@@ -40,4 +40,9 @@ class Mentor extends Model
     {
         return $this->hasMany(MateriMentoring::class);
     }
+
+    public function formMentorings()
+    {
+        return $this->hasMany(FormMentoring::class);
+    }
 }
