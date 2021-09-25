@@ -40,7 +40,7 @@
                                         Nama
                                     </div>
                                     <div class="col">
-                                        {{$pengelola->nama_pengelola}}
+                                        : {{$pengelola->nama_pengelola}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -48,7 +48,7 @@
                                         Jabatan
                                     </div>
                                     <div class="col">
-                                        {{$pengelola->jabatan}}
+                                        : {{$pengelola->jabatan}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -56,7 +56,7 @@
                                         No. HP
                                     </div>
                                     <div class="col">
-                                        {{$pengelola->no_hp}}
+                                        : {{$pengelola->no_hp}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -64,7 +64,7 @@
                                         E-mail
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->email }}
+                                        : {{ auth()->user()->email }}
                                     </div>
                                 </div>
                                 <div class="row mt-2 mb-5">
@@ -72,7 +72,7 @@
                                         Username
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->username }}
+                                        : {{ auth()->user()->username }}
                                     </div>
                                 </div>
 
@@ -85,7 +85,7 @@
                                         Nama
                                     </div>
                                     <div class="col">
-                                        {{$pendamping->nama_pendamping}}
+                                        : {{$pendamping->nama_pendamping}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -93,7 +93,7 @@
                                         Alamat
                                     </div>
                                     <div class="col">
-                                        {{$pendamping->alamat}}
+                                        : {{$pendamping->alamat}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -101,7 +101,7 @@
                                         No. HP
                                     </div>
                                     <div class="col">
-                                        {{$pendamping->no_hp}}
+                                        : {{$pendamping->no_hp}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -109,7 +109,7 @@
                                         Bidang Keahlian
                                     </div>
                                     <div class="col">
-                                        {{$pendamping->bidangs->bidang_keahlian}}
+                                        : {{$pendamping->bidangs->bidang_keahlian}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -117,7 +117,7 @@
                                         E-mail
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->email }}
+                                        : {{ auth()->user()->email }}
                                     </div>
                                 </div>
                                 <div class="row mt-2 mb-5">
@@ -125,7 +125,7 @@
                                         Username
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->username }}
+                                        : {{ auth()->user()->username }}
                                     </div>
                                 </div>
 
@@ -138,7 +138,7 @@
                                         Nama
                                     </div>
                                     <div class="col">
-                                        {{$mentor->nama_mentor}}
+                                        : {{$mentor->nama_mentor}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -146,7 +146,7 @@
                                         Alamat
                                     </div>
                                     <div class="col">
-                                        {{$mentor->alamat}}
+                                        : {{$mentor->alamat}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -154,7 +154,7 @@
                                         No. HP
                                     </div>
                                     <div class="col">
-                                        {{$mentor->no_hp}}
+                                        : {{$mentor->no_hp}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -162,7 +162,7 @@
                                         Bidang Keahlian
                                     </div>
                                     <div class="col">
-                                        {{$mentor->bidangs->bidang_keahlian}}
+                                        : {{$mentor->bidangs->bidang_keahlian}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -170,7 +170,7 @@
                                         E-mail
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->email }}
+                                        : {{ auth()->user()->email }}
                                     </div>
                                 </div>
                                 <div class="row mt-2 mb-5">
@@ -178,7 +178,7 @@
                                         Username
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->username }}
+                                        : {{ auth()->user()->username }}
                                     </div>
                                 </div>
 
@@ -191,7 +191,7 @@
                                         Nama
                                     </div>
                                     <div class="col">
-                                        {{$coach->nama_coach}}
+                                        : {{$coach->nama_coach}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -199,7 +199,7 @@
                                         Alamat
                                     </div>
                                     <div class="col">
-                                        {{$coach->alamat}}
+                                        : {{$coach->alamat}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -207,7 +207,7 @@
                                         No. HP
                                     </div>
                                     <div class="col">
-                                        {{$coach->no_hp}}
+                                        : {{$coach->no_hp}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -215,7 +215,7 @@
                                         Bidang Keahlian
                                     </div>
                                     <div class="col">
-                                        {{$coach->bidangs->bidang_keahlian}}
+                                        : {{$coach->bidangs->bidang_keahlian}}
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -223,7 +223,7 @@
                                         E-mail
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->email }}
+                                        : {{ auth()->user()->email }}
                                     </div>
                                 </div>
                                 <div class="row mt-2 mb-5">
@@ -231,7 +231,151 @@
                                         Username
                                     </div>
                                     <div class="col">
-                                        {{ auth()->user()->username }}
+                                        : {{ auth()->user()->username }}
+                                    </div>
+                                </div>
+
+
+                                @elseif(auth()->user()->hasRole('tenant'))
+
+                                <b>Informasi Saya</b>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        Nama
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->nama}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Alamat
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->alamat}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        No. HP
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->no_hp}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        E-mail
+                                    </div>
+                                    <div class="col">
+                                        : {{ auth()->user()->email }}
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-5">
+                                    <div class="col-lg-4">
+                                        Username
+                                    </div>
+                                    <div class="col">
+                                        : {{ auth()->user()->username }}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Nama Usaha
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->usahas->nama_usaha}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Kategori Usaha
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->usahas->kategori_usaha}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        Alamat Usaha
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->usahas->alamat_usaha}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        No. Telp Usaha
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->usahas->no_hp_usaha}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-lg-4">
+                                        E-mail Usaha
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->usahas->email_usaha}}
+                                    </div>
+                                </div>
+                                <div class="row mt-2 mb-5">
+                                    <div class="col-lg-4">
+                                        Website Usaha
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->usahas->website_usaha}}
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <b>Penanggung Jawab</b>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        Coach
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->coachs->nama_coach}}
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->coachs->bidangs->bidang_keahlian}} ({{$tenant->coachs->bidangs->kode_bidang}})
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        Mentor
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->mentors->nama_mentor}}
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->mentors->bidangs->bidang_keahlian}} ({{$tenant->mentors->bidangs->kode_bidang}})
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                        Pendamping
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->pendampings->nama_pendamping}}
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-4">
+                                    </div>
+                                    <div class="col">
+                                        : {{$tenant->pendampings->bidangs->bidang_keahlian}} ({{$tenant->pendampings->bidangs->kode_bidang}})
                                     </div>
                                 </div>
 

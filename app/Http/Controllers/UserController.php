@@ -12,6 +12,8 @@ use App\Models\Pengelola;
 use App\Models\Coach;
 use App\Models\Mentor;
 use App\Models\Pendamping;
+use App\Models\Tenant;
+use App\Models\Usaha;
 use App\Models\BidangKeahlian;
 
 class UserController extends Controller
@@ -23,10 +25,11 @@ class UserController extends Controller
         $pendamping = Auth::user()->pendampings;
         $mentor = Auth::user()->mentors;
         $coach = Auth::user()->coachs;
+        $tenant = Auth::user()->tenants;
 
         // dd($user);
         
-        return view('profile', compact('pengelola','pendamping','mentor','coach'));
+        return view('profile', compact('pengelola','pendamping','mentor','coach','tenant'));
     }
 
     public function EditProfile($id)
@@ -34,7 +37,7 @@ class UserController extends Controller
         $user = Auth::user($id);
         $ahli = BidangKeahlian::all();
         
-        // dd($user->pendampings->bidang_id);
+        // dd($user);
 
         return view('editProfile', compact('user','ahli'));
     }
