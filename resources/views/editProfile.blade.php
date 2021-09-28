@@ -426,6 +426,169 @@
                     </form>
 
 
+                    @elseif (auth()->user()->hasRole('tenant'))
+
+                    <form enctype="multipart/form-data" id="form-regist" method="POST" action="/updateProfileTenant">
+                        
+                        @csrf
+
+                        <div class="row no-gutters">
+                            <div class="col-lg-4">
+                                <div class="card mt-5 mb-3 mr-5 ml-5">
+                                    <div class="card-body" style="text-align:center; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);">
+                                        <div>
+                                            <img src="" class="" alt="..." width='200px' height="200px">
+                                            <div class="custom-file mt-4">
+                                                <!-- <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Pilih file</label>
+                                                <input type="file" class="custom-file-input" id="inputGroupFile02" name="profile_image"> -->
+                                                <label class="custom-file-label" for="customFile" style="padding-right: 30%">Pilih file</label>
+                                                <input type="file" name='profile_image' class="custom-file-input" id="customFile">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="m-5" style="text-align:left">
+                                    <b>Informasi Saya</b>
+                                    <div class="row mt-3">
+                                        <div class="col-lg-4">
+                                            <label for="nama" class="col-form-label">Nama
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" id="nama" name='nama' autocomplete='off' value="{{$user->tenants['nama']}}"></input>
+                                            <span class='text-danger' style="color: red">{{ $errors->first('nama') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="tempat_lahir" class="col-form-label">Tempat Lahir
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="tempat_lahir" class="form-control" name='tempat_lahir' autocomplete='off' required value="{{$user->tenants['tempat_lahir']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('tempat_lahir') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="tanggal_lahir" class="col-form-label">Tanggal Lahir
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="date" id="tanggal_lahir" class="form-control" name='tanggal_lahir' autocomplete='off' required value="{{$user->tenants['tanggal_lahir']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('tanggal_lahir') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="alamat" class="col-form-label">Alamat
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="alamat" class="form-control" name='alamat' autocomplete='off' required value="{{$user->tenants['alamat']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('alamat') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="no_hp" class="col-form-label">No. HP
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="no_hp" class="form-control" name='no_hp' autocomplete='off' required value="{{$user->tenants['no_hp']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('no_hp') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="email" class="col-form-label">E-mail
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="email" class="form-control" name='email' id="email" autocomplete='off' required value="{{$user['email']}}" readonly></input>
+                                            <span class='text-danger'>{{ $errors->first('email') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="username" class="col-form-label">Username
+                                            </label> </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" name='username' id="username" autocomplete='off' required value="{{$user['username']}}" readonly></input>
+                                            <span class="text-danger">{{ $errors->first('username') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="nama_usaha" class="col-form-label">Nama Usaha
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="nama_usaha" class="form-control" name='nama_usaha' autocomplete='off' required value="{{$user->tenants->usahas['nama_usaha']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('nama_usaha') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="produk" class="col-form-label">Produk Usaha
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="produk" class="form-control" name='produk' autocomplete='off' required value="{{$user->tenants->usahas['produk']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('produk') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="alamat_usaha" class="col-form-label">Alamat Usaha
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="alamat_usaha" class="form-control" name='alamat_usaha' autocomplete='off' required value="{{$user->tenants->usahas['alamat_usaha']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('alamat_usaha') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="no_hp_usaha" class="col-form-label">No. Telp Usaha
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="no_hp_usaha" class="form-control" name='no_hp_usaha' autocomplete='off' required value="{{$user->tenants->usahas['no_hp_usaha']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('no_hp_usaha') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="email_usaha" class="col-form-label">E-mail Usaha
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="email_usaha" class="form-control" name='email_usaha' autocomplete='off' readonly value="{{$user->tenants->usahas['email_usaha']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('email_usaha') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-lg-4">
+                                            <label for="website_usaha" class="col-form-label">Website Usaha
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <input type="text" id="website_usaha" class="form-control" name='website_usaha' autocomplete='off' required value="{{$user->tenants->usahas['website_usaha']}}"></input>
+                                            <span class='text-danger'>{{ $errors->first('website_usaha') }}</span>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: right">
+                                        <div class="row mt-3">
+                                            <div class="col-lg-4"></div>
+                                            <div class="col-lg-7">
+                                                <a href="/profile" class="btn btn-secondary">Batal</a>
+                                                <button class="btn btn-primary" type="submit" style="display: inline-block;font-weight: 400;text-align: center;border: 1px solid transparent;line-height: 1.5;border-radius: 0.25rem;padding: 0.375rem 0.75rem;">Simpan</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+
                     @endif
                     
 
