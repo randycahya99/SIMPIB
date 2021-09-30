@@ -21,9 +21,7 @@ Route::get('/', 'LandingPageController@LandingPage')->middleware('guest')->name(
 
 
 // Dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth');
+Route::get('/dashboard', 'DashboardController@Dashboard')->middleware('auth');
 
 
 // Profil User
