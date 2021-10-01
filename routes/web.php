@@ -212,3 +212,11 @@ Route::post('/addMateriMentoring', 'MentorController@AddMateriMentoring')->middl
 Route::get('/getfile2/{id}', 'MentorController@GetFile')->middleware('auth');
 Route::get('/fileMentoring', 'MentorController@UploadFile')->middleware('auth');
 Route::post('/addKonsultasiFile2', 'MentorController@AddKonsultasiFile')->middleware('auth','checkRole:tenant');
+
+
+// Laporan
+Route::get('/laporanCoaching', 'LaporanController@LaporanCoaching')->middleware('auth');
+Route::get('/laporanMentoring', 'LaporanController@LaporanMentoring')->middleware('auth');
+Route::get('/laporanPendampingan', 'LaporanController@LaporanPendampingan')->middleware('auth');
+Route::get('{id}/tenantMentoring', 'LaporanController@TenantMentoring')->middleware('auth');
+Route::get('{id}/tenantPendampingan', 'LaporanController@TenantPendampingan')->middleware('auth');

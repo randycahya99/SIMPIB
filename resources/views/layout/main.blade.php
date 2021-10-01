@@ -307,9 +307,9 @@
         </a>
         <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">Coaching</a>
-            <a class="collapse-item" href="#">Mentoring</a>
-            <a class="collapse-item" href="#">Pendampingan</a>
+            <a class="collapse-item" href="/laporanCoaching">Coaching</a>
+            <a class="collapse-item" href="/laporanMentoring">Mentoring</a>
+            <a class="collapse-item" href="/laporanPendampingan">Pendampingan</a>
           </div>
         </div>
       </li>
