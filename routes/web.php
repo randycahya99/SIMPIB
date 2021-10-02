@@ -220,3 +220,5 @@ Route::get('/laporanMentoring', 'LaporanController@LaporanMentoring')->middlewar
 Route::get('/laporanPendampingan', 'LaporanController@LaporanPendampingan')->middleware('auth');
 Route::get('{id}/tenantMentoring', 'LaporanController@TenantMentoring')->middleware('auth');
 Route::get('{id}/tenantPendampingan', 'LaporanController@TenantPendampingan')->middleware('auth');
+Route::get('/detailMentoring/{id}', 'LaporanController@DetailMentoring')->middleware('auth');
+Route::get('/detailPendampingan/{id}', 'LaporanController@DetailPendampingan')->middleware('auth');

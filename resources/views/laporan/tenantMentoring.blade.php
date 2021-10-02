@@ -43,7 +43,7 @@
 									<i class="fas fa-edit"></i>
 								</button> --}}
 								{{-- <button class="btn btn-success btn-circle btn-sm" title="Review" data-toggle="modal" data-target=""> --}}
-								<a href="{{$forms->id}}/detailMentoring" class="btn btn-success btn-sm" title="Lihat">
+								<a href="/detailMentoring/{{$forms->id}}" class="btn btn-success btn-sm" title="Lihat">
 									{{-- <i class="fas fa-eye"></i> --}}Lihat
 								</a>
 								{{-- </button> --}}

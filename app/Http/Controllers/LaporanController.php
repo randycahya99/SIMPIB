@@ -73,4 +73,26 @@ class LaporanController extends Controller
 
         return view('laporan/tenantPendampingan', compact('form','tenant'));
     }
+
+    // Menampilkan Halaman Detail Laporan Mentoring Tenant
+    public function DetailMentoring($id)
+    {
+        // Mencari or Mengambil Data Sesuai Dengan id
+        $form = FormMentoring::find($id);
+
+        // dd($form);
+
+        return view('laporan/detailMentoring', compact('form'));
+    }
+
+    // Menampilkan Halaman Detail Laporan Pendampingan Tenant
+    public function DetailPendampingan($id)
+    {
+        // Mencari or Mengambil Data Sesuai Dengan id
+        $form = FormPendampingan::find($id);
+
+        // dd($form);
+
+        return view('laporan/detailPendampingan', compact('form'));
+    }
 }
