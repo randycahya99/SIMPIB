@@ -34,7 +34,7 @@
 							<td align="center">{{$fotos->keterangan}}</td>
 							<td align="center">
                                 {{-- {{$fotos->foto}} --}}
-                                <img class="card-img-top" src="/landing/{{$fotos->foto}}" alt="Card image cap" style="max-width: 100px; max-height: 100px">
+                                <img class="card-img-top" src="/landing/{{$fotos->foto}}" alt="Card image cap" style="width: 200px; height: 100px">
                             </td>
 
 							<td align="center">
