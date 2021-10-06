@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
+use PDF;
 use App\User;
 use App\Models\Pengelola;
 use App\Models\Coach;
@@ -94,5 +95,49 @@ class LaporanController extends Controller
         // dd($form);
 
         return view('laporan/detailPendampingan', compact('form'));
+    }
+
+    // Menyimpan or Download File Laporan Mentoring ke Bentuk PDF
+    public function CetakLaporanMentoring(Request $request)
+    {
+        // Menyimpan id Laporan Kedalam Variabel
+        $id = $request->laporan_id;
+
+        // Mencari Data Laporan Mentoring Sesuai dengan id
+        $form = FormMentoring::find($id);
+
+        // dd($form);
+
+        $pdf = PDF::loadView('laporan.cetakLaporanMentoring', [
+            'form' => $form,
+        ]);
+
+        // return view('laporan.cetakLaporanMentoring', [
+        //     'form' => $form,
+        // ]);
+
+        return $pdf->download('LaporanMentoringTenant.pdf');
+    }
+
+    // Menyimpan or Download File Laporan Pendampingan ke Bentuk PDF
+    public function CetakLaporanPendampingan(Request $request)
+    {
+        // Menyimpan id Laporan Kedalam Variabel
+        $id = $request->laporan_id;
+
+        // Mencari Data Laporan Pendampingan Sesuai dengan id
+        $form = FormPendampingan::find($id);
+
+        // dd($form);
+
+        $pdf = PDF::loadView('laporan.cetakLaporanPendampingan', [
+            'form' => $form,
+        ]);
+
+        // return view('laporan.cetakLaporanPendampingan', [
+        //     'form' => $form,
+        // ]);
+
+        return $pdf->download('LaporanPendampinganTenant.pdf');
     }
 }

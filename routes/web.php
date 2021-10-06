@@ -222,3 +222,5 @@ Route::get('{id}/tenantMentoring', 'LaporanController@TenantMentoring')->middlew
 Route::get('{id}/tenantPendampingan', 'LaporanController@TenantPendampingan')->middleware('auth');
 Route::get('/detailMentoring/{id}', 'LaporanController@DetailMentoring')->middleware('auth');
 Route::get('/detailPendampingan/{id}', 'LaporanController@DetailPendampingan')->middleware('auth');
+Route::get('/cetakLaporanMentoring', 'LaporanController@CetakLaporanMentoring')->middleware('auth');
+Route::get('/cetakLaporanPendampingan', 'LaporanController@CetakLaporanPendampingan')->middleware('auth');

@@ -101,7 +101,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-10">
                         <label class="asterisk" for="alamat">Alamat Tinggal</label>
-                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Anda Tinggal" required>
+                        <textarea rows="3" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat Anda Tinggal" required></textarea>
                     </div>
                     <div class="form-group col-md-2">
                         <label class="asterisk" for="kode_pos">Kode Pos</label>
@@ -180,7 +180,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-10">
                         <label class="asterisk" for="alamat_usaha">Alamat Usaha</label>
-                        <input type="text" class="form-control" id="alamat_usaha" name="alamat_usaha" placeholder="Masukkan Alamat Usaha Anda">
+                        <textarea rows="3" class="form-control" id="alamat_usaha" name="alamat_usaha" placeholder="Masukkan Alamat Usaha Anda"></textarea>
                     </div>
                     <div class="form-group col-md-2">
                         <label class="asterisk" for="kode_pos_usaha">Kode Pos</label>
@@ -299,11 +299,11 @@
                 </div>
                 <div class="form-group">
                     <label class="asterisk" for="prestasi">Prestasi / penghargaan yang pernah diraih</label>
-                    <input type="text" class="form-control" id="prestasi" name="prestasi" placeholder="Jika banyak gunakan koma (,)">
+                    <textarea rows="4" class="form-control" id="prestasi" name="prestasi" placeholder="Jika banyak gunakan koma (,)"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="gridCheck">
+                        <input class="form-check-input" type="checkbox" id="gridCheck" required>
                         <label class="form-check-label" for="gridCheck">
                             “Dengan ini saya menyatakan bahwa usaha yang saya jalankan tidak bertentangan dengan ketertiban 
                             umum, kesusilaan dan ketentuan perundang-undangan. Saya juga menyatakan bahwa seluruh 

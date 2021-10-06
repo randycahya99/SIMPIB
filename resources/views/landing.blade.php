@@ -94,9 +94,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="#">Contact</a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="/registration">Registrasi</a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Login</a>
                         </li>
@@ -108,32 +108,48 @@
         <header>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+
+                    <!-- {{$i = 0}} -->
+
+                    @foreach ($foto as $fotos)
+
+                        @if ($i == 0)
+                            <!-- {{$aktif = "active"}} -->
+                        @else
+                            <!-- {{$aktif = ""}} -->
+                        @endif
+
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}" class="{{$aktif}}"></li>
+
+                    <!-- {{$i++}} -->
+
+                    @endforeach
+                
                 </ol>
                 <div class="carousel-inner" role="listbox">
+
+                    <!-- {{$i = 0}} -->
+
+                    @foreach ($foto as $fotos)
+
+                        @if ($i == 0)
+                            <!-- {{$aktif = "active"}} -->
+                        @else
+                            <!-- {{$aktif = ""}} -->
+                        @endif
+
                     <!-- Slide One - Set the background image for this slide in the line below -->
-                    <div class="carousel-item active" style="background-image: url('landing/assets/img/rektorat2.jpg')">
+                    <div class="carousel-item {{$aktif}}" style="background-image: url('/landing/{{$fotos->foto}}')">
                         <div class="carousel-caption d-none d-md-block">
-                            <h2 class="display-4">First Slide</h2>
-                            <p class="lead">This is a description for the first slide.</p>
+                            <h2 class="display-4">{{$fotos->keterangan}}</h2>
+                            <p class="lead">{{$fotos->keterangan}}</p>
                         </div>
                     </div>
-                    <!-- Slide Two - Set the background image for this slide in the line below -->
-                    <div class="carousel-item" style="background-image: url('landing/assets/img/dekanat ft.jpg')">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2 class="display-4">Second Slide</h2>
-                            <p class="lead">This is a description for the second slide.</p>
-                        </div>
-                    </div>
-                    <!-- Slide Three - Set the background image for this slide in the line below -->
-                    <div class="carousel-item" style="background-image: url('landing/assets/img/lppm.jpg')">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h2 class="display-4">Third Slide</h2>
-                            <p class="lead">This is a description for the third slide.</p>
-                        </div>
-                    </div>
+
+                    <!-- {{$i++}} -->
+
+                    @endforeach
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

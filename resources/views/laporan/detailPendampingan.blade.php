@@ -277,6 +277,18 @@
                 </div>
 
             </div>
+
+            <br>
+
+            <div>
+                <div class="text-center">
+                    <form action="/cetakLaporanPendampingan" method="GET">
+                        <input type="hidden" id="laporan_id" name="laporan_id" value="{{$form->id}}">
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-print"> Export PDF</i></button>
+                    </form>
+                    {{-- <a href="/cetakLaporanPendampingan/{{$form->id}}" class="btn btn-primary btn-sm" id="pdf"><i class="fa fa-print"> Export PDF</i></a> --}}
+                </div>
+            </div>
             
         </div>
     </div>
