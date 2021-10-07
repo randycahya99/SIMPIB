@@ -8,6 +8,6 @@ class FotoSlider extends Model
 {
     protected $table = 'foto_slider';
     protected $fillable = [
-        'keterangan', 'foto'
+        'judul', 'sub_judul', 'foto'
     ];
 }

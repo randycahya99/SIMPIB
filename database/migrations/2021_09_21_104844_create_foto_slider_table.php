@@ -15,7 +15,8 @@ class CreateFotoSliderTable extends Migration
     {
         Schema::create('foto_slider', function (Blueprint $table) {
             $table->id();
-            $table->string('keterangan');
+            $table->string('judul');
+            $table->string('sub_judul');
             $table->string('foto');
             $table->timestamps();
         });

@@ -141,8 +141,8 @@
                     <!-- Slide One - Set the background image for this slide in the line below -->
                     <div class="carousel-item {{$aktif}}" style="background-image: url('/landing/{{$fotos->foto}}')">
                         <div class="carousel-caption d-none d-md-block">
-                            <h2 class="display-4">{{$fotos->keterangan}}</h2>
-                            <p class="lead">{{$fotos->keterangan}}</p>
+                            <h2 class="display-4">{{$fotos->judul}}</h2>
+                            <p class="lead">{{$fotos->sub_judul}}</p>
                         </div>
                     </div>
 
@@ -288,7 +288,7 @@
             </div>
         </section>
    
-        <!-- Header -->
+        {{-- <!-- Header -->
         <header class="bg-primary text-center py-5 mb-4">
             <div class="container">
                 <h1 class="font-weight-light text-white">Meet the Team</h1>
@@ -340,7 +340,7 @@
                 </div>
             </div>
             <!-- /.row -->
-        </div>
+        </div> --}}
 
         <div class="container">
             <div class="row">

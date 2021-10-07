@@ -30,12 +30,15 @@ class LandingPageController extends Controller
         // Validasi Inputan Form
         $request->validate([
             'foto' => 'required|mimes:jpeg,png,jpg',
-            'keterangan' => 'required|string'
+            'judul' => 'required|string',
+            'sub_judul' => 'required|string'
         ], [
             'foto.required' => 'Foto tidak boleh kosong',
             'foto.mimes' => 'Format foto tidak sesuai (harus jpeg/png/jpg)',
-            'keterangan.required' => 'Keterangan tidak boleh kosong',
-            'keterangan.string' => 'Keterangan harus berupa string'
+            'judul.required' => 'Judul tidak boleh kosong',
+            'judul.string' => 'Judul harus berupa string',
+            'sub_judul.required' => 'Sub judul tidak boleh kosong',
+            'sub_judul.string' => 'Sub judul harus berupa string'
         ]);
 
         // Menyimpan Foto/Gambar ke Dalam Folder Public
@@ -45,7 +48,8 @@ class LandingPageController extends Controller
         // Menambahkan Data ke Database
         FotoSlider::create([
             'foto' => $imgName,
-            'keterangan' => $request->keterangan
+            'judul' => $request->judul,
+            'sub_judul' => $request->sub_judul
         ]);
 
         return redirect('/fotoSlider')->with('sukses', 'Foto berhasil ditambahkan.');

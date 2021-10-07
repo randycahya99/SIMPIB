@@ -21,7 +21,8 @@
 					<thead>
 						<tr>
 							<th width="20">No</th>
-							<th width="300">Keterangan</th>
+							<th width="200">Judul</th>
+							<th width="300">Sub Judul</th>
 							<th>Foto</th>
 							<th width="80">Aksi</th>
 						</tr>
@@ -31,7 +32,8 @@
 						@foreach($foto as $fotos)
 						<tr>
 							<td align="center">{{$loop->iteration}}</td>
-							<td align="center">{{$fotos->keterangan}}</td>
+							<td align="center">{{$fotos->judul}}</td>
+							<td align="center">{{$fotos->sub_judul}}</td>
 							<td align="center">
                                 {{-- {{$fotos->foto}} --}}
                                 <img class="card-img-top" src="/landing/{{$fotos->foto}}" alt="Card image cap" style="width: 200px; height: 100px">
@@ -80,9 +82,14 @@
 						<div class="invalid-feedback">Materi tidak valid</div>
 					</div>
                     <div class="form-group">
-						<label>Keterangan</label>
-						<textarea rows="3" name="keterangan" id="keterangan" class="form-control" placeholder="Masukan keterangan" required></textarea>
-						<div class="invalid-feedback">Keterangan tidak valid</div>
+						<label>Judul</label>
+						<textarea rows="3" name="judul" id="judul" class="form-control" placeholder="Masukan judul" required></textarea>
+						<div class="invalid-feedback">Judul tidak valid</div>
+					</div>
+					<div class="form-group">
+						<label>Sub Judul</label>
+						<textarea rows="3" name="sub_judul" id="sub_judul" class="form-control" placeholder="Masukan sub judul" required></textarea>
+						<div class="invalid-feedback">Sub judul tidak valid</div>
 					</div>
 
 					<div class="modal-footer">
