@@ -19,6 +19,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="{{ asset('assets/adminpos/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
 
         <style>
             .carousel-item {
@@ -86,13 +87,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
+                            <a class="nav-link" href="#about">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Services</a>
+                            <a class="nav-link" href="#services">Services</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="#contact">Contact</a>
                         </li>
                         {{-- <li class="nav-item">
                             <a class="nav-link" href="/registration">Registrasi</a>
@@ -165,10 +166,36 @@
         <!-- Page Content -->
         <section class="py-5 text-center">
             <div class="container"> 
-                <h2 class="text-center">Luckmoshy`s Services</h2>
-                <p class="text-muted mb-5 text-center">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form.</p>
+                <h2 class="text-center" id="about">About Us</h2>
+                <p class="text-muted mb-5 text-center">Pusat Inkubator Bisnis (PIB) Unsoed merupakan salah satu pusat yang berada dibawah Lembaga Pengabdian Kepada Masyarakat Universitas Jenderal Soedirman</p>
+            </div>
+        </section>
+        <section class="py-5 text-center">
+            <div class="container">
+                <h2 class="text-center" id="services">Our Services</h2><br>
                 <div class="row">
                     <div class="col-sm-6 col-lg-4 mb-3">
+                        <svg class="lnr text-primary services-icon">
+                            <use xlink:href="#lnr-screen"></use>
+                        </svg>
+                        <h6>Coaching</h6>
+                        <p class="text-muted">Coaching / Pelatihan merupakan salah satu layanan utama kami. Anda akan mendapatkan pelatihan langsung dengan para coach / pelatih terbaik kami.</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 mb-3">
+                        <svg class="lnr text-primary services-icon">
+                            <use xlink:href="#lnr-screen"></use>
+                        </svg>
+                        <h6>Mentoring</h6>
+                        <p class="text-muted">Mentoring merupakan salah satu layanan utama kami. Anda dapat langsung melakukan mentoring dengan para mentor terbaik kami.</p>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 mb-3">
+                        <svg class="lnr text-primary services-icon">
+                            <use xlink:href="#lnr-screen"></use>
+                        </svg>
+                        <h6>Pendampingan</h6>
+                        <p class="text-muted">Pendampingan merupakan salah satu layanan utama kami. Anda akan langsung didampingi oleh pendamping terbaik kami.</p>
+                    </div>
+                    {{-- <div class="col-sm-6 col-lg-4 mb-3">
                         <svg class="lnr text-primary services-icon">
                             <use xlink:href="#lnr-magic-wand"></use>
                         </svg>
@@ -210,18 +237,44 @@
                         <h6>Et labore tempor et</h6>
                         <p class="text-muted">Et labore tempor et adipisicing dolor.</p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
 
 
         <section class="main">
             <div class="container mt-4">
-                <h1 class="text-center mb-4 p-4 text-secondary">From The Blog</h1>
+                <h1 class="text-center mb-4 p-4 text-secondary">Produk Tenant Kami</h1>
                 <div class="row">
 
                     <div class="card-columns">
+                        @foreach ($product as $products)
+
+                        {{-- <div class="card shadow border-0">
+                            <img class="card-img-top" src="/landing/{{$products->foto}}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$products->nama_produk}}</h5>
+                                <p class="card-text">{{$products->deskripsi}}</p>
+                            </div>
+                        </div> --}}
+                        
                         <div class="card shadow border-0">
+                            <img class="card-img" src="/landing/{{$products->foto}}" alt="Card image">
+                        </div>
+                        <div class="card shadow border-0 p-3 text-right">
+                            <blockquote class="blockquote mb-0">
+                                <h5 class="card-title">{{$products->nama_produk}}</h5>
+                                <p>{{$products->deskripsi}}</p>
+                                <footer class="blockquote-footer">
+                                    <small class="text-muted">
+                                        <a href="#">Lihat Selengkapnya</a>
+                                    </small>
+                                </footer>
+                            </blockquote>
+                        </div>
+
+                        @endforeach
+                        {{-- <div class="card shadow border-0">
                             <img class="card-img-top" src="https://4.bp.blogspot.com/-InDD3Hm_bhU/XB4_TK3TT7I/AAAAAAAAAJ4/r5tUeCOqq1MTchFh7D7pWdf582A4qYIIwCEwYBhgL/s1600/Businesswoman-working-at-a-computer-1280x720.jpg" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">Card title that wraps to a new line</h5>
@@ -268,7 +321,7 @@
                         </div>
                         <div class="card shadow border-0 p-3 text-right">
                             <blockquote class="blockquote mb-0">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                <p>Lorem ipsum dolor sit amettttt, consectetur adipiscing elit. Integer posuere erat a ante.</p>
                                 <footer class="blockquote-footer">
                                     <small class="text-muted">
                                         Someone famous in <cite title="Source Title">Source Title</cite>
@@ -282,7 +335,7 @@
                                 <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
                                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -349,24 +402,25 @@
                         <svg class="lnr text-muted quote-icon pull-left">
                             <use xlink:href="#lnr-heart"></use>                                       
                         </svg>
-                        <p class="mb-0">Keep in touch with me for more Theme  right here!</p>
-                        <footer class="blockquote-footer">Luckmoshy Designing
-                            <cite title="Source Title">Webublog @</cite>
+                        <p class="mb-0">Bergabunglah dengan kami dan mulailah untuk membangun bisnis impian Anda.</p>
+                        <footer class="blockquote-footer">Pusat Inkubator Bisnis
+                            <cite title="Source Title">Universitas Jenderal Soedirman</cite>
                         </footer>
                     </blockquote>
                 </div>
                 <div class="col-md-4">
-                    <a class="flot-right btn btn-white border-0 rounded shadow post-pager-link p-0 next ml-4" href="">
+                    {{-- <a class="flot-right btn btn-white border-0 rounded shadow post-pager-link p-0 next ml-4" href=""> --}}
                         <span class="d-flex h-100">
                             <span class="p-3 d-flex flex-column justify-content-center w-100">
-                                <div class="indicator mb-1 text-uppercase text-muted">webublog<i class="fa fa-bars ml-2"></i></div>
-                                    <p class="f-13">See next awesome themes</p>
+                                <div class="indicator mb-1 text-uppercase text-muted" id="contact">Contact Us :</div>
+                                    <p class="f-13"><i class="fas fa-envelope"></i> : pib@unsoed.ac.id</p>
+                                    <p class="f-13"><i class="fas fa-phone-square"></i> : 08xx-xxxx-xxxx</p>
                             </span>
                             <span class="bg-primary p-2 d-flex align-items-center text-white">
-                                <i class="fa fa-arrow-circle-right"></i>
+                                {{-- <i class="fa fa-arrow-circle-right"></i> --}}
                             </span>
                         </span>
-                    </a>
+                    {{-- </a> --}}
                 </div>
             </div>
         </div>

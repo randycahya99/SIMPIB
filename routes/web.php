@@ -62,6 +62,9 @@ Route::get('{id}/detailHistori', 'TenantController@DetailHistori')->middleware('
 Route::get('/fotoSlider', 'LandingPageController@FotoSlider')->middleware('auth','checkRole:admin');
 Route::post('/addFotoSlider', 'LandingPageController@AddFotoSlider')->middleware('auth','checkRole:admin');
 Route::get('{id}/deleteFotoSlider', 'LandingPageController@DeleteFotoSlider')->middleware('auth','checkRole:admin');
+Route::get('/produkTenant', 'LandingPageController@ProdukTenant')->middleware('auth','checkRole:admin');
+Route::post('/addProdukTenant', 'LandingPageController@AddProdukTenant')->middleware('auth','checkRole:admin');
+Route::get('{id}/deleteProdukTenant', 'LandingPageController@DeleteProdukTenant')->middleware('auth','checkRole:admin');
 
 
 // Kategori Coach

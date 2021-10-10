@@ -86,7 +86,7 @@
         <div id="LandingPage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/fotoSlider">Foto Slider</a>
-            <a class="collapse-item" href="#">Produk Tenant</a>
+            <a class="collapse-item" href="/produkTenant">Produk Tenant</a>
           </div>
         </div>
       </li>
@@ -668,6 +668,39 @@
                  Swal.fire(
                   'Terhapus',
                   'Foto Berhasil dihapus',
+                  'success',
+                  'showConfirmButton: false',
+                  'timer: 2000'
+                  )
+               }
+             })
+            })
+          </script>
+
+          <!-- SweetAlert HapusProdukTenant -->
+          <script type="text/javascript">
+            $('.hapusProdukTenant').on('click', function(e){
+              e.preventDefault();
+
+              const href = $(this).attr('href')
+
+              Swal.fire({
+                title: 'Ingin Menghapus Data?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+              }).then((result) => {
+                if (result.value) {
+                 setTimeout(function(){ 
+
+                   document.location.href = href;
+
+                 }, 900);
+                 Swal.fire(
+                  'Terhapus',
+                  'Data Produk Tenant Berhasil dihapus',
                   'success',
                   'showConfirmButton: false',
                   'timer: 2000'
