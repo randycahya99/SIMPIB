@@ -40,4 +40,9 @@ class Coach extends Model
     {
         return $this->hasMany(MateriCoaching::class);
     }
+
+    public function coachings()
+    {
+        return $this->hasMany(Coaching::class);
+    }
 }

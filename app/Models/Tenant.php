@@ -93,4 +93,9 @@ class Tenant extends Model
     {
         return $this->hasMany(FormMentoring::class);
     }
+
+    public function coachings()
+    {
+        return $this->hasMany(Coaching::class);
+    }
 }

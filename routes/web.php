@@ -195,6 +195,11 @@ Route::post('/addMateriCoaching', 'CoachController@AddMateriCoaching')->middlewa
 Route::get('/getfile1/{id}', 'CoachController@GetFile')->middleware('auth');
 Route::get('/fileCoaching', 'CoachController@UploadFile')->middleware('auth');
 Route::post('/addKonsultasiFile1', 'CoachController@AddKonsultasiFile')->middleware('auth','checkRole:tenant');
+Route::get('/komentarCoaching', 'CoachController@KomentarCoaching')->middleware('auth');
+Route::post('/addKomentarCoaching', 'CoachController@AddKomentarCoaching')->middleware('auth','checkRole:coach');
+Route::get('{id}/kolomKomentar', 'CoachController@KolomKomentar')->middleware('auth');
+Route::post('{id}/addRepliesCoach', 'CoachController@AddRepliesCoach')->middleware('auth','checkRole:coach');
+Route::post('{id}/addRepliesTenant', 'CoachController@AddRepliesTenant')->middleware('auth','checkRole:tenant');
 
 
 // Mentoring

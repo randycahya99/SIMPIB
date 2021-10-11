@@ -17,6 +17,8 @@ use App\Models\MateriMentoring;
 use App\Models\JadwalMentoring;
 use App\Models\MateriPendampingan;
 use App\Models\JadwalPendampingan;
+use App\Models\FormMentoring;
+use App\Models\FormPendampingan;
 
 class DashboardController extends Controller
 {
@@ -105,9 +107,25 @@ class DashboardController extends Controller
         } elseif (Auth::user()->hasRole('calon tenant')) {
             return view('dashboard');
         } elseif (Auth::user()->hasRole('pemonev')) {
-            return view('dashboard');
+            $laporanMentoring = FormMentoring::count();
+            $laporanPendampingan = FormPendampingan::count();
+
+            // dd($laporanMentoring);
+
+            return view('dashboard', compact(
+                'laporanMentoring',
+                'laporanPendampingan'
+            ));
         } elseif (Auth::user()->hasRole('perusahaan')) {
-            return view('dashboard');
+            $laporanMentoring = FormMentoring::count();
+            $laporanPendampingan = FormPendampingan::count();
+
+            // dd($laporanMentoring);
+
+            return view('dashboard', compact(
+                'laporanMentoring',
+                'laporanPendampingan'
+            ));
         }
     }
 }

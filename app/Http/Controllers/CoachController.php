@@ -16,6 +16,8 @@ use App\Models\CategoryCoach;
 use App\Models\BidangKeahlian;
 use App\Models\JadwalCoaching;
 use App\Models\MateriCoaching;
+use App\Models\Coaching;
+use App\Models\Comments;
 
 class CoachController extends Controller
 {
@@ -517,5 +519,129 @@ class CoachController extends Controller
         // dd($materi);
 
         return redirect('/fileCoaching')->with('sukses', 'File berhasil dikirimkan ke coach.');
+    }
+
+    // Menampilkan Halaman Komentar Coaching
+    public function KomentarCoaching()
+    {
+        // Mengambil Data Komentar Coaching Sesuai Dengan User yang Sedang Login
+        if (Auth::user()->hasRole('coach')) {
+            $coaching = Auth::user()->coachs->coachings;
+            $tenant = Auth::user()->coachs->tenants;
+
+            // dd($jadwal);
+
+            return view('coaching/komentar', compact('coaching','tenant'));
+        } else {
+            $coaching = Auth::user()->tenants->coachings;
+            $coach = Auth::user()->tenants->coachs;
+
+            // dd($jadwal);
+
+            return view('coaching/komentar', compact('coaching','coach'));
+        }
+    }
+
+    // Menambahkan Komentar Coaching
+    public function AddKomentarCoaching(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'tanggal' => 'required|date',
+            'perihal' => 'required|string|max:1000',
+            'topik' => 'required|string|max:1000',
+            'tenant_id' => 'required',
+            'coach_id' => 'required'
+        ], [
+            'tanggal.required' => 'Tanggal tidak boleh kosong',
+            'tanggal.date' => 'Tanggal tidak valid',
+            'perihal.required' => 'Perihal tidak boleh kosong',
+            'perihal.string' => 'Perihal harus berupa string',
+            'perihal.max' => 'Perihal maksimal 1000 karakter',
+            'topik.required' => 'Topik tidak boleh kosong',
+            'topik.string' => 'Topik harus berupa string',
+            'topik.max' => 'Topik maksimal 1000 karakter',
+            'tenant_id.required' => 'Tenant tidak boleh kosong',
+            'coach_id.required' => 'Pendamping tidak boleh kosong',
+        ]);
+
+        // Menambahkan Komentar ke Database
+        $coaching = Coaching::create([
+            'tanggal' => $request->tanggal,
+            'perihal' => $request->perihal,
+            'topik' => $request->topik,
+            'tenant_id' => $request->tenant_id,
+            'coach_id' => $request->coach_id,
+        ]);
+
+        // dd($jadwal);
+
+        return redirect('/komentarCoaching')->with('sukses', 'Komentar berhasil ditambahkan.');
+    }
+
+    // Menampilkan Halaman Kolom Komentar
+    public function KolomKomentar($id)
+    {
+        $coaching = Coaching::find($id);
+        $comment = $coaching->comments;
+        $totalComment = $comment->count();
+
+        // dd($totalComment);
+
+        return view('coaching/kolomKomentar', compact('coaching','comment','totalComment'));
+    }
+
+    // Mengirimkan Balasan Komentar from Coach
+    public function AddRepliesCoach(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'replies' => 'required',
+            'coaching_id' => 'required'
+        ], [
+            'replies.required' => 'Balasan tidak bisa kosong',
+            'coaching_id' => 'Id coaching tidak boleh kosong'
+        ]);
+
+        // Status From Diisi dengan Value Coach
+        $from = "coach";
+
+        // Menambahkan ke Database
+        $comment = Comments::create([
+            'replies' => $request->replies,
+            'from' => $from,
+            'coaching_id' => $request->coaching_id
+        ]);
+
+        // dd($comment);
+
+        return back()->with('sukses', 'Balasan berhasil dikirim.');
+    }
+
+    // Mengirimkan Balasan Komentar from Tenant
+    public function AddRepliesTenant(Request $request)
+    {
+        // Validasi Inputan Form
+        $request->validate([
+            'replies' => 'required',
+            'coaching_id' => 'required'
+        ], [
+            'replies.required' => 'Balasan tidak bisa kosong',
+            'coaching_id' => 'Id coaching tidak boleh kosong'
+        ]);
+
+        // Status From Diisi dengan Value Coach
+        $from = "tenant";
+
+        // Menambahkan ke Database
+        $comment = Comments::create([
+            'replies' => $request->replies,
+            'from' => $from,
+            'coaching_id' => $request->coaching_id
+        ]);
+
+        // dd($comment);
+
+        return back()->with('sukses', 'Balasan berhasil dikirim.');
     }
 }

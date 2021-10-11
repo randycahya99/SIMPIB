@@ -178,17 +178,17 @@
         <div id="Coaching" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             
-            @if (auth()->user()->hasRole('coach'))
-            <a class="collapse-item" href="#">Form Coaching</a>
-            @endif
-            
             @if (auth()->user()->hasAnyRole('coach', 'tenant'))
             <a class="collapse-item" href="/materiCoaching">Coaching</a>
-            <a class="collapse-item" href="#">Hasil Coaching</a>
+            {{-- <a class="collapse-item" href="#">Hasil Coaching</a> --}}
             @endif
 
             @if (auth()->user()->hasAnyRole('coach', 'tenant'))
             <a class="collapse-item" href="/jadwalCoaching">Jadwal</a>
+            @endif
+
+            @if (auth()->user()->hasAnyRole('coach', 'tenant'))
+            <a class="collapse-item" href="/komentarCoaching">Komentar</a>
             @endif
 
             @if (auth()->user()->hasRole('coach'))
@@ -217,6 +217,10 @@
         <div id="Mentoring" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             
+            @if (auth()->user()->hasAnyRole('mentor', 'tenant'))
+            <a class="collapse-item" href="/jadwalMentoring">Jadwal</a>
+            @endif
+
             @if (auth()->user()->hasRole('mentor'))
             <a class="collapse-item" href="/formMentoring">Form Mentoring</a>
             @endif
@@ -224,10 +228,6 @@
             @if (auth()->user()->hasAnyRole('mentor', 'tenant'))
             <a class="collapse-item" href="/materiMentoring">Mentoring</a>
             <a class="collapse-item" href="/hasilMentoring">Hasil Mentoring</a>
-            @endif
-
-            @if (auth()->user()->hasAnyRole('mentor', 'tenant'))
-            <a class="collapse-item" href="/jadwalMentoring">Jadwal</a>
             @endif
 
             @if (auth()->user()->hasRole('mentor'))
@@ -256,6 +256,10 @@
         <div id="Pendampingan" class="collapse" aria-labelledby="headingFive" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             
+            @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
+            <a class="collapse-item" href="/jadwalPendampingan">Jadwal</a>
+            @endif
+
             @if (auth()->user()->hasRole('pendamping'))
             <a class="collapse-item" href="/formPendampingan">Form Pendampingan</a>
             @endif
@@ -263,10 +267,6 @@
             @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
             <a class="collapse-item" href="/materiPendampingan">Pendampingan</a>
             <a class="collapse-item" href="/hasilPendampingan">Hasil Pendampingan</a>
-            @endif
-
-            @if (auth()->user()->hasAnyRole('pendamping', 'tenant'))
-            <a class="collapse-item" href="/jadwalPendampingan">Jadwal</a>
             @endif
 
             @if (auth()->user()->hasRole('pendamping'))
@@ -307,7 +307,7 @@
         </a>
         <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="/laporanCoaching">Coaching</a>
+            {{-- <a class="collapse-item" href="/laporanCoaching">Coaching</a> --}}
             <a class="collapse-item" href="/laporanMentoring">Mentoring</a>
             <a class="collapse-item" href="/laporanPendampingan">Pendampingan</a>
           </div>
